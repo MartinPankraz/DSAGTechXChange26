@@ -1,0 +1,192 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getPropertyList = getPropertyList;
+const text_document_utils_1 = require("@sap-ux/text-document-utils");
+/**
+ * Properties list class.
+ */
+class PropertiesList {
+    tokens;
+    text;
+    index;
+    list;
+    lineOffsets;
+    contentLength;
+    /**
+     * Class constructor.
+     *
+     * @param tokens tokens
+     * @param text text
+     */
+    constructor(tokens, text) {
+        this.tokens = tokens;
+        this.text = text;
+        this.index = 0;
+        this.list = [];
+        this.lineOffsets = (0, text_document_utils_1.getLineOffsets)(text);
+        this.contentLength = this.text.length;
+    }
+    /**
+     * Peek a token.
+     *
+     * @returns token or undefined
+     */
+    peek() {
+        if (this.tokens[this.index] === undefined) {
+            return undefined;
+        }
+        return this.tokens[this.index];
+    }
+    /**
+     * Get next token and increment index.
+     *
+     * @param count number to increment index. By default one token
+     * @returns Token or undefined
+     */
+    next(count = 1) {
+        if (this.index >= this.tokens.length) {
+            return undefined;
+        }
+        this.index = this.index + count;
+        return this.tokens[this.index];
+    }
+    /**
+     * Consume comment.
+     *
+     */
+    consumeComment() {
+        const comment = this.peek();
+        if (!comment) {
+            return;
+        }
+        if (comment.type === 'comment') {
+            const data = {
+                type: 'comment-line',
+                value: comment.image,
+                range: (0, text_document_utils_1.rangeAt)(this.lineOffsets, comment.start, comment.end, this.contentLength)
+            };
+            this.list.push(data);
+            this.next();
+        }
+    }
+    /**
+     * Consume key.
+     *
+     * @returns key node or undefined
+     */
+    consumeKey() {
+        let key;
+        while (this.peek()) {
+            const token = this.peek();
+            if (!token) {
+                break;
+            }
+            if (token.type === 'key') {
+                key = {
+                    type: 'key',
+                    value: token.image,
+                    range: (0, text_document_utils_1.rangeAt)(this.lineOffsets, token.start, token.end, this.contentLength)
+                };
+                this.next();
+                break;
+            }
+            this.next();
+        }
+        return key;
+    }
+    /**
+     * Consume value.
+     *
+     * @returns value node or undefined
+     */
+    consumeValue() {
+        let value;
+        while (this.peek()) {
+            const token = this.peek();
+            if (!token) {
+                break;
+            }
+            if (token.type === 'value') {
+                value = {
+                    type: 'value',
+                    value: token.image,
+                    range: (0, text_document_utils_1.rangeAt)(this.lineOffsets, token.start, token.end, this.contentLength)
+                };
+                this.next();
+                break;
+            }
+            this.next();
+        }
+        return value;
+    }
+    /**
+     * Consume key value pair.
+     *
+     */
+    consumeKeyValue() {
+        const key = this.consumeKey();
+        if (!key) {
+            return;
+        }
+        let element = this.consumeValue();
+        if (!element) {
+            element = {
+                type: 'value',
+                value: '',
+                range: { ...key.range, start: { line: key.range.end.line, character: key.range.end.character } }
+            };
+        }
+        const nextToken = this.peek();
+        const line = {
+            type: 'key-element-line',
+            key,
+            element,
+            range: text_document_utils_1.Range.create(key.range.start, element.range.end)
+        };
+        if (nextToken?.type === 'end-of-line') {
+            line.endOfLineToken = nextToken;
+        }
+        this.list.push(line);
+    }
+    /**
+     * Create properties list.
+     */
+    createList() {
+        while (this.peek()) {
+            const token = this.peek();
+            if (!token) {
+                break;
+            }
+            if (['whitespace', 'separator', 'end-of-line'].includes(token.type)) {
+                this.next();
+                continue;
+            }
+            if (token.type === 'comment') {
+                this.consumeComment();
+                continue;
+            }
+            this.consumeKeyValue();
+        }
+    }
+    /**
+     * Get properties list.
+     *
+     * @returns property list
+     */
+    getList() {
+        return this.list;
+    }
+}
+/**
+ * Implements reading files Java properties files as described in https://docs.oracle.com/javase/10/docs/api/java/util/Properties.html.
+ *
+ * @param tokens list of token
+ * @param text text content
+ * @returns array of property line
+ */
+function getPropertyList(tokens, text) {
+    const propertiesLine = new PropertiesList(tokens, text);
+    propertiesLine.createList();
+    return propertiesLine.getList();
+}
+//# sourceMappingURL=properties-parser.js.map

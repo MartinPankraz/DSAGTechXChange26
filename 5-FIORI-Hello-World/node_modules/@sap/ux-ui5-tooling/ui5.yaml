@@ -1,0 +1,42 @@
+# https://sap.github.io/ui5-tooling/pages/extensibility/CustomServerMiddleware/
+specVersion: '3.0'
+metadata:
+  name: fiori-tools-appreload
+kind: extension
+type: server-middleware
+middleware:
+  path: dist/middlewares/fiori-tools-appreload.js
+---
+# https://sap.github.io/ui5-tooling/pages/extensibility/CustomServerMiddleware/
+specVersion: '3.0'
+metadata:
+  name: fiori-tools-proxy
+kind: extension
+type: server-middleware
+middleware:
+  path: dist/middlewares/fiori-tools-proxy.js
+---
+# https://sap.github.io/ui5-tooling/pages/extensibility/CustomServerMiddleware/
+specVersion: '3.0'
+metadata:
+  name: fiori-tools-preview
+kind: extension
+type: server-middleware
+middleware:
+  path: dist/middlewares/fiori-tools-preview.js
+---
+specVersion: '3.0'	
+metadata:	
+  name: fiori-tools-servestatic	
+kind: extension	
+type: server-middleware	
+middleware:	
+  path: dist/middlewares/fiori-tools-servestatic.js	
+---
+specVersion: '3.0'
+metadata:
+  name: deploy-to-abap
+kind: extension
+type: task
+task:
+  path: dist/tasks/deploy/index.js

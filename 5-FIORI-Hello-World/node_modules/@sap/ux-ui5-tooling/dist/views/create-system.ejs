@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create SAP System</title>
+        <style>
+            label {
+                width: 100%;
+                display: block;
+                margin-top: 2rem;
+                margin-left: 1rem;
+                font-family: "72", "72full", Arial, Helvetica, sans-serif;
+                font-weight: bold;
+            }
+            .button {
+                width: 200px;
+                margin-top: 1rem;
+                margin-left: 1rem;
+                color: #fff;
+                background: #0a6ed1;
+                font-family: "72", "72full", Arial, Helvetica, sans-serif;
+                cursor: pointer;
+                font-size: medium;
+                border: none;
+                border-radius: 6px;
+                height: 36px;
+            }
+            .button.hover, .button:hover {
+                background-color: #0960b8;;
+                background-position: -.5em;
+                border-color: rgba(27,31,35,.5);
+            }
+            .error-text {
+                color: #a75d5d;
+                border: #c782828a;
+                border-style: inset;
+            }
+            .system-url {
+                color: gray;
+                margin: 1rem;
+            }
+            body {
+                font-family: "72", "72full", Arial, Helvetica, sans-serif;
+                align-content: center;
+            }
+            .bottomText {
+                font-style: normal;
+                font-family: Arial;
+                font-size: 14px;
+                color: #444444;
+            }
+            .footer {
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                z-index: -1;
+            }
+            .icons {
+                display: block;
+                margin-left: 1rem;
+                margin-top: 1rem;
+            }
+            .footerRight {
+                float: right;
+                margin-right: 20px;
+                bottom: 0px;
+                right: 0px;
+            }
+            .system-name {
+                padding: unset;
+                margin-left: 1rem;
+                margin-top: 1rem;
+                text-transform: uppercase;
+                width: 100%;
+                height: 35px;
+                background: rgb(255, 255, 255);
+                border: 1px solid rgb(151, 151, 151);
+                border-radius: 3px;
+            }
+            form label.req:after {
+                color: red;
+                content: "Required";
+                float: right;
+            }
+            form {
+                width: 60%;
+            }
+            .warning {
+                margin-left: 1rem;
+                margin-top: 1rem;
+                padding: 1rem;
+                width: 90%;
+                height: 15rem;
+                background: rgb(255, 248, 229);
+                border-radius: 10px;
+            }
+            .checkbox {
+                margin: 1rem;
+            }
+            .margin-top {
+                margin-top: 2rem;
+            }
+            .text {
+                margin-left: 1rem;
+                font-family: "72", "72full", Arial, Helvetica, sans-serif;
+            }
+            .uploadArea {
+                box-sizing: border-box;
+                padding: 10px;
+                background: rgb(255, 255, 255);
+                border: 1px solid rgb(151, 151, 151);
+                border-radius: 3px;
+                width: 100%;
+                max-height: 300px;
+                height: 300px;
+                margin-left: 1rem;
+                margin-top: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <% if (systemCreationError.length) { %>
+        <div class="error-text">
+            <li>
+                <% systemCreationError.forEach((e) => {%>
+                    <ul><%= e %></ul>
+                <% }); %>
+            </li>
+        </div>
+        <% } %>
+        <div class='icons'><img width='100' height='50' title='' alt='SAP logo'
+            src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTAwcHgiIGhlaWdodD0iNTBweCIgdmlld0JveD0iMCAwIDEwMCA1MCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDx0aXRsZT4wRUJBRjVCNS1FOURGLTRDMjktQjZEMy0wM0YzN0MzN0Q5NEJAMXg8L3RpdGxlPgogICAgPGRlZnM+CiAgICAgICAgPGxpbmVhckdyYWRpZW50IHgxPSI1MCUiIHkxPSIwJSIgeDI9IjUwJSIgeTI9IjEwMCUiIGlkPSJsaW5lYXJHcmFkaWVudC0xIj4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iIzAwQUJEQSIgb2Zmc2V0PSIwJSI+PC9zdG9wPgogICAgICAgICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjMTE1RDlDIiBvZmZzZXQ9IjEwMCUiPjwvc3RvcD4KICAgICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9InNlcnZpY2Uta2V5LXVwbG9hZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjAwMDAwMCwgLTMwLjAwMDAwMCkiPgogICAgICAgICAgICA8ZyBpZD0ic2FwLWxvZ28iIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwLjAwMDAwMCwgMzAuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8cG9seWxpbmUgaWQ9ImJhY2twbGF0ZSIgZmlsbD0idXJsKCNsaW5lYXJHcmFkaWVudC0xKSIgcG9pbnRzPSIwIDQ5Ljk5MTgxODIgNTAuMzQyOTQ1MyA0OS45OTE4MTgyIDk5LjYxODM4NTcgMC4yNDg3ODc4NzkgMCAwLjI0ODc4Nzg3OSAwIDQ5Ljk5MTgxODIiPjwvcG9seWxpbmU+CiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNTkuNjk1NjIxNiwyNC4wNTE4MTgyIEw1Ny41MzM1OTM5LDI0LjA1MTgxODIgTDU3LjUzMzU5MzksMTYuMDczMzMzMyBMNTkuNjk1NjIxNiwxNi4wNzMzMzMzIEM2Mi41NzY5MjQ0LDE2LjA3MzMzMzMgNjQuODY5ODM4NiwxNy4wMzgxODE4IDY0Ljg2OTgzODYsMjAuMDE2NjY2NyBDNjQuODY5ODM4NiwyMy4wODYzNjM2IDYyLjU3NjkyNDQsMjQuMDUxODE4MiA1OS42OTU2MjE2LDI0LjA1MTgxODIgTDU5LjY5NTYyMTYsMjQuMDUxODE4MiBaIE0zNi40NTY2NzUyLDI5Ljc0MTIxMjEgQzM1LjMxNDQyMDgsMjkuNzQxMjEyMSAzNC4yMzk0MTA5LDI5LjUzNjM2MzYgMzMuMzEzODk5NywyOS4xODEyMTIxIEwzNi40MjM5NTM2LDE5LjI4NDg0ODUgTDM2LjQ4NzU5NTYsMTkuMjg0ODQ4NSBMMzkuNTMzMTA2OCwyOS4yMDk2OTcgQzM4LjYxODQwMjcsMjkuNTQ0NTQ1NSAzNy41NzI1MTIsMjkuNzQxMjEyMSAzNi40NTY2NzUyLDI5Ljc0MTIxMjEgWiBNNTkuMTE4NjQwNiw5LjYgTDQ5LjMxMzI2NTQsOS41OTc1NzU3NiBMNDkuMzEzMjY1NCwzMy4xMjk2OTcgTDQwLjc0NjIwNzksOS41OTc1NzU3NiBMMzIuMjUzMjk5Myw5LjU5NzU3NTc2IEwyNC45Mzc3NjgzLDI5LjI3NTQ1NDUgQzI0LjE2MzI1NjksMjQuMzE2MzYzNiAxOS4wNzc1OTg0LDIyLjU5OTA5MDkgMTUuMDc1MzU1NCwyMS4zMTQ1NDU1IEMxMi40MjkxMDc5LDIwLjQ1OTY5NyA5LjYzMzA2MTQ2LDE5LjE5ODE4MTggOS42NTc5Nzc5MSwxNy44MDYwNjA2IEM5LjY3NTk4OTgsMTYuNjY0ODQ4NSAxMS4xNjI4NzE3LDE1LjYwMzAzMDMgMTQuMDk1NTA4NCwxNS43NjM2MzY0IEMxNi4wNjcyMTA0LDE1Ljg3MDkwOTEgMTcuODA5ODYxMiwxNi4wMjkwOTA5IDIxLjI2NzU0NDYsMTcuNzE2MzYzNiBMMjQuNjgxMzk5LDExLjcyNjM2MzYgQzIxLjUxNzYwOTcsMTAuMTAxODE4MiAxNy4xNTA2MjU5LDkuMDc5MDkwOTEgMTMuNTczMTYzNCw5LjA3MzAzMDMgTDEzLjU0OTE0NzYsOS4wNzMwMzAzIEM5LjM3NjY5MjE2LDkuMDczMDMwMyA1Ljg5NzA5NDMxLDEwLjQ0MTUxNTIgMy43NDI4NzE3MSwxMi42ODg3ODc5IEMyLjI0MTU4MDI5LDE0LjI2MDYwNjEgMS40MzEzNDUyMywxNi4yNTE4MTgyIDEuMzk1MzIxNDQsMTguNDYxNTE1MiBDMS4zNDE4ODYxNSwyMS41MDA2MDYxIDIuNDQ1MTE0NywyMy42NTMwMzAzIDQuNzY1NjQ3MTMsMjUuMzc0MjQyNCBDNi43MTkzMzczLDI2LjgyMDYwNjEgOS4yMjM1OTEwNSwyNy43NjE1MTUyIDExLjQzMDM0ODMsMjguNDU1MTUxNSBDMTQuMTUxMzQ1MiwyOS4zMDMzMzMzIDE2LjM3MzQxMjYsMzAuMDQyNzI3MyAxNi4zNDYwOTQ2LDMxLjYyMDYwNjEgQzE2LjMzNDM4NjksMzIuMTk2MzYzNiAxNi4xMTQ5NDE5LDMyLjczIDE1LjcwNTE3MTMsMzMuMTYzOTM5NCBDMTUuMDI0NjIxOSwzMy44NzI3MjczIDEzLjk4NDEzNDgsMzQuMTM5MDkwOSAxMi41NDQ2ODQyLDM0LjE2Njk2OTcgQzkuNzYzMzQ3NDksMzQuMjIzMDMwMyA3LjcwNDI4Nzc0LDMzLjc4NDI0MjQgNC40MjQ2MjE5MiwzMS44Mjc4Nzg4IEwxLjM5NTMyMTQ0LDM3Ljg5OTA5MDkgQzQuNjcwMTg0MDgsMzkuNzc5MDkwOSA4LjU0NTQ0MzIyLDQwLjg4IDEyLjQ5NDg1MTMsNDAuODggTDEzLjAwNDI4NzcsNDAuODc1NzU3NiBDMTYuNDQ3MjYxNCw0MC44MTQyNDI0IDE5LjIyMzE5NDYsMzkuODE5Njk3IDIxLjQ0NTg2MjQsMzguMDE4MTgxOCBDMjEuNTY3NzQyOCwzNy45MTkzOTM5IDIxLjY4NjAyMSwzNy44MTEyMTIxIDIxLjgwMjc5ODEsMzcuNzA2MzYzNiBMMjAuODIyMDUwNCw0MC4zNjA2MDYxIEwyOS43MjYyMzA1LDQwLjM2MDYwNjEgTDMxLjIyMjQxODYsMzUuNzcwOTA5MSBDMzIuNzg3MzUyLDM2LjMwMzYzNjQgMzQuNTY2NjI3LDM2LjYwNjA2MDYgMzYuNDU2Njc1MiwzNi42MDYwNjA2IEMzOC4yOTQxODg2LDM2LjYwNjA2MDYgNDAuMDMyMzM2NCwzNi4zMjE4MTgyIDQxLjU2OTM1MTUsMzUuODEzMDMwMyBMNDMuMDA5MTAyMiw0MC4zNjA2MDYxIEw1Ny41MzM1OTM5LDQwLjM2MDYwNjEgTDU3LjUzMzU5MzksMzAuODU1MTUxNSBMNjAuNzAxNTg2LDMwLjg1NTE1MTUgQzY4LjM1OTY0MzIsMzAuODU1MTUxNSA3Mi44OTM1MzcyLDI2LjkyIDcyLjg5MzUzNzIsMjAuMzIwNjA2MSBDNzIuODkzNTM3MiwxMi45NzE4MTgyIDY4LjQ5MDgyOTgsOS42IDU5LjExODY0MDYsOS42IEw1OS4xMTg2NDA2LDkuNiBaIiBpZD0ic2FwIiBmaWxsPSIjRkZGRkZFIj48L3BhdGg+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg=='/>
+        </div>
+        <div class="warning">
+            <div class="icons"><img width='40' height='40' title='' alt='Warning icon'
+                src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzlweCIgaGVpZ2h0PSIzNXB4IiB2aWV3Qm94PSIwIDAgMzkgMzUiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8dGl0bGU+RUZFMkU0OUYtMDhFMC00QzFCLUE5MjYtNzNGRkUwODg0ODY1QDF4PC90aXRsZT4KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJzZXJ2aWNlLWtleS11cGxvYWQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01Mi4wMDAwMDAsIC0xMzQuMDAwMDAwKSI+CiAgICAgICAgICAgIDxnIGlkPSJ3YXJuaW5nIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1Mi4xODcxMjEsIDEzNC4wMTUyMDYpIj4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0yMS40MTMyMTI4LDEuNTA0NDIyNTcgTDM3LjIyNjA5MTUsMjguOTg4NzExOCBDMzguMDUyMzU1MSwzMC40MjQ4MzY3IDM3LjU1Nzk2NDksMzIuMjU4ODY0OCAzNi4xMjE4NDAxLDMzLjA4NTEyODQgQzM1LjY2NjcxNTEsMzMuMzQ2OTgxMiAzNS4xNTA4MzQzLDMzLjQ4NDc5NDQgMzQuNjI1NzU3NSwzMy40ODQ3OTQ0IEwzLDMzLjQ4NDc5NDQgQzEuMzQzMTQ1NzUsMzMuNDg0Nzk0NCAtMS4wNjU4MTQxZS0xNCwzMi4xNDE2NDg3IC0xLjA2NTgxNDFlLTE0LDMwLjQ4NDc5NDQgQy0xLjA2NTgxNDFlLTE0LDI5Ljk1OTcxNzYgMC4xMzc4MTMyNTYsMjkuNDQzODM2OCAwLjM5OTY2NTk5OCwyOC45ODg3MTE4IEwxNi4yMTI1NDQ4LDEuNTA0NDIyNTcgQzE3LjAzODgwODQsMC4wNjgyOTc3NTI4IDE4Ljg3MjgzNjUsLTAuNDI2MDkyNDUgMjAuMzA4OTYxMywwLjQwMDE3MTE0MSBDMjAuNzY4MDczNiwwLjY2NDMxNzkxNyAyMS4xNDkwNjYsMS4wNDUzMTAzMSAyMS40MTMyMTI4LDEuNTA0NDIyNTcgWiIgaWQ9InRyaWFuZ2xlIiBmaWxsPSIjRkZDMzRFIj48L3BhdGg+CiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMTguODEyODc4OCwyMC45ODQ3OTQ0IEMyMC41NDQwMjUxLDIwLjk4NDc5NDQgMjEuOTQ3NjQ5LDEyLjc2NDY3NzMgMjEuOTQ3NjQ5LDExLjAzMzUzMSBDMjEuOTQ3NjQ5LDkuMzAyMzg0NjkgMjAuNTQ0Mjc3Niw3Ljg5OTAxMzMyIDE4LjgxMzEzMTMsNy44OTkwMTMzMiBDMTcuMDgxOTg1LDcuODk5MDEzMzIgMTUuNjc4NjEzNyw5LjMwMjM4NDY5IDE1LjY3ODYxMzcsMTEuMDMzNTMxIEMxNS42Nzg2MTM3LDEyLjc2NDY3NzMgMTcuMDgxNzMyNSwyMC45ODQ3OTQ0IDE4LjgxMjg3ODgsMjAuOTg0Nzk0NCBaIiBpZD0iZXhjbGFtYXRpb24iIGZpbGw9IiNGRkZGRkYiPjwvcGF0aD4KICAgICAgICAgICAgICAgIDxjaXJjbGUgaWQ9Im92YWwiIGZpbGw9IiNGRkZGRkYiIGN4PSIxOC44MTMxMzEzIiBjeT0iMjYuNzQzNjE3OCIgcj0iMy4xMzQ1MTc2NyI+PC9jaXJjbGU+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg=='/>
+            </div>
+            <p class="text">The authentication information for the system:</p>
+            <p class="text" style="font-weight: bold;"><%= systemUrl %></p>
+            <p class="text">cannot be found. It may have been deleted or expired.</p>
+
+            <p class="text margin-top">Please paste the service key contents for this system in the box below. If you tick the save system checkbox, the service authentication details will be saved securely for future use.</p>
+
+        </div>
+        
+        <label>System URL</label>
+        <div class="system-url"><%= systemUrl %></div>
+        <div><%= client? 'Client: ' + client : '' %></div>
+        <form action="/create-system" method="post" class="form">
+            <div>
+                <label for="systemName" class="req">System Name</label>
+                <input type="text" id="systemName" name="systemName" class="system-name" autofocus required
+                <% if (systemName) { %>
+                    value="<%= systemName %>"
+                <% } %>
+                />
+            </div>
+            <div>
+                <label for="serviceKeysContents" class="req">Service Key Contents</label>
+                <textarea
+                    id="serviceKeysContents"
+                    name="serviceKeysContents"
+                    placeholder="Paste your service key contents here"
+                    class="uploadArea"
+                    required
+                    rows="15"><%= serviceKeysContents %></textarea>
+                </textarea>
+            </div>
+            <div>
+                <input type="submit" value="Save System" class="button" />
+            </div>
+        </form>
+
+        <div class="footer">
+            
+            <div class="footerRight">
+                <p class="bottomText"><span class="biggerBottomText">&copy;</span>2021 SAP SE, All rights reserved.</p>
+            </div>
+        </div>
+    </body>
+</html>
+

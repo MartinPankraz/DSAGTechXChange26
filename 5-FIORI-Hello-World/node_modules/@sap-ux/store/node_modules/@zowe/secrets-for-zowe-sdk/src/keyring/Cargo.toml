@@ -1,0 +1,24 @@
+[package]
+edition = "2021"
+name = "keyring"
+version = "1.0.0"
+authors = ["Zowe Project"]
+license = "EPL-2.0"
+repository = "https://github.com/zowe/zowe-cli"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
+napi = {version = "2", default-features = false, features = ["napi4"]}
+napi-derive = "2"
+secrets_core = {path = "../../core/"}
+
+[build-dependencies]
+napi-build = "2"
+
+[profile.release]
+lto = true
+opt-level = "z"  # Optimize for size.
+strip = "symbols"

@@ -1,0 +1,142 @@
+# Axios Extension
+
+The `@sap-ux/axios-extension` module is an extension of the link:https://github.com/axios/axios[axios] framework adding convenience methods to interact with SAP systems especially with OData services..
+
+## Features
+
+### Factories
+The module offers factory functions allowing to generate `ServiceProvider` instances.
+
+### Service Provider
+The base service provider extends the class `Axios` abstracting whether it is running in SAP Business Application Studio or locally.
+
+It offers convenience methods to simplify the handling of:
+
+* different versions of S/4 HANA systems
+* different authentication methods in the SAP ecosystem.
+* running locally or in SAP Business Application Studio
+
+It exposes the `service(path)` method that creates a new Axios instance for the requested service. It will reuse authentication details and cookies from the provider.
+
+### ABAP Service Provider
+Another extension of the base provider handling specifics for ABAP based backend systems. It offers simplified access to the catalog services as well as the UI5 ABAP repository service.
+
+### Services
+The generic OData service simplifies the access to the service metadata as well as the access to response data. It is used as base class for
+
+#### Catalog Service
+Simplified consumption of the SAP catalog service useful for fetching annotations.
+
+#### ABAP UI5 Repository Service
+Allows deployment of applications to the UI5 ABAP Repository as well as checking deployed applications.
+
+#### App Index Service
+A class representing the app index service allowing to search applications deployed on an ABAP system.
+
+#### Layered Repository Service
+Allows deployment of adaptation projects.
+
+Usage:
+```Typescript
+import { createForAbap } from '@sap-ux/axios-extension';
+
+const provider = createForAbap({
+    baseURL: 'https://sap.example',
+    params: { 'sap-client': client }
+});
+const service = provider.getLayeredRepository();
+await service.deploy('./dist/my-variant-webapp.zip', {
+    namespace: 'apps/my.base.app/appVariants/customer.variant/',
+    package: 'MY_PACKAGE',
+    transport: 'ABC123'
+});
+```
+
+#### ADT Service
+Services that supports Fiori project deployment configuration. The following example shows the usage
+of loading ADT service ```TransportRequestService``` for creating a new transport request number.
+
+Usage:
+```Typescript
+import { createForAbap } from '@sap-ux/axios-extension';
+
+const provider = createForAbap({
+    baseURL: 'https://sap.example',
+    params: { 'sap-client': client }
+});
+const transportRequestService = provider.getAdtService<TransportRequestService>(TransportRequestService);
+const newTrNumber = await transportRequestService.createTransportRequest({
+    packageName: 'Z_PACKAGE',
+    ui5AppName: 'zappname',
+    description: 'A new transport request number for deployment'
+});
+```
+#### ADT Service Implementation
+Supported ADT services are implemented in link:./src/abap/adt-catalog/services[src/abap/adt-catalog/services].
+
+Take link:./src/abap/adt-catalog/services/ato-service.ts[AtoService] as an example to illustrate how to implement an ADT service.
+A specific ADT service implementation like AtoService is implemented as a subclass of link:./src/abap/adt-catalog/services/adt-service.ts[AdtService]. 
+
+```Typescript
+export class AtoService extends AdtService {
+    // ...
+}
+```
+
+As a subclass of AdtService, AtoService implements the `getAdtCatagory()` static method to provide the AdtCatagory properties. 
+AdtCatagory properties is used as unique ID to
+obtain service schema from ADT discovery schema. See link:./src/abap/adt-catalog/adt-catalog-service.ts[AdtCatalogService] and 
+link:./src/abap/adt-catalog/adt-schema-store.ts[AdtSchemaStore] for details.
+
+Finally, AtoService implements the request for fetching ATO settings and the parsing of response data. See `getAtoInfo()` and
+`parseAtoResponse(xml: string)` in AtoService implementation.
+
+## Installation
+Npm
+
+`npm install --save @sap-ux/axios-extension`
+
+Yarn
+
+`yarn add @sap-ux/axios-extension`
+
+Pnpm
+
+`pnpm add @sap-ux/axios-extension`
+
+## Usage
+```Typescript
+import { createForAbap } from '@sap-ux/axios-extension';
+
+const provider = createForAbap({
+    baseURL: 'https://sap.example',
+    params: { 'sap-client': client }
+});
+const service = provider.service('/ns/my_service');
+const metadata = await service.metadata();
+
+```
+See more examples in link:./test/factory.test.ts[/test/factory.test.ts]
+
+## Proxy Support
+
+To enable support for TLS (Transport Layer Security) connections when using `HTTPS_PROXY`, update your environment by setting the `HTTPS_PROXY` environment variable, as shown;
+
+```bash
+export HTTPS_PROXY=<YOUR-PROXY:PORT>
+```
+
+In order to support credentials in the proxy URL, you can set the `HTTPS_PROXY` environment variable to include the username and password in the URL. For example:
+
+```bash
+export HTTPS_PROXY=http://user:password@proxy.domain.com:3128
+```
+
+Ensure you restart any running processes to apply the changes.
+
+Example Scenario
+
+If you're using a proxy server to route your HTTPS traffic, the proxy server will need to create a secure, TLS-encrypted connection to the target server on your behalf. `tls.connect()` will be used to establish that encrypted tunnel between your client, the proxy, and the server.
+
+
+

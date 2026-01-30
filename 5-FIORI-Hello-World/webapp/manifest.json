@@ -1,0 +1,98 @@
+{
+  "_version": "1.81.0",
+  "sap.app": {
+    "id": "hello",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.20.1",
+      "toolsId": "13f2cc7c-c5c0-444f-99eb-4dabc5bbcf83"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.144.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "hello.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "hello.view",
+        "async": true,
+        "viewPath": "hello.view"
+      },
+      "routes": [
+        {
+          "name": "RouteHelloWorld",
+          "pattern": ":?query:",
+          "target": [
+            "TargetHelloWorld"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetHelloWorld": {
+          "id": "HelloWorld",
+          "name": "HelloWorld"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "hello.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

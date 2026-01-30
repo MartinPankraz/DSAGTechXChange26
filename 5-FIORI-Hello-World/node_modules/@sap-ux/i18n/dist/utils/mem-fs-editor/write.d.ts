@@ -1,0 +1,11 @@
+import type { Editor } from 'mem-fs-editor';
+/**
+ * Write data to a file.
+ *
+ * @param filePath absolute path to a file
+ * @param content content to write
+ * @param fs optional `mem-fs-editor` instance. If provided, `write` api of `mem-fs-editor` is used.
+ * @returns string or void
+ */
+export declare function writeFile(filePath: string, content: string, fs?: Editor): Promise<string | void>;
+//# sourceMappingURL=write.d.ts.map

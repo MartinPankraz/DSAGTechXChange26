@@ -1,0 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ui5Libs = void 0;
+exports.ui5Libs = [
+    'sap.apf',
+    'sap.base',
+    'sap.chart',
+    'sap.collaboration',
+    'sap.f',
+    'sap.fe',
+    'sap.fileviewer',
+    'sap.gantt',
+    'sap.landvisz',
+    'sap.m',
+    'sap.ndc',
+    'sap.ovp',
+    'sap.rules',
+    'sap.suite',
+    'sap.tnt',
+    'sap.ui',
+    'sap.uiext',
+    'sap.ushell',
+    'sap.uxap',
+    'sap.viz',
+    'sap.webanalytics',
+    'sap.zen'
+];
+//# sourceMappingURL=constants.js.map
