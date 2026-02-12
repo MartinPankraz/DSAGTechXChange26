@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>DSAG Event – Essensausgabe (Security Training)</title>
+
+  <!--
+    WICHTIG (Build Code & Best Practice):
+    - Kein "legacy" Bootstrapping mit eigener App-Logik hier.
+    - Wir starten ausschließlich eine UI5 Component (Component.js) per Declarative API (ComponentSupport).
+    - Routing & Models sind im manifest.json definiert.
+
+    Full-Stack Hinweis:
+    - Diese App wird im Training direkt vom CAP Server ausgeliefert (server.js).
+    - Damit sind UI und OData Service in derselben Origin -> kein Proxy nötig.
+  -->
+
+  <script
+    id="sap-ui-bootstrap"
+    src="https://ui5.sap.com/1.141.1/resources/sap-ui-core.js"
+    data-sap-ui-theme="sap_horizon"
+    data-sap-ui-compatVersion="edge"
+    data-sap-ui-async="true"
+    data-sap-ui-xx-waitForTheme="true"
+    data-sap-ui-resourceRoots='{"dsag.mealapp": "./"}'
+    data-sap-ui-onInit="module:sap/ui/core/ComponentSupport"
+  ></script>
+</head>
+
+<body class="sapUiBody" id="content">
+  <!-- Declarative Component Container -->
+  <div
+    data-sap-ui-component
+    data-name="dsag.mealapp"
+    data-id="container"
+    data-settings='{"id":"dsag.mealapp"}'
+  ></div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Node
+node_modules/
+
+# CAP SQLite DB (persistente Trainingsdaten)
+db.sqlite
+
+# UI5 build output (falls genutzt)
+dist/
+
+# OS / IDE
+.DS_Store
+.vscode/

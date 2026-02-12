@@ -1,0 +1,38 @@
+<mvc:View
+  controllerName="dsag.mealapp.controller.Login"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+
+  <Page title="{i18n>loginTitle}">
+    <content>
+      <VBox class="sapUiLargeMargin sapUiResponsiveContentPadding" width="100%">
+
+        <!--
+          Security Training Hinweis:
+          - Kein Hinweis auf Default-Passwörter im UI.
+          - Die Dummy-Credentials stehen in der README (Training), nicht im Screenshot.
+        -->
+
+        <Label text="{i18n>emailLabel}" labelFor="emailInput"/>
+        <Input
+          id="emailInput"
+          type="Email"
+          placeholder="{i18n>emailPlaceholder}"
+          width="100%" />
+
+        <Label text="{i18n>passwordLabel}" labelFor="passwordInput" class="sapUiSmallMarginTop"/>
+        <Input
+          id="passwordInput"
+          type="Password"
+          placeholder="{i18n>passwordPlaceholder}"
+          width="100%" />
+
+        <Button
+          text="{i18n>loginButton}"
+          type="Emphasized"
+          press=".onLogin"
+          class="sapUiSmallMarginTop"/>
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>
