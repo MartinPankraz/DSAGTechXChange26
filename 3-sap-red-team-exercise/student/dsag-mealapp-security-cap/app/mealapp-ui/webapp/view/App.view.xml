@@ -1,0 +1,11 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  displayBlock="true">
+
+  <!--
+    Root Container für Routing.
+    Routing (manifest.json) hängt Views in die Aggregation "pages" des sap.m.App Controls ein.
+  -->
+  <App id="app"/>
+</mvc:View>

@@ -1,0 +1,15 @@
+specVersion: "3.0"
+metadata:
+  name: dsag-mealapp-ui
+type: application
+framework:
+  name: SAPUI5
+  version: "1.141.1"
+  libraries:
+    - name: sap.ui.core
+    - name: sap.m
+    - name: sap.ui.layout
+resources:
+  configuration:
+    paths:
+      webapp: webapp

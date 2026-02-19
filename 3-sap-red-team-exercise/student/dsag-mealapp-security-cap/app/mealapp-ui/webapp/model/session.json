@@ -1,0 +1,12 @@
+{
+  "auth": {
+    "isLoggedIn": false,
+    "user": {
+      "email": "",
+      "role": "user"
+    }
+  },
+  "preference": {
+    "selectedMealId": ""
+  }
+}
