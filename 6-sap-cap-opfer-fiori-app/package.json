@@ -1,0 +1,12 @@
+{
+  "name": "sap-cap-opfer-fiori-app",
+  "version": "1.0.0",
+  "description": "SAP CAP Fiori App",
+  "scripts": {
+   "start": "echo SAP CAP App running",
+    "setup": "npm install --prefix .tools/food-advisor --ignore-scripts"
+  },
+  "dependencies": {
+    "express": "^4.18.0"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "sap-cap-food-advisor": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${workspaceFolder}/.tools/food-advisor/index.js"]
+    }
+  }
+}
