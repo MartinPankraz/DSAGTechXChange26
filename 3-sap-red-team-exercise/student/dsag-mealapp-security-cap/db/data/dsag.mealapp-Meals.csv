@@ -5,3 +5,5 @@ ID;name;category;chefOnly
 44444444-4444-4444-4444-444444444444;Gemüse-Risotto;Vegetarisch;false
 55555555-5555-5555-5555-555555555555;Hähnchen Teriyaki;Nicht-vegetarisch;false
 66666666-6666-6666-6666-666666666666;Rinder-Gulasch;Nicht-vegetarisch;false
+77777777-7777-7777-7777-777777777777;Ribeye-Steak (Dry Aged);Nicht-vegetarisch;true
+88888888-8888-8888-8888-888888888888;Hummer Thermidor;Nicht-vegetarisch;true

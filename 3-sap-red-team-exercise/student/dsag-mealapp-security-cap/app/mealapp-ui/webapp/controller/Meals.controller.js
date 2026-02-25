@@ -199,6 +199,10 @@ sap.ui.define([
       oSession.setProperty("/preference/selectedMealId", "");
 
       this.getRouter().navTo("Login", {}, true);
+    },
+
+    onOpenAdmin: function () {
+      this.getRouter().navTo("Admin");
     }
   });
 });

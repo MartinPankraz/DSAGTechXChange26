@@ -43,7 +43,8 @@
       "libs": {
         "sap.ui.core": {},
         "sap.m": {},
-        "sap.ui.layout": {}
+        "sap.ui.layout": {},
+        "sap.ui.unified": {}
       }
     },
     "contentDensities": {
@@ -101,6 +102,11 @@
           "target": "Meals"
         },
         {
+          "name": "Admin",
+          "pattern": "admin",
+          "target": "Admin"
+        },
+        {
           "name": "Summary",
           "pattern": "summary",
           "target": "Summary"
@@ -114,6 +120,10 @@
         "Meals": {
           "viewName": "Meals",
           "viewId": "Meals"
+        },
+        "Admin": {
+          "viewName": "Admin",
+          "viewId": "Admin"
         },
         "Summary": {
           "viewName": "Summary",

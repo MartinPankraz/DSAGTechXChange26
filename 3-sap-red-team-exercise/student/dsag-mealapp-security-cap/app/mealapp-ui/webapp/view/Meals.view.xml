@@ -5,10 +5,16 @@
 
   <Page title="{i18n>mealsTitle}">
     <headerContent>
+      <Button
+        text="{i18n>adminTitle}"
+        icon="sap-icon://employee"
+        type="Transparent"
+        visible="{= ${/auth/user/role} === 'admin' }"
+        press=".onOpenAdmin"/>
     </headerContent>
 
     <content>
-      <VBox class="sapUiSmallMargin sapUiResponsiveContentPadding" width="100%">
+      <VBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginTop sapUiSmallMarginBottom">
         <Text text="{i18n>mealsIntro}" class="sapUiSmallMarginBottom"/>
 
         <!--

@@ -15,6 +15,10 @@ entity Meals : cuid, managed {
   name     : String(80);
   category : String(20);   // Vegan | Vegetarisch | Nicht-vegetarisch
 
+  // Admin Upload: Bilddaten (Base64) + Mime-Type
+  imageData     : LargeString;
+  imageMimeType : String(50);
+
   // Für spätere Workshop-Schritte (Chef Specials / privilegierte Gerichte)
   chefOnly : Boolean default false;
 }

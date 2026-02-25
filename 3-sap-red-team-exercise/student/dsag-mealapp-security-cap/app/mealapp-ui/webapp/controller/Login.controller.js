@@ -8,8 +8,10 @@ sap.ui.define([
   // Security Note:
   // - Hardcoded Credentials sind in echten Apps ein Anti-Pattern.
   // - Für die Schulung nutzen wir das als Startpunkt.
-  var VALID_EMAIL = "dummy@dsag.de";
-  var VALID_PASSWORD = "Start123!";
+  var VALID_USERS = [
+    { email: "dummy@dsag.de", password: "Start123!", role: "user" },
+    { email: "admin@dsag.de", password: "Start123!", role: "admin" }
+  ];
 
   return BaseController.extend("dsag.mealapp.controller.Login", {
 
@@ -62,7 +64,10 @@ sap.ui.define([
       }
 
       // Check gegen fixe Demo-Credentials
-      if (sEmail.toLowerCase() !== VALID_EMAIL || sPassword !== VALID_PASSWORD) {
+      var oUser = VALID_USERS.find(function (oEntry) {
+        return oEntry.email === sEmail.toLowerCase() && oEntry.password === sPassword;
+      });
+      if (!oUser) {
         MessageBox.error(oBundle.getText("loginInvalid"));
         return;
       }
@@ -71,7 +76,7 @@ sap.ui.define([
       // Wichtig: Das ist keine echte Security. Backend-Auth kommt später im Workshop.
       oSession.setProperty("/auth/isLoggedIn", true);
       oSession.setProperty("/auth/user/email", sEmail);
-      oSession.setProperty("/auth/user/role", "user");
+  oSession.setProperty("/auth/user/role", oUser.role || "user");
 
       // Auswahl zurücksetzen (wird in Meals ggf. aus der DB geladen)
       oSession.setProperty("/preference/selectedMealId", "");

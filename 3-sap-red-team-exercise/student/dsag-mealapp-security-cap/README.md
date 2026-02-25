@@ -55,6 +55,12 @@ Dann im Browser öffnen:
 - E-Mail: `dummy@dsag.de`
 - Passwort: `Start123!`
 
+### Admin Login (Gerichte pflegen)
+- E-Mail: `admin@dsag.de`
+- Passwort: `Start123!`
+- Admin-Seite: Button **Admin** in der Essensauswahl oder direkt `/#/admin`
+- Funktionen: Gerichte anlegen/bearbeiten/löschen, Bilder hochladen
+
 ### Datenbank-Reset (Training)
 Wenn ihr wieder „bei Null“ starten wollt:
 
@@ -178,6 +184,18 @@ Security-Diskussion:
 **Ziel:** `npm audit`, Lockfile, SBOM, Policies.
 - `npm audit` ausführen und Findings erklären
 - Dependency Pinning / Update Strategie
+
+---
+
+## Level‑basiertes Red‑Team Training (sicheres Scaffolding)
+
+Wir liefern **sichere** Trainings-Aufgaben ohne echte Hintertüren oder Exfiltration.
+Die Levels findest du in `training/levels.md` und `training/levels.json`.
+
+**Wichtig:**
+- Keine externen Webhooks oder Datenabflüsse einbauen.
+- Keine absichtlich verwundbaren Packages installieren.
+- Alle „Hidden Features“ bleiben deaktiviert oder als Text-Hinweis.
 
 ---
 

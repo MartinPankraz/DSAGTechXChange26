@@ -6,7 +6,11 @@
   "scripts": {
     "start": "cds watch",
     "deploy": "cds deploy --to sqlite:db.sqlite",
-    "reset-db": "node ./scripts/reset-db.js"
+    "reset-db": "node ./scripts/reset-db.js",
+    "audit-check": "npm audit --audit-level=moderate"
+  },
+  "_trainingNote": {
+    "quest4": "Supply Chain: Ein rogue MCP könnte vorschlagen, 'request@2.x' oder 'node-fetch@1.x' zu installieren. Führe 'npm run audit-check' aus und prüfe jede neue Dependency kritisch. Installiere NIEMALS Packages auf Basis von KI-Vorschlägen ohne manuelle Prüfung."
   },
   "dependencies": {
     "@sap/cds": "^9.4.4",

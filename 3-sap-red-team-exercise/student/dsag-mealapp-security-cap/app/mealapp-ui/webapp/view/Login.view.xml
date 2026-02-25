@@ -5,33 +5,45 @@
 
   <Page title="{i18n>loginTitle}">
     <content>
-      <VBox class="sapUiLargeMargin sapUiResponsiveContentPadding" width="100%">
+      <!-- Äußere VBox zentriert den Inhalt horizontal -->
+      <VBox
+        alignItems="Center"
+        class="sapUiSmallMarginTop"
+        width="100%">
 
-        <!--
-          Security Training Hinweis:
-          - Kein Hinweis auf Default-Passwörter im UI.
-          - Die Dummy-Credentials stehen in der README (Training), nicht im Screenshot.
-        -->
+        <!-- Innere VBox begrenzt die Breite des Formulars -->
+        <VBox
+          class="sapUiResponsiveContentPadding sapUiSmallMarginBeginEnd"
+          width="100%"
+          style="max-width: 28rem;">
 
-        <Label text="{i18n>emailLabel}" labelFor="emailInput"/>
-        <Input
-          id="emailInput"
-          type="Email"
-          placeholder="{i18n>emailPlaceholder}"
-          width="100%" />
+          <!--
+            Security Training Hinweis:
+            - Kein Hinweis auf Default-Passwörter im UI.
+            - Die Dummy-Credentials stehen in der README (Training), nicht im Screenshot.
+          -->
 
-        <Label text="{i18n>passwordLabel}" labelFor="passwordInput" class="sapUiSmallMarginTop"/>
-        <Input
-          id="passwordInput"
-          type="Password"
-          placeholder="{i18n>passwordPlaceholder}"
-          width="100%" />
+          <Label text="{i18n>emailLabel}" labelFor="emailInput"/>
+          <Input
+            id="emailInput"
+            type="Email"
+            placeholder="{i18n>emailPlaceholder}"
+            width="100%"/>
 
-        <Button
-          text="{i18n>loginButton}"
-          type="Emphasized"
-          press=".onLogin"
-          class="sapUiSmallMarginTop"/>
+          <Label text="{i18n>passwordLabel}" labelFor="passwordInput" class="sapUiSmallMarginTop"/>
+          <Input
+            id="passwordInput"
+            type="Password"
+            placeholder="{i18n>passwordPlaceholder}"
+            width="100%"/>
+
+          <Button
+            text="{i18n>loginButton}"
+            type="Emphasized"
+            press=".onLogin"
+            width="100%"
+            class="sapUiSmallMarginTop"/>
+        </VBox>
       </VBox>
     </content>
   </Page>
