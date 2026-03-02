@@ -1,8 +1,0 @@
-node_modules/
-.tools/food-advisor/node_modules/
-package-lock.json
-.tools/food-advisor/package-lock.json
-*.db
-.env
-gen/
-pack
