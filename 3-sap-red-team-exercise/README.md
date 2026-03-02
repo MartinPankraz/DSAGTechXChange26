@@ -21,9 +21,7 @@ For this quest, a minimal GitHub Codespaces dev container is included at `3-sap-
 - Open a Codespace directly on this repository
 - Open folder `3-sap-red-team-exercise`
 - Wait for container bootstrap to finish (`npm` dependencies for CAP + MCP server, plus CAP/CF/MBT tooling)
-- Start CAP app from `student/dsag-mealapp-security-cap` with `npm start` or `cds watch`
-
-Detailed steps are documented in `student/dsag-mealapp-security-cap/README.md`.
+- Start CAP app from `student/dsag-mealapp-security-cap` with `cds watch`
 
 > [!TIP]
 > The concepts applied in this hack can be re-used with other products and services. SAP Enterprise Threat Detection, cloud edition; Microsoft Sentinel, Microsoft Entra ID and Azure are merely used to demonstrate and deepen understanding through hands-on experience.

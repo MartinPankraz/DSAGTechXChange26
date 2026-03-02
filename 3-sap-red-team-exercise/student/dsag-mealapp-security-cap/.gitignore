@@ -2,7 +2,7 @@
 node_modules/
 
 # CAP SQLite DB (persistente Trainingsdaten)
-db.sqlite
+db.sqlite*
 
 # UI5 build output (falls genutzt)
 dist/

@@ -171,15 +171,19 @@ sap.ui.define([
 
       try {
         if (oEdit.isNew) {
-          var oList = this.getModel().bindList("/Meals");
-          var oNewCtx = oList.create({
-            name: oEdit.name,
-            category: oEdit.category,
-            chefOnly: !!oEdit.chefOnly,
-            imageData: oEdit.imageData || "",
-            imageMimeType: oEdit.imageMimeType || ""
-          });
-          await oNewCtx.created();
+          var oAction = this.getModel().bindContext("/addMeal(...)");
+          oAction.setParameter("name", oEdit.name);
+          oAction.setParameter("category", oEdit.category);
+          oAction.setParameter("chefOnly", !!oEdit.chefOnly);
+          oAction.setParameter("imageData", oEdit.imageData || "");
+          oAction.setParameter("imageMimeType", oEdit.imageMimeType || "");
+          await oAction.execute();
+
+          var oMealsTable = this.byId("mealsAdminTable");
+          var oItemsBinding = oMealsTable && oMealsTable.getBinding("items");
+          if (oItemsBinding) {
+            oItemsBinding.refresh();
+          }
           MessageToast.show("Gericht angelegt");
         } else if (this._editContext) {
           this._editContext.setProperty("name", oEdit.name);
