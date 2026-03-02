@@ -16,6 +16,7 @@ The first thing is to download the $metadata information, via. https://microsoft
 For this we use the website https://witty-sand-02a41c00f.1.azurestaticapps.net/
 
 Open the page, select “I agree” and click on Get started.
+
 ![Open Converter](../images/quest3/step03.png) 
  
 ## 3.1.4. Select the $metadata file you downloaded before and click on Convert. If you had issues you can also use this file xxx
