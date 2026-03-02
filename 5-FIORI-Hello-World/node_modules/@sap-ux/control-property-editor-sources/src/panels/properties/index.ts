@@ -1,1 +1,0 @@
-export { PropertiesList } from './PropertiesList';
