@@ -2,39 +2,24 @@
 
 ** [🤖 Quest 1 >](student/Quest1.md)
 
-## 1. Introduction
-Welcome to the DSAG TechXChange 2025 Hands-on lab. This document provides an overview of the Hands-on activities, challenges, and resources available to participants.
+## 0. Introduction
+Welcome to the DSAG TechXChange 2026 Hands-on lab. This document provides an overview of the Hands-on activities, challenges, and resources available to participants.
 
-### 1.1. Business Scenario
-Customers can enhance their SAP systems by integrating Power Platform and AI, enabling them to address a variety of business needs across different use cases. This integration allows for greater flexibility, automation, and intelligent insights, ultimately improving operational efficiency and decision-making.
-![Common Patterns](images/CommonPatternsWithSAPandPowerPlatform.jpg)
- 
-#### Example
-1.	**Frontline Workers** - want a simple experience to complete tasks, often relying on mobile apps like inspections. However, many SAP processes are incomplete or inefficient, lacking mobile-friendly solutions. This results in workarounds like paper, Excel exports, and emailed screenshots, introducing data accuracy risks and inefficiencies. With Power Platform (PP), task-based inspection apps can be quickly developed using device features (camera, GPS, etc.) and integrated with SAP via BTP or the SAP Core, creating a faster, simpler process with fewer errors.
-2.	**Finding answers** - There’s lots of situations that employees need quick access to SAP data such as stock levels, payment status, HR data and maintenance progress. However, often this is a time-consuming user experience and not always available on the device of choice. The opportunity with PP and Copilot Studio is to introduce a conversational experience in working with SAP where the user can ask questions in natural language to get the insights they need. What’s more, these Copilots can be surfaced in Teams, web pages and Power Apps. With pro-dev support these Copilots can also add actions to update SAP data which adds a whole new dimension to how SAP can be used.
+### 0.1. Business Scenario and getting started
+Joule has demonstrated how users can interact with their SAP backend system in natural language. While tools such as Joule Studio or Copilot Studio provide also access to tool to connect to APIs directly, the introduction of the Model Context Protocol, MCP, has simplified the integration of AI Clients dramatically. 
+As long as an MCP Server is available, MCP Clients like Joule Studio or Copilot Studio, can just access the MCP Server and use the exposed data. Single Sign-On can ensure that the user is only able to see what he or she is allowed to see. 
 
+### 0.2 MCP Server and where to get them
+So the main question is: where can I get an MCP Server from. The [MCP Registry](https://registry.modelcontextprotocol.io/) already lists hundreds of MCP Servers, but if you want to connect to your own (SAP) Systems, you can use open source solutions (like the [OData MCP Bridge](https://github.com/oisee/odata_mcp_go)) or use tools like Azure API Management which provide a simply way to expose existing APIs as an MCP Server. 
 
-In this lab, you will develop a solution to help employees easily access product information from SAP and also change product prices (write back) in SAP.
+In our tutorial we will use Azure API Management to create such an MCP Server from the GWSAMPLE OData Service and expose the information in a Copilot Studio agent. 
 
-### 1.2 Getting ready for the lab
-#### 1.2.1 Locate credentials for accessing the provided SAP system
-* SAP system: PM0 
+### 0.3. Labs and More
+For DSAG TechXChange we have prepared everything for you. However, you can also reproduce this very same scenario at home. All that you need is
+* [Copilot Studio](https://copilotstudio.microsoft.com/)
+* Azure API Management (start with the free trial [Azure Free Trial](https://azure.com/free))
+* SAP Backend System (you can use a Service from the [SAP API Business Hub](https://api.sap.com))
 
-SAP credentials to connect to the SAP system PM0 will be provided later in this guide when you need to create a connection.
-
-> [!Tip] 
-> If you run through this guide after the TechXChange event, you can also leverage the public [SAP Gateway Demo System](https://developers.sap.com/tutorials/gateway-demo-signup.html) 
-
-#### 1.2.2. Locate Entra-ID / Active Directory credentials
-* Locate Entra-ID / Active Directory credentials provided in the resources section of this guide. You will need these to sign into Copilot Studio, Power Platform and Microsoft Teams.
-
-#### 1.2.3. Power Platform
-* Sign in to Copilot Studio and start free trial here:
-[Copilot Studio](https://copilotstudio.microsoft.com/)
-
-> [!Note]
-> If you encounter an error starting the trial, you will need to hit "Retry" button a couple of times.
- 
 ## 📢Feedback
 
 This repos encourages contributions and feedback via the [GitHub Issues](https://github.com/MartinPankraz/DSAGTechXChange26/issues/new/choose).
