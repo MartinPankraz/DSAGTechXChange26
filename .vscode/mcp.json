@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "sap-cap-food-advisor": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["3-sap-red-team-exercise/student/sap-cap-mcp-server/src/index.js"]
+    }
+  }
+}

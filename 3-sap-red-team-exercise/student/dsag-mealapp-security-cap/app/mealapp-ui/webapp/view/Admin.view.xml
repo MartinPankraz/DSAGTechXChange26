@@ -1,0 +1,183 @@
+<mvc:View
+  controllerName="dsag.mealapp.controller.Admin"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:unified="sap.ui.unified">
+
+  <Page title="{i18n>adminTitle}">
+    <headerContent>
+      <Button
+        text="{i18n>backToMeals}"
+        icon="sap-icon://nav-back"
+        press=".onBackToMeals"/>
+    </headerContent>
+
+    <content>
+      <VBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginTop sapUiSmallMarginBottom">
+        <Toolbar>
+          <Title text="{i18n>adminHeadline}" level="H3"/>
+          <ToolbarSpacer/>
+          <Button
+            icon="sap-icon://add"
+            text="{i18n>adminAddMeal}"
+            type="Emphasized"
+            press=".onAddMeal"/>
+        </Toolbar>
+
+        <Table
+          id="mealsAdminTable"
+          items="{
+            path: '/Meals',
+            parameters: {
+              $select: 'ID,name,category,chefOnly,imageData,imageMimeType'
+            }
+          }"
+          noDataText="{i18n>adminNoMeals}"
+          mode="None">
+          <columns>
+            <!-- Bild: immer sichtbar, schmal -->
+            <Column
+              width="4.5rem"
+              minScreenWidth="Tablet"
+              demandPopin="false">
+              <Text text="{i18n>adminImage}"/>
+            </Column>
+            <!-- Name: immer sichtbar, bekommt den restlichen Platz -->
+            <Column>
+              <Text text="{i18n>adminName}"/>
+            </Column>
+            <!-- Kategorie: auf kleinen Screens als Popin -->
+            <Column
+              minScreenWidth="Tablet"
+              demandPopin="true"
+              popinDisplay="Inline">
+              <Text text="{i18n>adminCategory}"/>
+            </Column>
+            <!-- Chef Only: auf kleinen Screens als Popin -->
+            <Column
+              minScreenWidth="Tablet"
+              demandPopin="true"
+              popinDisplay="Inline"
+              width="8rem">
+              <Text text="{i18n>adminChefOnly}"/>
+            </Column>
+            <!-- Aktionen: immer sichtbar, fixe Breite -->
+            <Column width="7rem" hAlign="End">
+              <Text text="{i18n>adminActions}"/>
+            </Column>
+          </columns>
+          <items>
+            <ColumnListItem>
+              <cells>
+                <Avatar
+                  displaySize="S"
+                  src="{parts: ['imageData', 'imageMimeType'], formatter: '.formatImageSrc'}"
+                  fallbackIcon="sap-icon://meal"/>
+                <Text text="{name}"/>
+                <Text text="{category}"/>
+                <ObjectStatus
+                  text="{path: 'chefOnly', formatter: '.formatChefOnly'}"
+                  state="{path: 'chefOnly', formatter: '.formatChefOnlyState'}"/>
+                <HBox justifyContent="End" alignItems="Center" renderType="Bare">
+                  <Button
+                    icon="sap-icon://edit"
+                    type="Transparent"
+                    tooltip="{i18n>adminEdit}"
+                    press=".onEditMeal"/>
+                  <Button
+                    icon="sap-icon://delete"
+                    type="Transparent"
+                    tooltip="{i18n>adminDelete}"
+                    press=".onDeleteMeal"/>
+                </HBox>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </VBox>
+    </content>
+
+    <dependents>
+      <Dialog
+        id="mealDialog"
+        title="{= ${admin>/edit/isNew} ? ${i18n>adminDialogCreateTitle} : ${i18n>adminDialogEditTitle} }"
+        contentWidth="40rem"
+        resizable="true"
+        draggable="true"
+        verticalScrolling="true"
+        horizontalScrolling="false"
+        stretchOnPhone="true">
+        <content>
+          <VBox class="sapUiSmallMargin">
+
+            <Label text="{i18n>adminName}" labelFor="mealNameInput" required="true"/>
+            <Input
+              id="mealNameInput"
+              value="{admin>/edit/name}"
+              placeholder="{i18n>adminNamePlaceholder}"
+              width="100%"/>
+
+            <Label text="{i18n>adminCategory}" class="sapUiSmallMarginTop" required="true"/>
+            <Select
+              selectedKey="{admin>/edit/category}"
+              width="100%">
+              <items>
+                <core:Item key="Vegan" text="Vegan"/>
+                <core:Item key="Vegetarisch" text="Vegetarisch"/>
+                <core:Item key="Nicht-vegetarisch" text="Nicht-vegetarisch"/>
+              </items>
+            </Select>
+
+            <HBox
+              class="sapUiSmallMarginTop"
+              alignItems="Center"
+              justifyContent="SpaceBetween">
+              <Label text="{i18n>adminChefOnly}"/>
+              <Switch
+                state="{admin>/edit/chefOnly}"
+                customTextOn="Ja"
+                customTextOff="Nein"/>
+            </HBox>
+
+            <Label text="{i18n>adminImage}" class="sapUiSmallMarginTop"/>
+            <unified:FileUploader
+              id="mealImageUploader"
+              width="100%"
+              buttonText="{i18n>adminUploadButton}"
+              change=".onFileChange"
+              sameFilenameAllowed="true"
+              fileType="jpg,png,jpeg,webp"
+              placeholder="{i18n>adminUploadPlaceholder}"/>
+
+            <HBox
+              class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+              alignItems="Center"
+              justifyContent="SpaceBetween">
+              <Avatar
+                displaySize="M"
+                src="{admin>/edit/imagePreview}"
+                fallbackIcon="sap-icon://meal"/>
+              <Button
+                text="{i18n>adminRemoveImage}"
+                type="Transparent"
+                press=".onRemoveImage"/>
+            </HBox>
+
+          </VBox>
+        </content>
+        <beginButton>
+          <Button
+            text="{i18n>adminSave}"
+            type="Emphasized"
+            press=".onDialogSave"/>
+        </beginButton>
+        <endButton>
+          <Button
+            text="{i18n>adminCancel}"
+            press=".onDialogCancel"/>
+        </endButton>
+      </Dialog>
+    </dependents>
+  </Page>
+</mvc:View>

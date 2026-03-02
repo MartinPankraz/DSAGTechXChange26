@@ -1,0 +1,51 @@
+<mvc:View
+  controllerName="dsag.mealapp.controller.Meals"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+
+  <Page title="{i18n>mealsTitle}">
+    <headerContent>
+      <Button
+        text="{i18n>adminTitle}"
+        icon="sap-icon://employee"
+        type="Transparent"
+        visible="{= ${/auth/user/role} === 'admin' }"
+        press=".onOpenAdmin"/>
+    </headerContent>
+
+    <content>
+      <VBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginTop sapUiSmallMarginBottom">
+        <Text text="{i18n>mealsIntro}" class="sapUiSmallMarginBottom"/>
+
+        <!--
+          OData Binding:
+          - Die Liste bindet direkt auf /Meals (CAP Service).
+          - Dadurch müssen wir keine JSON-Datei mit Meals mehr pflegen.
+        -->
+        <List
+          id="mealsList"
+          items="{path: '/Meals'}"
+          mode="SingleSelectMaster"
+          selectionChange=".onSelectionChange"
+          visible="{= ${/auth/isLoggedIn} }">
+          <items>
+            <StandardListItem
+              title="{name}"
+              description="{category}"
+              type="Active"/>
+          </items>
+        </List>
+      </VBox>
+    </content>
+
+    <footer>
+      <Toolbar>
+        <ToolbarSpacer/>
+        <Button
+          text="{i18n>savePreferenceButton}"
+          type="Emphasized"
+          press=".onSavePreference"/>
+      </Toolbar>
+    </footer>
+  </Page>
+</mvc:View>

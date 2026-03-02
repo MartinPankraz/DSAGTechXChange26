@@ -1,0 +1,135 @@
+{
+  "_version": "1.12.0",
+  "sap.app": {
+    "id": "dsag.mealapp",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.2.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/meal/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "dsag.mealapp.view.App",
+      "type": "XML",
+      "id": "app",
+      "async": true
+    },
+    "dependencies": {
+      "minUI5Version": "1.141.1",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.ui.layout": {},
+        "sap.ui.unified": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "dsag.mealapp.i18n.i18n"
+        }
+      },
+      "session": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/session.json"
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        },
+        "type": "sap.ui.model.odata.v4.ODataModel"
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "dsag.mealapp.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "async": true
+      },
+      "routes": [
+        {
+          "name": "Login",
+          "pattern": "",
+          "target": "Login"
+        },
+        {
+          "name": "Meals",
+          "pattern": "meals",
+          "target": "Meals"
+        },
+        {
+          "name": "Admin",
+          "pattern": "admin",
+          "target": "Admin"
+        },
+        {
+          "name": "Summary",
+          "pattern": "summary",
+          "target": "Summary"
+        }
+      ],
+      "targets": {
+        "Login": {
+          "viewName": "Login",
+          "viewId": "Login"
+        },
+        "Meals": {
+          "viewName": "Meals",
+          "viewId": "Meals"
+        },
+        "Admin": {
+          "viewName": "Admin",
+          "viewId": "Admin"
+        },
+        "Summary": {
+          "viewName": "Summary",
+          "viewId": "Summary"
+        }
+      }
+    }
+  }
+}

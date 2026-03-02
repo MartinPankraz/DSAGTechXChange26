@@ -1,0 +1,39 @@
+<mvc:View
+  controllerName="dsag.mealapp.controller.Summary"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+
+  <Page title="{i18n>summaryTitle}">
+    <headerContent>
+      <Button
+        text="{i18n>logout}"
+        icon="sap-icon://log"
+        type="Transparent"
+        press=".onLogout"/>
+    </headerContent>
+
+    <content>
+      <VBox class="sapUiSmallMargin sapUiResponsiveContentPadding" width="100%">
+
+
+        <ObjectHeader title="Ihre gespeicherte Präferenz"/>
+        <ObjectAttribute title="E-Mail Adresse" text="{userEmail}"/>
+        <ObjectAttribute title="Gewähltes Gericht" text="{meal/name}"/>
+        <ObjectAttribute title="Kategorie" text="{meal/category}"/>
+        <ObjectAttribute title="Allergien" text="{allergy}"/>
+
+  <Text text="Sie können sich jetzt ausloggen, Ihre Präferenz wurde gespeichert." class="sapUiSmallMarginTop"/>
+      </VBox>
+    </content>
+
+    <footer>
+      <Toolbar>
+        <Button
+          text="{i18n>backToMeals}"
+          icon="sap-icon://nav-back"
+          press=".onBackToMeals"/>
+        <ToolbarSpacer/>
+      </Toolbar>
+    </footer>
+  </Page>
+</mvc:View>

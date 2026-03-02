@@ -1,0 +1,24 @@
+{
+  "name": "sap-red-team-exercise",
+  "build": {
+    "dockerfile": "../3-sap-red-team-exercise/.devcontainer/Dockerfile"
+  },
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/3-sap-red-team-exercise",
+  "forwardPorts": [4004],
+  "portsAttributes": {
+    "4004": {
+      "label": "CAP App",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ]
+    }
+  },
+  "updateContentCommand": "npm install --prefix student/dsag-mealapp-security-cap && npm install --prefix student/dsag-mealapp-security-cap/app/mealapp-ui && npm install --prefix student/sap-cap-mcp-server",
+  "postStartCommand": "cd student/dsag-mealapp-security-cap && cds deploy"
+}

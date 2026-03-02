@@ -14,6 +14,17 @@ Anyone with a very basic understanding of SAP systems and security can participa
 
 This workshop gives you a glimpse into the world of a [red team'er](https://en.wikipedia.org/wiki/Red_team). You will learn how to exploit a vulnerable SAP system login and how to detect & respond to ever evolving attacks.
 
+## Codespaces Setup (CAP Exercise)
+
+For this quest, a minimal GitHub Codespaces dev container is included at `3-sap-red-team-exercise/.devcontainer`.
+
+- Open a Codespace directly on this repository
+- Open folder `3-sap-red-team-exercise`
+- Wait for container bootstrap to finish (`npm` dependencies for CAP + MCP server, plus CAP/CF/MBT tooling)
+- Start CAP app from `student/dsag-mealapp-security-cap` with `npm start` or `cds watch`
+
+Detailed steps are documented in `student/dsag-mealapp-security-cap/README.md`.
+
 > [!TIP]
 > The concepts applied in this hack can be re-used with other products and services. SAP Enterprise Threat Detection, cloud edition; Microsoft Sentinel, Microsoft Entra ID and Azure are merely used to demonstrate and deepen understanding through hands-on experience.
 
