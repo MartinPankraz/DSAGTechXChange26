@@ -31,6 +31,13 @@ Die App regelt die Essensausgabe für ein Event:
 ### SAP Build Code / BAS
 - Dev Space mit **CAP** + **SAPUI5** Fähigkeiten
 
+### GitHub Codespaces (Workshop)
+- Persönlicher GitHub Account mit aktivierten Codespaces
+- Für AI-Unterstützung: GitHub Copilot Berechtigung im Account
+- Für BTP Deployment: Eigener SAP BTP Trial/Subaccount + Cloud Foundry Rechte
+
+> Hinweis zu kostenlosen persönlichen Accounts: Verfügbare Codespaces-Kontingente (Compute/Storage) sind begrenzt.
+
 ---
 
 ## Quick Start (lokal)
@@ -50,6 +57,49 @@ npm start
 Dann im Browser öffnen:
 - `http://localhost:4004/`  (UI)
 - `http://localhost:4004/odata/v4/meal/` (Service Root)
+
+---
+
+## Quick Start (GitHub Codespaces)
+
+Der Quest enthält eine minimale Dev Container Konfiguration in `3-sap-red-team-exercise/.devcontainer/`.
+
+1. In GitHub: **Code → Codespaces → Create codespace on main**
+2. Falls nötig den Ordner `3-sap-red-team-exercise` im Codespace öffnen
+3. Warten bis die Container-Erstellung und das Content-Update abgeschlossen sind (installiert u.a. `@sap/cds-dk`, `mbt`, `cf`, `multiapps` Plugin, CAP/UI Dependencies und MCP Server Dependencies)
+4. Terminal im Projekt öffnen und starten:
+
+```bash
+cd student/dsag-mealapp-security-cap
+npm start
+```
+
+5. Den weitergeleiteten Port **4004** öffnen
+
+Standardbefehle im Codespace:
+
+```bash
+# CAP live development
+cds watch
+
+# MTA build
+mbt build
+
+# Cloud Foundry deploy (mit MultiApps Plugin)
+cf deploy <dein-mta-archiv.mtar>
+```
+
+Für Deployment nach SAP BTP zuerst anmelden:
+
+```bash
+cf login --sso
+```
+
+Optional mit CAP Deployment-Flow:
+
+```bash
+cds up
+```
 
 ### Dummy Login
 - E-Mail: `dummy@dsag.de`
