@@ -23,10 +23,8 @@ service MealService {
   };
 
   action addMeal(
-    name         : String(80),
-    category     : String(20),
-    imageData    : LargeString,
-    imageMimeType: String(50),
+    mealName     : String(80),
+    mealCategory : String(20),
     chefOnly     : Boolean
   ) returns Meals;
 }
