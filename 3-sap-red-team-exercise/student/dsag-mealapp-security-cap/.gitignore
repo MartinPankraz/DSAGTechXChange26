@@ -10,3 +10,6 @@ dist/
 # OS / IDE
 .DS_Store
 .vscode/
+
+gen/
+mta_archives/

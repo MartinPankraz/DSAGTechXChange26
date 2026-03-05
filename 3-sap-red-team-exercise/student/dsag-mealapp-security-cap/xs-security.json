@@ -1,0 +1,29 @@
+{
+  "xsappname": "dsag-mealapp-security-cap",
+  "tenant-mode": "dedicated",
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://*.cfapps.us10-001.hana.ondemand.com/login/callback"
+    ]
+  },
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.admin",
+      "description": "Admin scope"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "MealAppAdmin",
+      "description": "Admin role for the Meal App",
+      "scope-references": ["$XSAPPNAME.admin"]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "MealApp Admin",
+      "description": "Admin access to meal app",
+      "role-template-references": ["$XSAPPNAME.MealAppAdmin"]
+    }
+  ]
+}
