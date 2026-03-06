@@ -6,7 +6,11 @@ Put the AI to work again, but this time for defense! In this quest, you will use
 
 ## See the SAP Audit Log Service
 
-## Consider tuning the analytic rule for your newly added custom audit log entries
+## Put the AI to use to inspect the security posture of your SAP CAP app
+
+How secure is your CAP app besides the surprising loyalty upgrade? SQL injection a blast of the past?
+
+## Consider tuning the Sentinel analytic rule for your newly added custom audit log entries
 
 ## Update the [leaderboard](https://martinpankraz.github.io/crispy-potato/) with your progress⏱
 

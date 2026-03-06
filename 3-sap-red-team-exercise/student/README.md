@@ -50,7 +50,7 @@ Our journey will start from the very beginning and will take you through the fol
 🌟
 🕒 10 min
 
-## [Quest 1](quest1.md) - Compromise the SAP CAP app using MCP (red team)
+## [Quest 1](Quest1.md) - Compromise the SAP CAP app using MCP (red team)
 
 🌟🌟
 🕒 15 mins

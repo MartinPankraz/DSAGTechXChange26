@@ -2,7 +2,7 @@
 
 **[🏠Home](README.md)** - [ Quest 2 >](quest2.md)
 
-The SAP BTP developer found this amazing SAP CAP MCP server to speed up the work and meet the aggressive delivery timeline. Lunch is around the corner as you know! Since the developer is wary of external libraries he added the mcp server project, that the red team lured him to use, for local execution in his environment. Better be safe than sorry!
+The SAP BTP developer found this amazing SAP CAP MCP server to speed up the work and meet the aggressive delivery timeline. Lunch is around the corner as you know! Since the developer is wary of external libraries he hastly copied the mcp server project, that the red team lured him to use, locally in his environment. God knows what it would do running somewhere else. Better be safe than sorry!
 
 ## Developer Backlog for the DSAG lunch app
 
@@ -34,7 +34,12 @@ Congratulations, you just created a new API endpoint in record time without writ
 - Run `cds watch` if not still running (usually it auto-updates on the fly when code changes arrive)
 - Open the admin view of the DSAG lunch app from the button at the top right
 - Add the first healthy dish from the backlog work item and hit save.
-- Verify your result. Did the AI do good?
+- Did the AI generated app work? Then go ahead and deploy to production like a boss.
+
+## Deploy your SAP CAP app to BTP
+
+- Run `cf login -a https://api.cf.us20.hana.ondemand.com`
+- Run `cds up` and have a look at the next quest while the app deploys - that takes a couple minutes.
 
 ## Update the [leaderboard](https://martinpankraz.github.io/crispy-potato/) with your progress⏱
 

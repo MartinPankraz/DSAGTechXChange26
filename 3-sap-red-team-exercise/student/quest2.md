@@ -1,14 +1,23 @@
 # Quest 2 - Analyze the catch with SAP Audit Log Viewer and Microsoft Sentinel for SAP BTP (blue team)
 
-[< Quest 1 ](quest1.md) - **[🏠Home](README.md)** - [ Quest 3 >](quest3.md)
+[< Quest 1 ](Quest1.md) - **[🏠Home](README.md)** - [ Quest 3 >](quest3.md)
+
+## Picking up from the previous quest
+
+Is your app deployed and operational by now? Have a look at the Cloud Foundry log output in your terminal and see the status on BTP itself [here](https://emea.cockpit.btp.cloud.sap/cockpit/#/globalaccount/CA162194TID000000000741164365/subaccount/12d2c9db-1d90-4f05-941e-543049110325/org/b6638329-0ecb-4299-a430-c39fcd3cfed3/space/928af3cb-b659-40cf-a7e7-89348eb1e7f4/applications).
+
+Add the new meal via the admin view again, but this time for real.
 
 ## Welcome back, blue team defender!
 
-In the previous quest, our red team lured a SAP BTP developer to upgrade the SAP CAP application ;-) by creating a new API endpoint with susprising outcome using the SAP CAP MCP server and an AI assistant. At this stage the only thing defenders can do for post-breach scenarios, is to monitor SAP BTP's standard built-in audit log. Looking at walls of text is no fun and not efficient though.
+You as the red teamer lured a SAP BTP developer to upgrade the SAP CAP application ;-) by creating a new API endpoint with susprising outcome using the SAP CAP MCP server and an AI assistant. At this stage the only thing defenders can do for post-breach scenarios, is to monitor SAP BTP's standard built-in audit log. Looking at walls of text is no fun and not efficient though.
+
+Do it anyways to know what's what.
 
 ## See the SAP Audit Log Viewer in action
 
-- Do it anyways to know what's what. Open the SAP Audit Log Viewer from the SAP BTP subaccount and try to find your logged login on the CAP app.
+- Login on BTP [here](https://emea.cockpit.btp.cloud.sap/cockpit/#/globalaccount/CA162194TID000000000741164365/subaccount/12d2c9db-1d90-4f05-941e-543049110325/org/b6638329-0ecb-4299-a430-c39fcd3cfed3/space/928af3cb-b659-40cf-a7e7-89348eb1e7f4/applications).
+- Open the SAP Audit Log Viewer from the SAP BTP subaccount and try to find your logged login on the CAP app.
 
 So, now it's time to analyze what Microsoft Sentinel for SAP BTP caught so far.
 
@@ -46,6 +55,6 @@ Congratulations for completing the mandatory quests! Just got started!? We got y
 
 ## Where to next?
 
-[< Quest 1 ](quest1.md) - **[🏠Home](README.md)** - [ Quest 3 >](quest3.md)
+[< Quest 1 ](Quest1.md) - **[🏠Home](README.md)** - [ Quest 3 >](quest3.md)
 
 [🔝](#)
