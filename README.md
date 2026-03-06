@@ -11,9 +11,9 @@ Find us on-site in Hamburg. We are looking forward to meeting you in person! �
 | Lab             | Level | Session Code |Dungeon entry  | Description |
 | ---------------- | -------- | -------- | -------- | -------- |
 | Microsoft Copilot with SAP | Beginner | P007 | 👉[🏰](./1-copilot-getting-started/README.md) | Learn how to build your first Microsoft Copilot app that interacts with SAP ERP data. |
-| SAP BDC integration with Microsoft Fabric | Beginner | P008 | 👉[⛩️](./2-bdc-fabric-integration/README.md) | Learn how to build you first... |
-| SAPawned: Join the red team - SAP hacking exercise | Beginner | MS100 | 👉[🧙](./3-sap-red-team-exercise/README.md) | Learn how to ... |
-| Identity lifecycle management with SAP BTP and Microsoft Entra | Beginner | XP261 | 👉[🧙](./4-identity-btp-entra/README.md) | Learn how to ... |
+| SAP BDC integration with Microsoft Fabric | Beginner | P008 | 👉[⛩️](./2-bdc-fabric-integration/README.md) | Learn how to build you first combined data flows between SAP Business Data Cloud and Microsoft Fabric. |
+| SAPawned: Join the red team - SAP BTP hacking exercise | Beginner | MS100 | 👉[🧙](./3-sap-red-team-exercise/README.md) | Learn how to attack and defend SAP BTP apps (red team vs. blue team scenario) and experience how MCP servers leveled the playing field. |
+| Identity lifecycle management with SAP BTP and Microsoft Entra | Beginner | XP261 | 👉[🧙](https://github.com/SAP-samples/teched2025-XP261) | Learn how to integrate SAP Cloud Identity Services with Microsoft Entra to deliver unified user lifecycle management across SAP software and third-party applications. The end-to-end scenario in this hands-on session spans across cloud and on-premises environments to provide consistent access control throughout the enterprise. |
 
 ## Recommended courses and further learning
 
