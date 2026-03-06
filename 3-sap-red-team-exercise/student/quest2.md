@@ -8,11 +8,13 @@ Is your app deployed and operational by now? Have a look at the Cloud Foundry lo
 
 Add the new meal via the admin view again, but this time for real.
 
+You as the red teamer lured a SAP BTP developer to upgrade the SAP CAP application ;-) by creating a new API endpoint with susprising outcome using the SAP CAP MCP server and an AI assistant. 
+
 ## Welcome back, blue team defender!
 
-You as the red teamer lured a SAP BTP developer to upgrade the SAP CAP application ;-) by creating a new API endpoint with susprising outcome using the SAP CAP MCP server and an AI assistant. At this stage the only thing defenders can do for post-breach scenarios, is to monitor SAP BTP's standard built-in audit log. Looking at walls of text is no fun and not efficient though.
+At this stage the only thing defenders can do for post-breach scenarios, is to monitor SAP BTP's standard built-in audit log. Looking at walls of text is no fun and not efficient though.
 
-Do it anyways to know what's what.
+Do it anyways to know what you are in for.
 
 ## See the SAP Audit Log Viewer in action
 
