@@ -68,12 +68,12 @@ flowchart LR
     subgraph Microsoft["🛡️ Microsoft Security Stack"]
         direction TB
         subgraph Post["🔍 Post-Breach Detection & Response"]
-            SENT["Microsoft Sentinel\nfor SAP BTP"]
-            KQL["KQL Analytics\nRules"]
-            CORR["⚡ Signal Correlation\nEngine"]
+            SENT["Microsoft Sentinel for SAP BTP"]
+            KQL["KQL Analytics Rules"]
+            CORR["⚡ Signal Correlation Engine"]
         end
         subgraph Pre["🛑 Pre-Breach Prevention"]
-            ENTRA["Microsoft\nEntra ID"]
+            ENTRA["Microsoft Entra ID"]
         end
     end
 
@@ -84,9 +84,9 @@ flowchart LR
 
     SENT --> CORR
     KQL --> CORR
-    ENTRA -.->|"Identity\nrisk signals"| CORR
+    ENTRA -.->|"Identity risk signals"| CORR
 
-    CORR -->|"🚨 Incident with\nfull attack story"| INC["📊 Unified\nIncident"]
+    CORR -->|"🚨 Incident with full attack story"| INC["📊 Unified Incident"]
 
     style Post fill:#fff3e0,stroke:#ff9800
     style Pre fill:#e8f5e9,stroke:#4caf50
