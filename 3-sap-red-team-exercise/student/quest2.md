@@ -1,6 +1,6 @@
 # Quest 2 - Analyze the catch with SAP Audit Log Viewer and Microsoft Sentinel for SAP BTP (blue team)
 
-[< Quest 1 ](quest1.md) - **[🏠Home](../README.md)** - [ Quest 3 >](quest3.md)
+[< Quest 1 ](quest1.md) - **[🏠Home](README.md)** - [ Quest 3 >](quest3.md)
 
 ## Welcome back, blue team defender!
 
@@ -30,9 +30,11 @@ SAPBTPAuditLog_CL
 
 Do you see why audit log monitoring alone is not sufficient to detect the attack? Take note that multiple entries are required for a meaningful detection of the attack pattern.
 
-## Discover the built-in analytic rule for unaudited custome SAP BTP apps
+## Discover the built-in analytic rule for unaudited custom SAP BTP apps
 
-
+- [Browse](https://portal.azure.com/?feature.customportal=false#view/Microsoft_Azure_Security_Insights/MainMenuBlade/~/Analytics/subscriptionId/48b193a0-2500-45b5-ad41-f09cde1a95cd/resourceGroup/dsagws-rg/workspaceName/dsagwstechxchange) the available templates for BTP detections.
+- Find the one for `Unaudited custom SAP BTP applications` and open it (use the `...` button and click edit).
+- Navigate to `Set rule logic` pane and expand the KQL view. Understand how the rule matches multiple audit events to detect the unaudited apps. Ask an AI to explain in simple terms for convenience.
 
 ## The difference between SAP pre-breach and post-breach threat detection
 
@@ -44,6 +46,6 @@ Congratulations for completing the mandatory quests! Just got started!? We got y
 
 ## Where to next?
 
-[< Quest 1 ](quest1.md) - **[🏠Home](../README.md)** - [ Quest 3 >](quest3.md)
+[< Quest 1 ](quest1.md) - **[🏠Home](README.md)** - [ Quest 3 >](quest3.md)
 
 [🔝](#)

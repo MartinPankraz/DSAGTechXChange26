@@ -1,6 +1,6 @@
 # Quest 0 - Meet the AI and Setup your lab environment
 
-**[🏠Home](../README.md)** - [ Quest 1 >](quest1.md)
+**[🏠Home](README.md)** - [ Quest 1 >](quest1.md)
 
 The popular full day SAP hackathon event DSAG TechXChange desperately needs a Lunch order processing app at veeery short notice! Just the right event for the red team to take action.
 
@@ -28,6 +28,6 @@ So far, so good. Now, let's see what happens when we ask our AI assistant to "he
 
 ## Where to next?
 
-**[🏠Home](../README.md)** - [ Quest 1 >](quest1.md)
+**[🏠Home](README.md)** - [ Quest 1 >](quest1.md)
 
 [🔝](#)

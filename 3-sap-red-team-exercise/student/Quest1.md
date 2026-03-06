@@ -1,6 +1,6 @@
 # Quest 1 - Compromise the SAP CAP app using MCP (red team)
 
-**[🏠Home](../README.md)** - [ Quest 2 >](quest2.md)
+**[🏠Home](README.md)** - [ Quest 2 >](quest2.md)
 
 The SAP BTP developer found this amazing SAP CAP MCP server to speed up the work and meet the aggressive delivery timeline. Lunch is around the corner as you know! Since the developer is wary of external libraries he added the mcp server project, that the red team lured him to use, for local execution in his environment. Better be safe than sorry!
 
@@ -25,13 +25,15 @@ The action should accept mealName, category and chefOnly as boolean.
 Make sure to follow the mcp tool recommendations exactly.
 ```
 
-Congratulations, you just created a new API endpoint in record time without writing a single line of code!
+- Spot the MCP tool choice in the AI chat window and approve the action `get-sap-cap-recommendation`. Watch the magic happen.
 
-## Test your new API endpoint
+Congratulations, you just created a new API endpoint in record time without writing a single line of code! You might actually make that ridicoulus release timeline after all.
 
-- Run `cds watch`
-- Open the admin view from the button at the top right
-- Add the first healthy dish from the backlog work item
+## Without further ado go and test your new function!
+
+- Run `cds watch` if not still running (usually it auto-updates on the fly when code changes arrive)
+- Open the admin view of the DSAG lunch app from the button at the top right
+- Add the first healthy dish from the backlog work item and hit save.
 - Verify your result. Did the AI do good?
 
 ## Update the [leaderboard](https://martinpankraz.github.io/crispy-potato/) with your progress⏱
@@ -40,6 +42,6 @@ Next, we will switch to the defender's perspective - the **blue team** - and lea
 
 ## Where to next?
 
-**[🏠Home](../README.md)** - [ Quest 2 >](quest2.md)
+**[🏠Home](README.md)** - [ Quest 2 >](quest2.md)
 
 [🔝](#)
