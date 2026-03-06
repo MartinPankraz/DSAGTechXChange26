@@ -10,6 +10,7 @@
     "audit-check": "npm audit --audit-level=moderate"
   },
   "dependencies": {
+    "@cap-js/audit-logging": "^1.2.0",
     "@cap-js/sqlite": "^2",
     "@sap/cds": "^9",
     "@sap/xssec": "^4",

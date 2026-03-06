@@ -32,13 +32,15 @@ Congratulations, you just created a new API endpoint in record time without writ
 ## Without further ado go and test your new function!
 
 - Run `cds watch` if not still running (usually it auto-updates on the fly when code changes arrive)
+- Use credentials: `dummy@dsag.de` / `Start123!` to log in to the app.
 - Open the admin view of the DSAG lunch app from the button at the top right
 - Add the first healthy dish from the backlog work item and hit save.
 - Did the AI generated app work? Then go ahead and deploy to production like a boss.
 
 ## Deploy your SAP CAP app to BTP
 
-- Run `cf login -a https://api.cf.us20.hana.ondemand.com`
+- Run `cf login -a https://api.cf.us10-001.hana.ondemand.com`. Use your credentials.
+- Pick the org `Microsoft_Corporation_dsag` and the space `dev`.
 - Run `cds up` and have a look at the next quest while the app deploys - that takes a couple minutes.
 
 ## Update the [leaderboard](https://martinpankraz.github.io/crispy-potato/) with your progress⏱
