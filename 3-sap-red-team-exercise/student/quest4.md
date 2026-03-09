@@ -22,6 +22,6 @@ Anthropic even released a specialized capability in Claude Code to handle securi
 
 ## Where to next?
 
-[< Quest 2 ](quest2.md) - **[🏠Home](README.md)**
+[< Quest 3 ](quest3.md) - **[🏠Home](README.md)**
 
 [🔝](#)
