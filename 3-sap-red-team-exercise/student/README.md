@@ -67,6 +67,11 @@ Our journey will start from the very beginning and will take you through the fol
 🌟🌟🌟
 🕒 30 min
 
+### [Quest 4](quest4.md) - Reach the next level (red team)
+
+🌟🌟🌟🌟
+🕒 30 min
+
 ## Where to next?
 
 **[🏠Home](../README.md)** - [ Quest 0 >](quest0.md)

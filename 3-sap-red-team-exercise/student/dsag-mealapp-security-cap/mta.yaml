@@ -1,5 +1,5 @@
 _schema-version: "3.1"
-ID: dsag-mealapp-security-cap
+ID: dsag-mealapp-security-cap-hacker00
 version: 1.0.0
 description: "DSAG Meal App – Security Training (CAP + SAPUI5 Freestyle)"
 
@@ -18,7 +18,7 @@ build-parameters:
 
 modules:
   # ---------- Approuter (entry point, XSUAA auth) ----------
-  - name: dsag-mealapp-security-cap-approuter
+  - name: dsag-mealapp-security-cap-hacker00-approuter
     type: approuter.nodejs
     path: app/approuter
     parameters:
@@ -36,7 +36,7 @@ modules:
           forwardAuthToken: true
 
   # ---------- CAP Server (with embedded SQLite + static UI) ----------
-  - name: dsag-mealapp-security-cap-srv
+  - name: dsag-mealapp-security-cap-hacker00-srv
     type: nodejs
     path: gen/srv
     parameters:
@@ -55,11 +55,12 @@ modules:
 resources:
   # ---------- XSUAA Service ----------
   - name: dsag-mealapp-security-cap-xsuaa
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./xs-security.json
+    type: org.cloudfoundry.existing-service
+  #  type: org.cloudfoundry.managed-service
+  #  parameters:
+  #    service: xsuaa
+  #    service-plan: application
+  #    path: ./xs-security.json
 
   # ---------- Audit Log Service ----------
   - name: audit-log-srv
