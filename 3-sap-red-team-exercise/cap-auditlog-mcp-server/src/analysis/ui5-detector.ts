@@ -39,8 +39,9 @@ const UI5_HANDLER_NAMES = [
   "onReject",
 ];
 
-/** OData binding call patterns in UI5 controller code */
+/** OData binding call patterns in UI5 controller code (V2 + V4) */
 const ODATA_CALL_PATTERNS = [
+  // V2
   /submitChanges\s*\(/g,
   /oModel\.create\s*\(/g,
   /oModel\.update\s*\(/g,
@@ -50,6 +51,14 @@ const ODATA_CALL_PATTERNS = [
   /attachRequestFailed\s*\(/g,
   /attachRequestCompleted\s*\(/g,
   /bindingContext/g,
+  // V4 (ODataModel v4 / CAP Fiori)
+  /submitBatch\s*\(/g,
+  /\.delete\s*\(\s*\)/g,
+  /\.execute\s*\(\s*\)/g,
+  /bindContext\s*\(/g,
+  /getBinding\s*\(/g,
+  /oPrefList\.create\s*\(/g,
+  /oList\.getBinding\s*\(/g,
 ];
 
 // ─── Detection Helpers ───────────────────────────────────────────────────────

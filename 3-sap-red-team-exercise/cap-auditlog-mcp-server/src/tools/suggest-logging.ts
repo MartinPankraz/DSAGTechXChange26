@@ -59,27 +59,27 @@ function extractModifiedFilesFromDiff(diff: string): string[] {
 
 /**
  * Extracts handler locations from CAP service implementation files.
+ *
+ * Handles all three CAP registration patterns:
+ *   this.on('CREATE', 'Meals', ...)         → event + entity
+ *   this.on('addMeal', async (req) => ...)  → action (no entity arg)
+ *   this.on('addMeal', ...)                 → action, no second string arg
  */
 function extractCapHandlerLocations(file: FileNode): HandlerLocation[] {
   const locations: HandlerLocation[] = [];
   const lines = file.content.split("\n");
 
-  // Pattern: this.on/before/after('EVENT', 'EntityName', async (req) => {
-  const handlerRegex =
-    /this\.(on|before|after)\s*\(\s*['"`]([A-Za-z_]+)['"`]\s*(?:,\s*['"`]([A-Za-z_.]+)['"`])?\s*,/g;
+  // Pattern A: this.on('EVENT', 'EntityName', handler)
+  const withEntityRegex =
+    /this\.(on|before|after)\s*\(\s*['"`]([A-Za-z_]+)['"`]\s*,\s*['"`]([A-Za-z_.]+)['"`]\s*,/g;
 
   let m: RegExpExecArray | null;
-  while ((m = handlerRegex.exec(file.content)) !== null) {
+  while ((m = withEntityRegex.exec(file.content)) !== null) {
     const event = m[2];
-    const entity = m[3] ?? "UnknownEntity";
-
-    // Find approximate line number
+    const entity = m[3];
     const upToMatch = file.content.substring(0, m.index);
     const lineHint = upToMatch.split("\n").length;
-
-    // Find the surrounding function name from context
     const functionName = findEnclosingFunctionName(lines, lineHint - 1);
-
     locations.push({
       file: file.path,
       event,
@@ -89,17 +89,42 @@ function extractCapHandlerLocations(file: FileNode): HandlerLocation[] {
     });
   }
 
-  // Also detect express-style / action-level handlers: async function handle*(req, res)
+  // Pattern B: this.on('actionName', async/function/arrow) — action handlers (no entity string)
+  // Matches: this.on('addMeal', async (req) =>   OR   this.on('addMeal', (req) =>
+  const actionRegex =
+    /this\.(on|before|after)\s*\(\s*['"`]([A-Za-z_]+)['"`]\s*,\s*(?:async\s*)?\(/g;
+  while ((m = actionRegex.exec(file.content)) !== null) {
+    const event = m[2];
+    // Skip if this position was already captured by Pattern A (entity name would be next)
+    const ahead = file.content.substring(m.index, m.index + 80);
+    if (/['"`][A-Za-z_.]+['"`]\s*,/.test(ahead.substring(ahead.indexOf(",") + 1, ahead.indexOf(",") + 30))) {
+      continue; // already handled above
+    }
+    const upToMatch = file.content.substring(0, m.index);
+    const lineHint = upToMatch.split("\n").length;
+    const functionName = findEnclosingFunctionName(lines, lineHint - 1);
+    // Derive entity from action name (e.g. addMeal → Meal, deleteEmployee → Employee)
+    const derivedEntity = deriveEntityFromActionName(event);
+    locations.push({
+      file: file.path,
+      event: deriveEventFromName(event),
+      entityName: derivedEntity,
+      functionName: functionName ?? event,
+      lineHint,
+    });
+  }
+
+  // Pattern C: standalone async function handlers: async function handleXxx(req)
   const funcRegex = /(?:async\s+)?function\s+(\w+)\s*\(req/g;
   while ((m = funcRegex.exec(file.content)) !== null) {
     const funcName = m[1];
-    if (/create|update|delete|read|save|export|import|approve|reject/i.test(funcName)) {
+    if (/create|update|delete|read|save|export|import|approve|reject|add|remove/i.test(funcName)) {
       const upToMatch = file.content.substring(0, m.index);
       const lineHint = upToMatch.split("\n").length;
       locations.push({
         file: file.path,
         event: deriveEventFromName(funcName),
-        entityName: deriveEntityFromName(funcName),
+        entityName: deriveEntityFromActionName(funcName),
         functionName: funcName,
         lineHint,
       });
@@ -107,6 +132,19 @@ function extractCapHandlerLocations(file: FileNode): HandlerLocation[] {
   }
 
   return locations;
+}
+
+/**
+ * Derives an entity name from a camelCase action name.
+ * addMeal → Meal, deleteEmployee → Employee, onSavePreference → Preference
+ */
+function deriveEntityFromActionName(name: string): string {
+  // Strip leading verb(s)
+  const stripped = name
+    .replace(/^(on|handle|do|perform|process)/i, "")
+    .replace(/^(create|add|update|edit|save|delete|remove|read|get|fetch|export|import|approve|reject|submit)/i, "");
+  // Capitalise first letter
+  return stripped.charAt(0).toUpperCase() + stripped.slice(1) || name;
 }
 
 function findEnclosingFunctionName(
@@ -136,13 +174,6 @@ function deriveEventFromName(name: string): string {
   if (lower.includes("approve")) return "APPROVE";
   if (lower.includes("reject")) return "REJECT";
   return "WRITE";
-}
-
-function deriveEntityFromName(name: string): string {
-  return name
-    .replace(/^(handle|on|do|perform|process)/i, "")
-    .replace(/^(create|update|delete|read|save|get|fetch|export|import)/i, "")
-    || name;
 }
 
 // ─── UI5 handler extraction ───────────────────────────────────────────────────
@@ -180,7 +211,7 @@ function extractUi5HandlerLocations(file: FileNode): HandlerLocation[] {
     // pointing to where the backend handler should be
     if (
       hasODataCalls(file.content) &&
-      /save|submit|create|update|delete|approve|reject/i.test(handler)
+      /save|submit|create|add|update|edit|delete|remove|approve|reject/i.test(handler)
     ) {
       // Virtual suggestion pointing at the (likely) backend location
       locations.push({
