@@ -36,7 +36,9 @@ For this quest, a minimal GitHub Codespaces dev container is included at [`.devc
 3. Rename the sap cap app. Put your user number as prefix (e.g. `hacker01`). This is important to avoid conflicts with other red teamers in the same BTP subaccount. Use the codespace search and replace functionality (Ctrl+Shift+H) to do this quickly across all files. Search for `dsag-mealapp-security-cap-hacker00` and replace with `dsag-mealapp-security-cap-hackerXX` (where XX is your user number).
 
 TODO: add screenshot of the package.json file with the name field highlighted
-
+<p align="center" width="100%">
+<img alt="PackageJson" src="assets/quest0/packageJson.png"  width="600">
+</p>
 4. See the GitHub Copilot flyout to the right of your code editor. If you don't see it, open the command palette (Ctrl+Shift+P) and search for ">GitHub Copilot:" to open it manually.
     - Pick AI Model `GPT-5 mini`. This is very important! Otherwise, you won't get the same experience as described in the quests.
     - Meet your AI assistant and ask it: "show me in which javascript file the first quest starts." Keep your urge to play more at bay and continue for now. We will get there ;-)
