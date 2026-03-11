@@ -21,8 +21,23 @@ import {
 } from "../analysis/ui5-detector.js";
 import { detectAuditIntegration } from "../analysis/audit-integration-detector.js";
 import { crawlToFileNodes } from "../analysis/fs-crawler.js";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
+
+/**
+ * Config files that must always be read from rootPath (if present on disk)
+ * and merged with any caller-supplied openFiles, so detectors like
+ * hasMtaAuditLogResource() never miss them even when openFiles is provided.
+ */
+const ALWAYS_MERGE_FROM_ROOT = [
+  "mta.yaml",
+  "mta.yml",
+  ".cdsrc.json",
+  "xs-security.json",
+  "package.json",
+];
 
 function makeEmptyEvidence(): Evidence {
   return {
@@ -41,6 +56,11 @@ function makeEmptyEvidence(): Evidence {
  *  1. openFiles  – caller already provided content (fastest, used by Copilot)
  *  2. fileList   – explicit relative paths; content is read from rootPath if given
  *  3. rootPath   – full filesystem crawl when no files are provided at all
+ *
+ * Additionally, when rootPath is provided it always supplements the node list
+ * with key configuration files (mta.yaml, package.json, etc.) that detectors
+ * rely on, even when openFiles was already supplied.  This prevents false-positive
+ * gap reports when a caller passes only source files but omits config files.
  */
 function buildFileNodes(input: ScanWorkspaceInput): FileNode[] {
   const nodes: FileNode[] = [];
@@ -66,6 +86,25 @@ function buildFileNodes(input: ScanWorkspaceInput): FileNode[] {
   if (nodes.length === 0 && input.rootPath) {
     const crawled = crawlToFileNodes(input.rootPath);
     nodes.push(...crawled);
+    return nodes;
+  }
+
+  // 4. Always merge key config files from rootPath, even when openFiles was given.
+  //    This ensures mta.yaml, .cdsrc.json etc. are never silently missing.
+  if (input.rootPath) {
+    const existingPaths = new Set(nodes.map((n) => n.path));
+    for (const fileName of ALWAYS_MERGE_FROM_ROOT) {
+      const absPath = path.join(input.rootPath, fileName);
+      // Use relative path (just the filename) to match detector patterns
+      if (!existingPaths.has(fileName) && fs.existsSync(absPath)) {
+        try {
+          const content = fs.readFileSync(absPath, "utf-8");
+          nodes.push({ path: fileName, content });
+        } catch {
+          // If the file can't be read, skip silently
+        }
+      }
+    }
   }
 
   return nodes;
