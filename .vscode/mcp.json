@@ -4,6 +4,11 @@
       "type": "stdio",
       "command": "node",
       "args": ["3-sap-red-team-exercise/student/sap-cap-mcp-server/src/index.js"]
+    },
+    "cap-auditlog": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["3-sap-red-team-exercise/student/cap-auditlog-mcp-server/dist/server.js"]
     }
   }
 }

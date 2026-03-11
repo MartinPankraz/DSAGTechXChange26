@@ -26,6 +26,10 @@
         "credentials": {
           "url": "db.sqlite"
         }
+      },
+      "audit-log": {
+        "impl": "@cap-js/audit-logging",
+        "handle": ["READ", "CREATE", "UPDATE", "DELETE"]
       }
     }
   }

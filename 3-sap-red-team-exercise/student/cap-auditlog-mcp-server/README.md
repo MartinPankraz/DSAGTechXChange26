@@ -52,7 +52,7 @@ Works with **any SAP CAP + UI5 project** — point it at your app folder and get
 ```bash
 # 1. Clone the repo (skip if already cloned)
 git clone https://github.com/MartinPankraz/DSAGTechXChange26.git
-cd DSAGTechXChange26/3-sap-red-team-exercise/cap-auditlog-mcp-server
+cd DSAGTechXChange26/3-sap-red-team-exercise/student/cap-auditlog-mcp-server
 
 # 2. Install dependencies
 npm install
@@ -80,7 +80,7 @@ The server communicates over **stdio**. Add it to `.vscode/mcp.json` in your wor
       "command": "node",
       "args": [
         // Use ${workspaceFolder} if the server lives inside the same workspace:
-        "${workspaceFolder}/3-sap-red-team-exercise/cap-auditlog-mcp-server/dist/server.js"
+        "${workspaceFolder}/3-sap-red-team-exercise/student/cap-auditlog-mcp-server/dist/server.js"
         // Or use an absolute path if the server is outside the workspace:
         // "/Users/you/cap-auditlog-mcp-server/dist/server.js"
       ]
