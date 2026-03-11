@@ -82,17 +82,40 @@ export function hasCdsAuditLoggingConfig(files: FileNode[]): boolean {
 
 /**
  * Returns true when mta.yaml references an auditlog service resource.
+ * Accepts both managed-service (freshly provisioned) and existing-service
+ * (pre-provisioned instance) resource types, as both result in a valid
+ * VCAP_SERVICES binding at CF runtime.
+ *
+ * Detection strategy:
+ *   1. managed-service with "auditlog" anywhere in the block → covers service: auditlog / auditlog-api
+ *   2. existing-service whose `name:` value contains "audit" (e.g. audit-log-srv, auditlog, my-audit-svc)
+ *      The name match is intentionally broad (word-boundary on "audit") to cover all naming conventions.
  */
 export function hasMtaAuditLogResource(files: FileNode[]): boolean {
   for (const file of files) {
-    if (file.path.endsWith("mta.yaml") || file.path.endsWith("mta.yml")) {
+    if (!file.path.endsWith("mta.yaml") && !file.path.endsWith("mta.yml")) {
+      continue;
+    }
+
+    // 1. managed-service containing "auditlog" anywhere (covers auditlog-api, service: auditlog, etc.)
+    if (
+      /type:\s*org\.cloudfoundry\.managed-service/.test(file.content) &&
+      /auditlog/i.test(file.content)
+    ) {
+      return true;
+    }
+
+    // 2. existing-service block whose name contains "audit" (word-boundary aware)
+    //    Matches: audit-log-srv, auditlog, my-audit-service, audit_log, etc.
+    //    Uses a block-aware approach: find each existing-service block and check its name.
+    const existingServiceBlocks = file.content.split(
+      /(?=\s*-\s+name:\s)/
+    );
+    for (const block of existingServiceBlocks) {
       if (
-        /type:\s*org\.cloudfoundry\.managed-service/.test(file.content) &&
-        /auditlog/.test(file.content)
+        /type:\s*org\.cloudfoundry\.existing-service/.test(block) &&
+        /name:\s*\S*audit\S*/i.test(block)
       ) {
-        return true;
-      }
-      if (/auditlog-api/.test(file.content)) {
         return true;
       }
     }
@@ -154,14 +177,20 @@ export function detectIntegrationGaps(
   if (!mtaPresent) {
     gaps.push(
       "No mta.yaml auditlog service resource detected. " +
-        "Add an org.cloudfoundry.managed-service resource of type auditlog-api and bind it to your app module."
+        "Add either an org.cloudfoundry.managed-service resource (service: auditlog, plan: oauth2) " +
+        "or an org.cloudfoundry.existing-service resource (for pre-provisioned instances) " +
+        "with a name containing 'audit', and reference it in your app module's requires."
     );
   }
 
+  // Only flag missing VCAP binding when there is also no MTA resource declared.
+  // If an mta.yaml resource exists (managed-service OR existing-service), the CF
+  // runtime will inject VCAP_SERVICES automatically on deploy – no separate action needed.
   if (!vcapUsed && !mtaPresent) {
     gaps.push(
-      "No VCAP_SERVICES auditlog binding detected. " +
-        "Ensure the auditlog service is bound (cf bind-service) and VCAP_SERVICES is available at runtime."
+      "No VCAP_SERVICES auditlog binding detected and no mta.yaml resource found. " +
+        "Either add an auditlog resource to mta.yaml (managed-service or existing-service), " +
+        "or manually bind the service with: cf bind-service <app> <auditlog-instance> && cf restage <app>."
     );
   }
 
