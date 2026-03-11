@@ -82,10 +82,14 @@ export function hasCdsAuditLoggingConfig(files: FileNode[]): boolean {
 
 /**
  * Returns true when mta.yaml references an auditlog service resource.
+ * Accepts both managed-service (freshly provisioned) and existing-service
+ * (pre-provisioned instance) resource types, as both result in a valid
+ * VCAP_SERVICES binding at CF runtime.
  */
 export function hasMtaAuditLogResource(files: FileNode[]): boolean {
   for (const file of files) {
     if (file.path.endsWith("mta.yaml") || file.path.endsWith("mta.yml")) {
+      // managed-service with auditlog service/plan name or auditlog-api
       if (
         /type:\s*org\.cloudfoundry\.managed-service/.test(file.content) &&
         /auditlog/.test(file.content)
@@ -93,6 +97,14 @@ export function hasMtaAuditLogResource(files: FileNode[]): boolean {
         return true;
       }
       if (/auditlog-api/.test(file.content)) {
+        return true;
+      }
+      // existing-service whose resource name contains "audit"
+      // (e.g. `name: audit-log-srv` with `type: org.cloudfoundry.existing-service`)
+      if (
+        /type:\s*org\.cloudfoundry\.existing-service/.test(file.content) &&
+        /name:\s*\S*audit\S*/i.test(file.content)
+      ) {
         return true;
       }
     }
@@ -158,10 +170,14 @@ export function detectIntegrationGaps(
     );
   }
 
+  // Only flag missing VCAP binding when there is also no MTA resource declared.
+  // If an mta.yaml resource exists (managed-service OR existing-service), the CF
+  // runtime will inject VCAP_SERVICES automatically on deploy – no separate action needed.
   if (!vcapUsed && !mtaPresent) {
     gaps.push(
-      "No VCAP_SERVICES auditlog binding detected. " +
-        "Ensure the auditlog service is bound (cf bind-service) and VCAP_SERVICES is available at runtime."
+      "No VCAP_SERVICES auditlog binding detected and no mta.yaml resource found. " +
+        "Either add an auditlog resource to mta.yaml, or manually bind the service " +
+        "with: cf bind-service <app> <auditlog-instance> && cf restage <app>."
     );
   }
 
