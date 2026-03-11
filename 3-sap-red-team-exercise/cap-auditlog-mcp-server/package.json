@@ -1,0 +1,48 @@
+{
+  "name": "cap-auditlog-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server that helps developers add audit-compliant logging to SAP CAP (Node.js) and SAPUI5 applications, with focus on SAP BTP Audit Log Service integration.",
+  "author": "DSAG TechXChange 2026",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/server.js",
+  "bin": {
+    "cap-auditlog-mcp": "dist/server.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "start": "node dist/server.js",
+    "dev": "tsx src/server.ts",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "eslint": "^9.15.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "mcp",
+    "sap",
+    "cap",
+    "sapui5",
+    "audit-logging",
+    "btp",
+    "model-context-protocol"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "AUD-001",
+  "expandedRationale": "## Suggestion AUD-001 – AUDIT_LOG (HIGH priority)\n\n**File:** `srv/employee-service.js`\n**Event / Action:** CREATE\n**Entity:** Employees\n\n### Why this matters\nEvent 'CREATE' is a data-mutating or security-relevant operation that must be audit-logged for compliance (GDPR, SOX, DSGVO).\n\n### Compliance context\nUnder GDPR (EU) / DSGVO (Germany), organisations must be able to demonstrate lawful processing of personal data and maintain a record of processing activities (Art. 30 GDPR). SAP BTP Audit Log Service provides a tamper-evident, centralised audit trail that satisfies these requirements. Missing audit entries for data mutations or access events can lead to regulatory findings and fines.\n\n### What the audit log entry must contain\n- **Actor**: Who performed the action (user ID or service principal).\n- **Action**: The operation type (CREATE).\n- **Object**: The entity type (Employees).\n- **ObjectId**: A stable, safe identifier for the specific record.\n- **Outcome**: success / failure / denied.\n- **Tenant**: The BTP subaccount / CF org subdomain.\n- **CorrelationId**: Propagated from x-correlation-id header.\n\n### Correlation ID strategy\nUse x-correlation-id header if present (set by SAP BTP API Gateway / CAP framework). Fall back to crypto.randomUUID().\nCAP binding: `req.headers?.['x-correlation-id'] ?? req.id`",
+  "privacyGuidance": "### Privacy / PII guidance\n\nFields such as email or name from 'Employees' must NOT appear in audit log attribute values. Log only identifiers (IDs) and exclude sensitive field content. Use @PersonalData.IsPotentiallySensitive annotations in your CDS model.\n\n**Potentially PII-bearing fields to mask or omit:**\n  - `email`: do NOT log the value; log only the field name or a hash.\n  - `name`: do NOT log the value; log only the field name or a hash.\n  - `phoneNumber`: do NOT log the value; log only the field name or a hash.\n  - `address`: do NOT log the value; log only the field name or a hash.\n  - `salary`: do NOT log the value; log only the field name or a hash.\n\n**Golden rules:**\n1. Never log passwords, tokens, API keys, or session cookies.\n2. Never log full request/response payloads – log only identifiers and counts.\n3. For names/emails: log only if the audit standard explicitly requires it, and mask to first letter.\n4. Use @PersonalData.IsPotentiallySensitive in CDS annotations to let @cap-js/audit-logging handle masking automatically.",
+  "btpVerificationSteps": [
+    "1. Deploy/run the app with audit-log service bound (cf bind-service).",
+    "2. Trigger the 'CREATE' operation on 'Employees' once.",
+    "3. Open BTP Cockpit → Services → Instances → Audit Log Service → 'Open Dashboard'.",
+    "4. Filter by app GUID and time range; confirm the event appears.",
+    "5. (Optional) Use Audit Log Retrieval API: GET /auditlog/v2/auditlogrecords?$filter=..."
+  ],
+  "alternativePlacements": [
+    {
+      "file": "srv/employee-service.js",
+      "anchor": {
+        "type": "pattern",
+        "value": "this\\.before\\(['\"`]CREATE['\"`]"
+      },
+      "tradeoff": "Logging in a before() handler fires even when the operation fails. Use outcome:'pending' and update to 'failure' in a catch block. Preferred for pre-check audit events (e.g., access denied scenarios)."
+    },
+    {
+      "file": "srv/employee-service.js",
+      "anchor": {
+        "type": "pattern",
+        "value": "this\\.after\\(['\"`]CREATE['\"`]"
+      },
+      "tradeoff": "Logging in an after() handler fires only on success. Simple but means failed operations are not logged unless error handling also emits an audit event."
+    }
+  ],
+  "references": [
+    {
+      "title": "SAP CAP Audit Logging Plugin (@cap-js/audit-logging)",
+      "url": "https://cap.cloud.sap/docs/guides/data-privacy/audit-logging"
+    },
+    {
+      "title": "SAP BTP Audit Log Service Documentation",
+      "url": "https://help.sap.com/docs/btp/sap-btp-neo-environment/audit-log-overview"
+    },
+    {
+      "title": "@sap/audit-logging npm package",
+      "url": "https://www.npmjs.com/package/@sap/audit-logging"
+    },
+    {
+      "title": "GDPR Compliance with SAP BTP",
+      "url": "https://help.sap.com/docs/btp/sap-business-technology-platform/data-protection-and-privacy"
+    },
+    {
+      "title": "SAP CAP Personal Data Annotations",
+      "url": "https://cap.cloud.sap/docs/guides/data-privacy/"
+    },
+    {
+      "title": "Audit Log Retrieval API",
+      "url": "https://api.sap.com/api/CFAuditLogRetrievalAPI/overview"
+    }
+  ]
+}

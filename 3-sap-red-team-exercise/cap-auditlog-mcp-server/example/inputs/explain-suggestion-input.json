@@ -1,0 +1,7 @@
+{
+  "tool": "explain_suggestion",
+  "description": "Explain suggestion AUD-001 from the previous suggest_logging run.",
+  "input": {
+    "id": "AUD-001"
+  }
+}

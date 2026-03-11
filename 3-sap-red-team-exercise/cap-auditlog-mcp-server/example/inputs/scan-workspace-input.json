@@ -1,0 +1,24 @@
+{
+  "tool": "scan_workspace",
+  "description": "Scan a mixed CAP + UI5 workspace that has no audit logging configured yet.",
+  "input": {
+    "openFiles": [
+      {
+        "path": "package.json",
+        "content": "{\n  \"name\": \"sample-cap-app\",\n  \"dependencies\": {\n    \"@sap/cds\": \"^8.0.0\"\n  }\n}"
+      },
+      {
+        "path": "srv/employee-service.js",
+        "content": "const cds = require('@sap/cds');\nmodule.exports = cds.service.impl(async function(srv) {\n  this.on('CREATE', 'Employees', async (req) => { /* ... */ });\n  this.on('UPDATE', 'Employees', async (req) => { /* ... */ });\n  this.on('DELETE', 'Employees', async (req) => { /* ... */ });\n  this.on('READ',   'Employees', async (req) => { /* ... */ });\n});\n"
+      },
+      {
+        "path": "webapp/controller/Employees.controller.js",
+        "content": "sap.ui.define([], function() {\n  return Controller.extend('Employees', {\n    onSave: function() { this.getView().getModel().submitChanges(); },\n    onDelete: function() { oContext.delete(); }\n  });\n});\n"
+      },
+      {
+        "path": "webapp/manifest.json",
+        "content": "{ \"sap.app\": { \"id\": \"sample.app\", \"dataSources\": { \"main\": { \"type\": \"OData\" } } }, \"sap.ui\": { \"technology\": \"UI5\" } }"
+      }
+    ]
+  }
+}
