@@ -1,0 +1,40 @@
+{
+  "detectedStacks": ["cap", "ui5"],
+  "evidence": {
+    "capFiles": ["srv/employee-service.js"],
+    "ui5Files": [
+      "webapp/controller/Employees.controller.js",
+      "webapp/manifest.json"
+    ],
+    "packageJsonPaths": ["package.json"],
+    "handlerPatterns": [
+      "srv/employee-service.js:CREATE",
+      "srv/employee-service.js:UPDATE",
+      "srv/employee-service.js:DELETE",
+      "srv/employee-service.js:READ"
+    ],
+    "sensitiveEntities": ["Employees"]
+  },
+  "auditIntegration": {
+    "library": "none",
+    "configuredInCdsRequires": false,
+    "mtaResourcePresent": false,
+    "vcapServicesUsed": false,
+    "capPluginActive": false,
+    "integrationGaps": [
+      "No audit logging library detected in package.json. Add @cap-js/audit-logging (preferred) or @sap/audit-logging.",
+      "Add auditlog managed service resource to mta.yaml and bind it to your app module.",
+      "No VCAP_SERVICES auditlog binding detected. Ensure the auditlog service is bound (cf bind-service) and VCAP_SERVICES is available at runtime."
+    ]
+  },
+  "recommendedNextSteps": [
+    "CAP workspace detected. Run suggest_logging to get targeted audit log insertion points.",
+    "ACTION REQUIRED: Install @cap-js/audit-logging → npm install @cap-js/audit-logging",
+    "ACTION REQUIRED: Add CDS plugin config to package.json:\n  \"cds\": { \"requires\": { \"audit-log\": { \"impl\": \"@cap-js/audit-logging\" } } }",
+    "Add auditlog managed service resource to mta.yaml and bind it to your app module.",
+    "UI5 workspace detected. Note: audit logging must NEVER be done from UI5 frontend code. All audit events must be emitted in CAP backend handlers.",
+    "GAP: No audit logging library detected in package.json. Add @cap-js/audit-logging (preferred) or @sap/audit-logging.",
+    "GAP: Add auditlog managed service resource to mta.yaml and bind it to your app module.",
+    "GAP: No VCAP_SERVICES auditlog binding detected. Ensure the auditlog service is bound (cf bind-service) and VCAP_SERVICES is available at runtime."
+  ]
+}

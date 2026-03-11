@@ -1,0 +1,35 @@
+{
+  "sap.app": {
+    "id": "sample.app",
+    "type": "application",
+    "title": "Employee App",
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/employee/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5"
+  },
+  "sap.ui5": {
+    "models": {
+      "": {
+        "dataSource": "mainService"
+      }
+    },
+    "routing": {
+      "routes": [
+        {
+          "name": "employees",
+          "pattern": "employees",
+          "target": "employees"
+        }
+      ]
+    }
+  }
+}

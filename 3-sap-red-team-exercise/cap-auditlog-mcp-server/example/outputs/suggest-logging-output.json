@@ -1,0 +1,185 @@
+{
+  "summary": {
+    "totalEdits": 3,
+    "auditLogEdits": 3,
+    "appLogEdits": 0,
+    "highPriorityCount": 3,
+    "detectedStacks": ["cap", "ui5"],
+    "auditLibraryDetected": "none",
+    "coverageWarnings": [
+      "No audit logging library installed. Suggestions include a stub wrapper – replace with a real library before production.",
+      "mta.yaml auditlog service binding not detected. Audit events will not reach BTP Audit Log Service at runtime.",
+      "A stub audit log wrapper will be referenced at ./lib/audit-log-wrapper.js – create this file using the auditWrapperSource() helper or replace with a real library."
+    ]
+  },
+  "edits": [
+    {
+      "id": "AUD-001",
+      "type": "AUDIT_LOG",
+      "priority": "HIGH",
+      "file": "srv/employee-service.js",
+      "anchor": {
+        "type": "function_name",
+        "value": "handler_CREATE_Employees"
+      },
+      "line_hint": 3,
+      "why": "Event 'CREATE' is a data-mutating or security-relevant operation that must be audit-logged for compliance (GDPR, SOX, DSGVO).",
+      "what_to_log": {
+        "actor": "req.user?.id ?? 'anonymous'",
+        "action": "CREATE",
+        "object": "Employees",
+        "objectId": "data?.ID ?? req.params?.[0] ?? 'unknown'",
+        "outcome": "success",
+        "tenant": "req.tenant ?? 'default'",
+        "correlationId": "req.headers?.['x-correlation-id'] ?? req.headers?.['x-request-id'] ?? crypto.randomUUID()",
+        "additionalAttributes": {
+          "serviceMethod": "'CREATE'"
+        }
+      },
+      "how": {
+        "snippet": "// ── Audit Log: CREATE on Employees ──────────────────────────────\n// TODO: No audit library found. Install one first:\n//   npm install @cap-js/audit-logging   ← preferred (CDS plugin, zero boilerplate)\n//   npm install @sap/audit-logging      ← alternative (imperative API)\n//\n// Until then, use this local wrapper to avoid losing audit events:\nconst { writeAuditLog } = require('./lib/audit-log-wrapper.js');\nawait writeAuditLog({\n  actor:        req.user?.id ?? 'anonymous',\n  action:       'CREATE',\n  object:       'Employees',\n  objectId:     String(data?.ID ?? req.params?.[0] ?? 'unknown'),\n  outcome:      'success',\n  tenant:       req.tenant ?? 'default',\n  correlationId:\n    req.headers?.['x-correlation-id'] ??\n    req.headers?.['x-request-id'] ??\n    crypto.randomUUID(),\n});",
+        "imports": [
+          "// TODO: No audit library found. Install one first:",
+          "// Option A (preferred): npm install @cap-js/audit-logging",
+          "// Option B: npm install @sap/audit-logging",
+          "// See README for full setup checklist."
+        ],
+        "setupNotes": [
+          "TODO-1: npm install @cap-js/audit-logging",
+          "TODO-2: Add to package.json > cds > requires: { 'audit-log': { impl: '@cap-js/audit-logging' } }",
+          "TODO-3: Add auditlog service resource to mta.yaml and bind (cf bind-service <app> <auditlog-instance>)",
+          "TODO-4: Verify via BTP Audit Log Viewer or Audit Log Retrieval API"
+        ],
+        "wrapperNeeded": true,
+        "wrapperPath": "./lib/audit-log-wrapper.js"
+      },
+      "privacy_notes": {
+        "piiFields": ["email", "name", "phoneNumber", "address", "salary"],
+        "maskingAdvice": "Fields such as email or name from 'Employees' must NOT appear in audit log attribute values. Log only identifiers (IDs) and exclude sensitive field content. Use @PersonalData.IsPotentiallySensitive annotations in your CDS model.",
+        "legalBasis": null
+      },
+      "validation": {
+        "unitTestHint": "In your unit test, mock the audit-log service and assert that `audit.log` is called with object.type === 'Employees' and the correct action 'CREATE'.",
+        "btpVerification": [
+          "1. Deploy/run the app with audit-log service bound (cf bind-service).",
+          "2. Trigger the 'CREATE' operation on 'Employees' once.",
+          "3. Open BTP Cockpit → Services → Instances → Audit Log Service → 'Open Dashboard'.",
+          "4. Filter by app GUID and time range; confirm the event appears.",
+          "5. (Optional) Use Audit Log Retrieval API: GET /auditlog/v2/auditlogrecords?$filter=..."
+        ]
+      },
+      "correlation": {
+        "strategy": "Use x-correlation-id header if present (set by SAP BTP API Gateway / CAP framework). Fall back to crypto.randomUUID().",
+        "headerName": "x-correlation-id",
+        "capBinding": "req.headers?.['x-correlation-id'] ?? req.id"
+      },
+      "confidence": 0.9
+    },
+    {
+      "id": "AUD-002",
+      "type": "AUDIT_LOG",
+      "priority": "HIGH",
+      "file": "srv/employee-service.js",
+      "anchor": {
+        "type": "function_name",
+        "value": "handler_DELETE_Employees"
+      },
+      "line_hint": 7,
+      "why": "Event 'DELETE' is a data-mutating or security-relevant operation that must be audit-logged for compliance (GDPR, SOX, DSGVO).",
+      "what_to_log": {
+        "actor": "req.user?.id ?? 'anonymous'",
+        "action": "DELETE",
+        "object": "Employees",
+        "objectId": "data?.ID ?? req.params?.[0] ?? 'unknown'",
+        "outcome": "success",
+        "tenant": "req.tenant ?? 'default'",
+        "correlationId": "req.headers?.['x-correlation-id'] ?? req.headers?.['x-request-id'] ?? crypto.randomUUID()",
+        "additionalAttributes": {
+          "serviceMethod": "'DELETE'"
+        }
+      },
+      "how": {
+        "snippet": "// ── Audit Log: DELETE on Employees ──────────────────────────────\nconst { writeAuditLog } = require('./lib/audit-log-wrapper.js');\nawait writeAuditLog({\n  actor:        req.user?.id ?? 'anonymous',\n  action:       'DELETE',\n  object:       'Employees',\n  objectId:     String(req.params[0] ?? 'unknown'),\n  outcome:      'success',\n  tenant:       req.tenant ?? 'default',\n  correlationId: req.headers?.['x-correlation-id'] ?? crypto.randomUUID(),\n});",
+        "imports": [
+          "// TODO: Replace wrapper with @cap-js/audit-logging"
+        ],
+        "setupNotes": [
+          "TODO-1: npm install @cap-js/audit-logging",
+          "TODO-3: cf bind-service <app> <auditlog-instance>"
+        ],
+        "wrapperNeeded": true,
+        "wrapperPath": "./lib/audit-log-wrapper.js"
+      },
+      "privacy_notes": {
+        "piiFields": ["email", "name", "phoneNumber", "address", "salary"],
+        "maskingAdvice": "Do not log the deleted record's field values. Log only the entity ID.",
+        "legalBasis": null
+      },
+      "validation": {
+        "unitTestHint": "Mock writeAuditLog and assert it is called with action 'DELETE' and the correct employee ID.",
+        "btpVerification": [
+          "1. Trigger a DELETE on /Employees(ID='xxx').",
+          "2. Check BTP Audit Log Viewer for a deletion event."
+        ]
+      },
+      "correlation": {
+        "strategy": "Use x-correlation-id header. Fall back to crypto.randomUUID().",
+        "headerName": "x-correlation-id",
+        "capBinding": "req.headers?.['x-correlation-id'] ?? req.id"
+      },
+      "confidence": 0.9
+    },
+    {
+      "id": "AUD-003",
+      "type": "AUDIT_LOG",
+      "priority": "HIGH",
+      "file": "srv/employee-service.js",
+      "anchor": {
+        "type": "function_name",
+        "value": "handler_EXPORT_exportEmployees"
+      },
+      "line_hint": 10,
+      "why": "Event 'exportEmployees' is classified as EXPORT – must be audit-logged (GDPR Art. 30, SOX).",
+      "what_to_log": {
+        "actor": "req.user?.id ?? 'anonymous'",
+        "action": "EXPORT",
+        "object": "Employees",
+        "objectId": "'bulk-export'",
+        "outcome": "success",
+        "tenant": "req.tenant ?? 'default'",
+        "correlationId": "req.headers?.['x-correlation-id'] ?? crypto.randomUUID()",
+        "additionalAttributes": {
+          "serviceMethod": "'exportEmployees'"
+        }
+      },
+      "how": {
+        "snippet": "// ── Audit Log: EXPORT of Employees ──────────────────────────────\nconst { writeAuditLog } = require('./lib/audit-log-wrapper.js');\nawait writeAuditLog({\n  actor:        req.user?.id ?? 'anonymous',\n  action:       'EXPORT',\n  object:       'Employees',\n  objectId:     'bulk-export',\n  outcome:      'success',\n  tenant:       req.tenant ?? 'default',\n  correlationId: req.headers?.['x-correlation-id'] ?? crypto.randomUUID(),\n});",
+        "imports": [],
+        "setupNotes": [
+          "Install and configure @cap-js/audit-logging before go-live."
+        ],
+        "wrapperNeeded": true,
+        "wrapperPath": "./lib/audit-log-wrapper.js"
+      },
+      "privacy_notes": {
+        "piiFields": ["email", "name", "phoneNumber", "address", "salary"],
+        "maskingAdvice": "Log the count of exported records, NOT the records themselves.",
+        "legalBasis": "GDPR Art. 6(1)(b) – processing necessary for contract performance; or Art. 6(1)(c) – legal obligation"
+      },
+      "validation": {
+        "unitTestHint": "Assert writeAuditLog is called with action 'EXPORT' when exportEmployees fires.",
+        "btpVerification": [
+          "1. Call the exportEmployees action.",
+          "2. Verify an EXPORT audit entry appears in BTP Audit Log Viewer."
+        ]
+      },
+      "correlation": {
+        "strategy": "Use x-correlation-id header. Fall back to crypto.randomUUID().",
+        "headerName": "x-correlation-id",
+        "capBinding": "req.headers?.['x-correlation-id'] ?? req.id"
+      },
+      "confidence": 0.75,
+      "ui5BackendNote": null
+    }
+  ]
+}

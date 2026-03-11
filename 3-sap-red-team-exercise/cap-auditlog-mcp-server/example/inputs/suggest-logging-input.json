@@ -1,0 +1,22 @@
+{
+  "tool": "suggest_logging",
+  "description": "Suggest logging for a CAP+UI5 workspace with no audit library. Focus on audit events.",
+  "input": {
+    "focus": "audit",
+    "maxSuggestions": 5,
+    "openFiles": [
+      {
+        "path": "package.json",
+        "content": "{\n  \"name\": \"sample-cap-app\",\n  \"dependencies\": { \"@sap/cds\": \"^8.0.0\" }\n}"
+      },
+      {
+        "path": "srv/employee-service.js",
+        "content": "const cds = require('@sap/cds');\nmodule.exports = cds.service.impl(async function(srv) {\n  this.on('CREATE', 'Employees', async (req) => {\n    const data = req.data;\n    return await INSERT.into('Employees').entries(data);\n  });\n  this.on('DELETE', 'Employees', async (req) => {\n    await DELETE.from('Employees').where({ ID: req.params[0] });\n  });\n  this.on('exportEmployees', async (req) => {\n    const rows = await SELECT.from('Employees');\n    return rows;\n  });\n});\n"
+      },
+      {
+        "path": "webapp/controller/Employees.controller.js",
+        "content": "sap.ui.define([], function() {\n  return Controller.extend('Employees', {\n    onSave: function() { this.getView().getModel().submitChanges(); },\n    onExport: function() { this.getView().getModel().callFunction('/exportEmployees'); }\n  });\n});\n"
+      }
+    ]
+  }
+}

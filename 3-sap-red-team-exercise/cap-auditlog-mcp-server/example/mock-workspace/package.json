@@ -1,0 +1,9 @@
+{
+  "name": "sample-cap-app",
+  "version": "1.0.0",
+  "description": "Sample CAP Node.js app for MCP server demo",
+  "dependencies": {
+    "@sap/cds": "^8.0.0",
+    "@sap/cds-dk": "^8.0.0"
+  }
+}
