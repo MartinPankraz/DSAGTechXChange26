@@ -176,6 +176,10 @@ export const ScanWorkspaceOutputSchema = z.object({
 export type ScanWorkspaceOutput = z.infer<typeof ScanWorkspaceOutputSchema>;
 
 export const SuggestLoggingInputSchema = z.object({
+  rootPath: z.string().optional().describe(
+    "Absolute path to workspace root. When supplied without openFiles, the server " +
+    "will crawl the directory automatically (skips node_modules, dist, .git)."
+  ),
   fileTree: z.array(z.string()).optional().describe(
     "List of relative file paths present in the workspace"
   ),

@@ -25,6 +25,7 @@ import {
   buildSuggestion,
   resetIdCounter,
 } from "../analysis/classifier.js";
+import { crawlToFileNodes } from "../analysis/fs-crawler.js";
 
 // ─── Internal types ───────────────────────────────────────────────────────────
 
@@ -287,12 +288,17 @@ function buildCoverageWarnings(
 export function runSuggestLogging(input: SuggestLoggingInput): SuggestLoggingOutput {
   resetIdCounter();
 
-  // Build file nodes
+  // ── Build file nodes ─────────────────────────────────────────────────────
+  // Priority: openFiles (caller-supplied) → rootPath crawl
   const files: FileNode[] = [];
-  if (input.openFiles) {
+  if (input.openFiles && input.openFiles.length > 0) {
     for (const of_ of input.openFiles) {
       files.push({ path: of_.path, content: of_.content });
     }
+  } else if (input.rootPath) {
+    // Full filesystem crawl – works without Copilot passing open files
+    const crawled = crawlToFileNodes(input.rootPath);
+    files.push(...crawled);
   }
 
   // If only a diff is provided, parse modified file paths for context

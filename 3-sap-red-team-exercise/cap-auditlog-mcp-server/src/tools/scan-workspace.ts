@@ -20,6 +20,7 @@ import {
   buildUi5Evidence,
 } from "../analysis/ui5-detector.js";
 import { detectAuditIntegration } from "../analysis/audit-integration-detector.js";
+import { crawlToFileNodes } from "../analysis/fs-crawler.js";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -35,26 +36,36 @@ function makeEmptyEvidence(): Evidence {
 
 /**
  * Converts the raw input into a list of FileNode objects.
- * When content is not provided (fileList only), the content is noted as unavailable
- * so path-based heuristics still run.
+ *
+ * Priority order:
+ *  1. openFiles  – caller already provided content (fastest, used by Copilot)
+ *  2. fileList   – explicit relative paths; content is read from rootPath if given
+ *  3. rootPath   – full filesystem crawl when no files are provided at all
  */
 function buildFileNodes(input: ScanWorkspaceInput): FileNode[] {
   const nodes: FileNode[] = [];
 
+  // 1. Caller-supplied files with content (highest priority)
   if (input.openFiles) {
     for (const of_ of input.openFiles) {
       nodes.push({ path: of_.path, content: of_.content });
     }
   }
 
+  // 2. Explicit path list (content = "" for path-only heuristics)
   if (input.fileList) {
     const existingPaths = new Set(nodes.map((n) => n.path));
     for (const p of input.fileList) {
       if (!existingPaths.has(p)) {
-        // No content – path-only mode
         nodes.push({ path: p, content: "" });
       }
     }
+  }
+
+  // 3. Full crawl – only when nothing was supplied via openFiles / fileList
+  if (nodes.length === 0 && input.rootPath) {
+    const crawled = crawlToFileNodes(input.rootPath);
+    nodes.push(...crawled);
   }
 
   return nodes;
