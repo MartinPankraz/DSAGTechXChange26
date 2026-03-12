@@ -4,16 +4,6 @@
       "type": "stdio",
       "command": "node",
       "args": ["3-sap-red-team-exercise/student/sap-cap-mcp-server/src/index.js"]
-    },
-    "cap-auditlog": {
-      "type": "stdio",
-      "command": "node",
-      "args": [
-        // Use ${workspaceFolder} if the server lives inside the same workspace:
-        "${workspaceFolder}/3-sap-red-team-exercise/student/cap-auditlog-mcp-server/dist/server.js"
-        // Or use an absolute path if the server is outside the workspace:
-        // "/Users/you/cap-auditlog-mcp-server/dist/server.js"
-      ]
     }
   }
 }
