@@ -20,19 +20,29 @@ From **API Operations**, select
  
  ![Select Entities](../images/quest5/step04.png) 
  
-For the Display Name enter ```student0XX-SAP Products, Business Partner and Sales Orders```
+For the Display Name enter 
+```text
+student0XX-SAP Products, Business Partner and Sales Orders
+```
+
  ![Enter Display Name](../images/quest5/step05.png) 
  
 As the description enter
 
-```This MCP Server returns information about Products, Business Partners and Sales Orders from your SAP System```
+```text
+This MCP Server returns information about Products, Business Partners and Sales Orders from your SAP System
+```
 
 and click on **Create**
 
  ![Create MCP Server](../images/quest5/step06.png) 
  
 Now your MCP Server has been created click on **Copy** to note down the URL of your MCP Server (e.g. copy it to Notepad), 
-e.g. ```https://techxchangeapim.azure-api.net/trainer001-sap-products-business-partner-and-sales-orders/mcp```
+e.g. 
+```text
+https://techxchangeapim.azure-api.net/trainer001-sap-products-business-partner-and-sales-orders/mcp
+```
+
  ![Copy and note down URL](../images/quest5/step07.png) 
  
 

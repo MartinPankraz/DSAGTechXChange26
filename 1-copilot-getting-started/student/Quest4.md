@@ -58,7 +58,10 @@ student0XX
 ``` 
 with your student number, 
 
-Make also sure to adjust the **display name** and add ```student0XX GWSAMPLE_BASIC```  (the Name should be automatically be adjusted)
+Make also sure to adjust the **display name** and add ```text
+student0XX GWSAMPLE_BASIC
+```  
+(the Name should be automatically be adjusted)
 
 then click on **Create**
 
@@ -128,7 +131,9 @@ Now click on **Settings**
 ### 4.4.2. Change the target URL
 And change the **Web Service URL** to 
 
-```https://microsoftintegrationdemo.com:44301/sap/opu/odata/IWBEP/GWSAMPLE_BASIC```
+```text
+https://microsoftintegrationdemo.com:44301/sap/opu/odata/IWBEP/GWSAMPLE_BASIC
+```
 
 and click on **Save**
 

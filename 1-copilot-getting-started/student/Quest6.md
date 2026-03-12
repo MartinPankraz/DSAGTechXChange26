@@ -20,10 +20,20 @@ Click on **Model Context Protocol**
 
 Now enter the following values
 
-* Server name: ```Student0XX - SAP MCP Server```
+* Server name: 
+```text
+Student0XX - SAP MCP Server
+```
 
-* Server Description: ```This MCP Server provides read-only access to Business Partner, Products and Sales Order information in the SAP System.```
-* Server URL: ```https://techxchangeapim.azure-api.net/student0XX-sap-products-business-partner-and-sales-orders/mcp``` (use the one that you created in the last step of Quest 5 before)
+* Server Description: 
+```text
+This MCP Server provides read-only access to Business Partner, Products and Sales Order information in the SAP System.
+```
+* Server URL: 
+```text
+https://techxchangeapim.azure-api.net/student0XX-sap-products-business-partner-and-sales-orders/mcp
+``` 
+(use the one that you created in the last step of Quest 5 before)
 
 and click on **Create**
 
