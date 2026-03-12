@@ -7,9 +7,9 @@ For our tests we are going to use the GWSAMPLE Service, https://microsoftintegra
 
 Open a new Browser Tab and download the $metadata information, via. 
 
-´´´http
+```text
 https://microsoftintegrationdemo.com:44301/sap/opu/odata/IWBEP/GWSAMPLE_BASIC/$metadata
-´´´
+```
 
 
 ## 3.1.1. Authenticate 
