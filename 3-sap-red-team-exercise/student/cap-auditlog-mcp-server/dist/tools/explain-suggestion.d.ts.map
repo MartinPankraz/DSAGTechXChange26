@@ -1,0 +1,1 @@
+{"version":3,"file":"explain-suggestion.d.ts","sourceRoot":"","sources":["../../src/tools/explain-suggestion.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AAEH,OAAO,KAAK,EACV,sBAAsB,EACtB,uBAAuB,EACvB,cAAc,EACf,MAAM,aAAa,CAAC;AAUrB,wBAAgB,mBAAmB,CAAC,KAAK,EAAE,cAAc,EAAE,GAAG,IAAI,CAIjE;AAED,wBAAgB,aAAa,IAAI,IAAI,CAEpC;AAkMD,wBAAgB,oBAAoB,CAClC,KAAK,EAAE,sBAAsB,GAC5B,uBAAuB,CAmCzB"}
