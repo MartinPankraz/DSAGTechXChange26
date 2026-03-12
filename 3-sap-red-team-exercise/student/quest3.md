@@ -1,6 +1,6 @@
 # Quest 3 - Apply AI-based remediation (blue team) - OPTIONAL
 
-[< Quest 2 ](quest2.md) - **[🏠Home](README.md)**
+[< Quest 2 ](quest2.md) - **[🏠Home](README.md)** - [ Quest 4 >](quest4.md)
 
 Put the AI to work again, but this time for defense! In this quest, you will use another MCP server - but to prevent future attacks on the same path.
 
@@ -26,6 +26,6 @@ Optionally, consider tuning your analytic rule for your newly added custom audit
 
 ## Where to next?
 
-[< Quest 2 ](quest2.md) - **[🏠Home](README.md)**
+[< Quest 2 ](quest2.md) - **[🏠Home](README.md)** - [ Quest 4 >](quest4.md)
 
 [🔝](#)
