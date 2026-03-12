@@ -12,10 +12,12 @@ https://portal.azure.com/#@tws22.onmicrosoft.com/resource/subscriptions/0973cd86
 
 ### 4.1.2. Accept Permissions
 Click on **Accept**
+
 ![Accept](../images/quest4/step01.png) 
 
 ### 4.1.3. Add to Authenticator App
 Since this is an external user in this Azure subscription you need to add also this user to the Authentictor
+
 ![Next](../images/quest4/step02.png) 
  
 ### 4.1.4. Run through enrollment process
@@ -32,10 +34,12 @@ Now you are in Azure API Management. This is one instance that is used by  all p
  
 ### 4.2.2. Managing APIs
 Expand **API** and click on **APIs**
+
 ![Expand](../images/quest4/step05.png) 
  
 ### 4.2.3. Define API from OpenAPI specification
 Scroll down and click on OpenAPI
+
 ![OpenAPI](../images/quest4/step06.png) 
  
 ### 4.2.4. Upload OpenAPI Specification
@@ -123,6 +127,7 @@ And change the **Web Service URL** to
 ```https://microsoftintegrationdemo.com:44301/sap/opu/odata/IWBEP/GWSAMPLE_BASIC```
 
 and click on **Save**
+
 ![Update URL](../images/quest4/step13.png) 
  
 ### 4.4.3. Uncheck Subscription Required
@@ -135,6 +140,7 @@ Now click on **Test**, select the *Entity Type* ```Get entities from BusinessPar
 
 ### 4.5.2 Submit the request
 And click on **Send**
+
 ![See Results](../images/quest4/step16.png) 
 
  

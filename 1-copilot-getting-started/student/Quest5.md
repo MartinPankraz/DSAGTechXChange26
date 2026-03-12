@@ -3,7 +3,7 @@
 ## 5.1 Create an MCP Server
 
 ## 5.1.1. Navigate to MCP 
-With this API now managed in Azure APIM, we can create an MCP Server out of it. Select **s** on the left hand side
+With this API now managed in Azure APIM, we can create an MCP Server out of it. Select **MCP Servers** on the left hand side
  ![MCP Server](../images/quest5/step01.png) 
 
 Click on **Create MCP Server** and select **Expose an API as an MCP Server**
