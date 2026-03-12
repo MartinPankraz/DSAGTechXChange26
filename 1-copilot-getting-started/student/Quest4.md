@@ -52,7 +52,11 @@ Click on **Select a File** and select the **$metadata-openapi.json** file that w
 ![Select File](../images/quest4/step07.png) 
  
  ### 4.2.5. Configure the Displayname & more
-For the **API URL Suffix** enter your ```student0XX``` with your student number, 
+For the **API URL Suffix** enter your ID, e.g. 
+```text
+student0XX
+``` 
+with your student number, 
 
 Make also sure to adjust the **display name** and add ```student0XX GWSAMPLE_BASIC```  (the Name should be automatically be adjusted)
 
