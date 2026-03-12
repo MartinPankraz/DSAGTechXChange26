@@ -19,6 +19,6 @@
       ]
     }
   },
-  "updateContentCommand": "npm install --prefix student/dsag-mealapp-security-cap && npm install --prefix student/dsag-mealapp-security-cap/app/mealapp-ui && npm install --prefix student/sap-cap-mcp-server",
+  "updateContentCommand": "npm install --prefix student/dsag-mealapp-security-cap && npm install --prefix student/dsag-mealapp-security-cap/app/mealapp-ui && npm install --prefix student/sap-cap-mcp-server && npm install --prefix student/cap-auditlog-mcp-server",
   "postStartCommand": "cd student/dsag-mealapp-security-cap && cds deploy"
 }
