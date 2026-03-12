@@ -1,6 +1,6 @@
 # ============================================================
-# Invite-TrainerGuests.ps1
-# Invites trainer001-030 as B2B guest users into this tenant
+# Invite-StudentGuests.ps1
+# Invites student001-030 as B2B guest users into this tenant
 # and adds them to the "DSAG TechXChange 2026" group
 # ============================================================
 # Prerequisites:
@@ -10,6 +10,8 @@
 #Requires -Modules Microsoft.Graph.Users, Microsoft.Graph.Groups, Microsoft.Graph.Identity.SignIns
 
 param(
+    [string]$SourceDomain = "M365x49933862.onmicrosoft.com",
+    [int]$StartWith = 1,
     [switch]$WhatIf
 )
 
@@ -25,7 +27,6 @@ if (-not $context) {
 Write-Host "Connected as: $($context.Account)" -ForegroundColor Green
 
 # ── Config ───────────────────────────────────────────────────
-$sourceDomain  = "M365x49933862.onmicrosoft.com"   # Tenant where users were created
 $groupId       = "e43d9d58-0b3e-4c23-aa96-978079105c74"  # "DSAG TechXChange 2026"
 $inviteRedirectUrl = "https://myapps.microsoft.com"       # Where users land after accepting invite
 
@@ -40,11 +41,14 @@ try {
 }
 
 # ── Process users ─────────────────────────────────────────────
+$userCount = 30
 $results = @()
 
-for ($i = 1; $i -le 30; $i++) {
+Write-Host "`nInviting users student$("{0:D3}" -f $StartWith) to student$("{0:D3}" -f ($StartWith + $userCount - 1)) from $SourceDomain" -ForegroundColor Cyan
+
+for ($i = $StartWith; $i -le ($StartWith + $userCount - 1); $i++) {
     $number = "{0:D3}" -f $i
-    $email  = "trainer$number@$sourceDomain"
+    $email  = "student$number@$SourceDomain"
 
     Write-Host "`nProcessing $email ..." -ForegroundColor Cyan
 
@@ -73,7 +77,7 @@ for ($i = 1; $i -le 30; $i++) {
             $invitation = New-MgInvitation `
                 -InvitedUserEmailAddress $email `
                 -InviteRedirectUrl $inviteRedirectUrl `
-                -InvitedUserDisplayName "Trainer $number" `
+                -InvitedUserDisplayName "Student $number" `
                 -SendInvitationMessage:$false   # Set to $true to send invite email
 
             $guestId = $invitation.InvitedUser.Id
@@ -123,6 +127,6 @@ Write-Host "`n========== SUMMARY ==========" -ForegroundColor Cyan
 $results | Format-Table Email, InviteStatus, GroupStatus -AutoSize
 
 $successCount = ($results | Where-Object { $_.GroupStatus -in "Added","AlreadyMember" }).Count
-Write-Host "Done. $successCount / 30 users are in the group." -ForegroundColor $(if ($successCount -eq 30) {"Green"} else {"Yellow"})
+Write-Host "Done. $successCount / $userCount users are in the group." -ForegroundColor $(if ($successCount -eq $userCount) {"Green"} else {"Yellow"})
 
 Disconnect-MgGraph

@@ -79,7 +79,7 @@ The server communicates over **stdio**. Add it to `.vscode/mcp.json` in your wor
       "type": "stdio",
       "command": "node",
       "args": [
-        "3-sap-red-team-exercise/student/cap-auditlog-mcp-server/dist/server.js"
+        "student/cap-auditlog-mcp-server/dist/server.js"
       ]
     }
   }

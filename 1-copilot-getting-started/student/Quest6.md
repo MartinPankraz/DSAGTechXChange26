@@ -3,29 +3,29 @@
 ## 6.1 Add the MCP Server to Copilot Studio
 
 Now we are ready to test and integrate the MCP in Copilot Studio. 
-Go back to Copilot Studio and go to the Agent
+Go back to **Copilot Studio** windows and go to the **Agent**
 If you do not have the Agent open anymore, click on Agents and select your Agent
 
  ![Go to Agents](../images/quest6/step01a.png) 
 
-Click on Add Tool and select “+Add a tool”
+From the **Tools** menu, click on **+Add a tool**
 
  ![Add new Tool](../images/quest6/step01.png) 
  
 
-Click on Model Context Protocol
+Click on **Model Context Protocol**
 
  ![Select MCP](../images/quest6/step02.png) 
  
 
 Now enter the following values
 
-* Server name: ```Student001 - SAP MCP Server```
+* Server name: ```Student0XX - SAP MCP Server```
 
 * Server Description: ```This MCP Server provides read-only access to Business Partner, Products and Sales Order information in the SAP System.```
-* Server URL: ```https://bps-agent-apim.azure-api.net/PM4/GWSAMPLE_BASIC-mcp/mcp``` (use the one that you created in the step XXX before)
+* Server URL: ```https://techxchangeapim.azure-api.net/student0XX-sap-products-business-partner-and-sales-orders/mcp``` (use the one that you created in the last step of Quest 5 before)
 
-and click on Create
+and click on **Create**
 
 > [!Note]
 > In a production environment you would select OAuth and configure the principal propagation flow. 

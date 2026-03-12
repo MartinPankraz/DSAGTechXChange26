@@ -1,6 +1,6 @@
 # ============================================================
-# Create-TrainerUsers.ps1
-# Creates trainer001 to trainer030 in M365 and assigns licenses
+# Create-StudentUsers.ps1
+# Creates student001 to student030 in M365 and assigns licenses
 # ============================================================
 # Prerequisites:
 #   Install-Module Microsoft.Graph -Scope CurrentUser
@@ -9,7 +9,9 @@
 #Requires -Modules Microsoft.Graph.Users, Microsoft.Graph.Identity.DirectoryManagement
 
 param(
-    [string]$DefaultPassword = "Trainer@2025!",
+    [string]$DefaultPassword = "Student@2025!",
+    [string]$Domain = "M365x75849431.OnMicrosoft.com",
+    [int]$StartWith = 1,
     [switch]$WhatIf
 )
 
@@ -25,20 +27,19 @@ if (-not $context) {
 }
 Write-Host "Connected as: $($context.Account)" -ForegroundColor Green
 
-$domain        = "M365x49933862.onmicrosoft.com"
 $usageLocation = "DE"   # Change if needed (e.g. "US", "GB")
 
 # ── Hardcoded SKU IDs (from your tenant) ─────────────────────
 $licenses = @(
     @{ SkuId = "3271cf8e-2be5-4a09-a549-70fd05baaa17" },  # Microsoft 365 E5 EEA (not Teams)
-    @{ SkuId = "606b54a9-78d8-4298-ad8b-df6ef4481c80" },  # Microsoft Copilot Studio Viral Trial
+    # @{ SkuId = "606b54a9-78d8-4298-ad8b-df6ef4481c80" },  # Microsoft Copilot Studio Viral Trial — NOT available in tenant
     @{ SkuId = "f30db892-07e9-47e9-837c-80727f46fd3d" },  # Microsoft Power Automate Free
     @{ SkuId = "7e74bd05-2c47-404e-829a-ba95c66fe8e5" }   # Microsoft Teams EEA
 )
 
 Write-Host "Licenses to assign:" -ForegroundColor Cyan
 Write-Host "  - Microsoft 365 E5 EEA (not Teams)"
-Write-Host "  - Microsoft Copilot Studio Viral Trial"
+# Write-Host "  - Microsoft Copilot Studio Viral Trial"  # Not available in tenant
 Write-Host "  - Microsoft Power Automate Free"
 Write-Host "  - Microsoft Teams EEA"
 
@@ -49,13 +50,16 @@ $passwordProfile = @{
 }
 
 # ── Create users ─────────────────────────────────────────────
+$userCount = 30
 $results = @()
 
-for ($i = 1; $i -le 30; $i++) {
+Write-Host "Creating users student$("{0:D3}" -f $StartWith) to student$("{0:D3}" -f ($StartWith + $userCount - 1))" -ForegroundColor Cyan
+
+for ($i = $StartWith; $i -le ($StartWith + $userCount - 1); $i++) {
     $number      = "{0:D3}" -f $i
-    $upn         = "trainer$number@$domain"
-    $displayName = "Trainer $number"
-    $mailNick    = "trainer$number"
+    $upn         = "student$number@$domain"
+    $displayName = "Student $number"
+    $mailNick    = "student$number"
 
     Write-Host "`nProcessing $upn ..." -ForegroundColor Cyan
 
@@ -111,11 +115,23 @@ for ($i = 1; $i -le 30; $i++) {
     }
 
     try {
+        # Check which licenses are already assigned
+        $currentLicenses = (Get-MgUserLicenseDetail -UserId $userId -ErrorAction Stop).SkuId
+        $missingLicenses = $licenses | Where-Object { $_.SkuId -notin $currentLicenses }
+
+        if ($missingLicenses.Count -eq 0) {
+            Write-Host "  All licenses already assigned — skipping." -ForegroundColor Yellow
+            $results += [PSCustomObject]@{ UPN = $upn; Status = "AlreadyComplete" }
+            continue
+        }
+
+        Write-Host "  Assigning $($missingLicenses.Count) missing license(s)..." -ForegroundColor Cyan
         Update-MgUser -UserId $userId -UsageLocation $usageLocation
 
         Set-MgUserLicense -UserId $userId `
-                          -AddLicenses $licenses `
-                          -RemoveLicenses @()
+                          -AddLicenses @($missingLicenses) `
+                          -RemoveLicenses @() `
+                          -ErrorAction Stop
 
         Write-Host "  Licenses assigned successfully." -ForegroundColor Green
         $results += [PSCustomObject]@{ UPN = $upn; Status = "Success" }
@@ -130,7 +146,7 @@ for ($i = 1; $i -le 30; $i++) {
 Write-Host "`n========== SUMMARY ==========" -ForegroundColor Cyan
 $results | Format-Table -AutoSize
 
-$successCount = ($results | Where-Object Status -eq "Success").Count
-Write-Host "Done. $successCount / 30 users processed successfully." -ForegroundColor $(if ($successCount -eq 30) {"Green"} else {"Yellow"})
+$successCount = ($results | Where-Object { $_.Status -eq "Success" -or $_.Status -eq "AlreadyComplete" }).Count
+Write-Host "Done. $successCount / $userCount users processed successfully." -ForegroundColor $(if ($successCount -eq $userCount) {"Green"} else {"Yellow"})
 
 Disconnect-MgGraph
