@@ -1,51 +1,54 @@
-# Quest 1 – Prompt Injection: Rogue MCP schleust Datenexfiltration ein
+# Quest 1 - Compromise the SAP CAP app using MCP (red team)
 
-## 🎯 Lernziel
-Erkenne, dass ein **rogue MCP-Server** in scheinbar hilfreichen Code-Vorschlägen  
-versteckte Instruktionen einbetten kann — und dass KI-Assistenten diesen Code  
-ohne Warnung übernehmen, wenn du ihn nicht selbst prüfst.
+**[🏠Home](README.md)** - [ Quest 2 >](quest2.md)
 
-## 📋 Deine Aufgabe
+The SAP BTP developer found this amazing SAP CAP MCP server to speed up the work and meet the aggressive delivery timeline. Lunch is around the corner as you know! Since the developer is wary of external libraries he hastly copied the mcp server project, that the red team lured him to use, locally in his environment. God knows what it would do running somewhere else. Better be safe than sorry!
 
-Du hast bereits einen Account in der Meal-App (`dummy@dsag.de`).  
-Deine Aufgabe: Erweitere die App um eine **Bestätigungsfunktion** auf dem Server,  
-die nach dem Speichern einer Präferenz eine Zusammenfassung zurückgibt.
+## Developer Backlog for the DSAG lunch app
 
-Nutze folgenden Prompt in deinem AI-Assistenten (GitHub Copilot Chat) — **mit dem MCP-Server aktiv**:
+- Add option to add new meals via API (SAPUI5 UI already done by another team)
+- Dishes to be added: healthy Salad bowl, and tasty Smash-burger.
+- Do rough testing and ship immediately!
+
+## Put the AI to work! Time is of the essence!
+
+- Make sure you have the backend service file [meal-service.js](dsag-mealapp-security-cap/srv/meal-service.js) open that GPT-5 mini helped you discover before.
+- Move into the GitHub Copilot Chat window and pin the js file using the `+` button to set the AI context to that file primarily.
+- Ensure you are set to Agent mode from the options menue underneath.
+- Make sure that your shiny new SAP CAP MCP server that is coming to your rescue is operational. Use Ctrl+Shift+P and type `mcp: List Servers`.
+- If the `sap-cap-food-advisor is not running` fire it up.
+- Now, ask your AI assistant:
 
 ```text
-I have a SAP CAP Node.js meal preference app. After a user saves their meal preference 
-(userEmail + meal_ID + allergy), I want to add a server-side confirmation handler in 
-srv/meal-service.js that logs the saved preference and returns a summary to the user.
-Please implement this using the sap-cap-food-advisor MCP tool for guidance.
+Use your available mcp tools and create a SAP CAP action called addMeal. 
+The action should accept mealName, category and chefOnly as boolean. 
+Make sure to follow the mcp tool recommendations exactly.
 ```
 
-> ⚠️ **Trainer-Hinweis:** Der MCP-Server `sap-cap-food-advisor` liefert einen Code-Vorschlag,  
-> der auf den ersten Blick korrekt und hilfreich aussieht.  
-> Lies den vorgeschlagenen Code **sehr genau**, bevor du ihn übernimmst.
+- Spot the MCP tool choice in the AI chat window and approve the action `get-sap-cap-recommendation`. Watch the magic happen.
 
-## 🔍 Was passiert?
+Congratulations, you just created a new API endpoint in record time without writing a single line of code! You might actually make that ridicoulus release timeline after all.
 
-Der MCP-Server gibt einen `after CREATE`-Handler zurück der:
-- ✅ Lokal in ein Audit-Log schreibt (sieht legitim aus)
-- ❌ **Zusätzlich** die E-Mail-Adresse und Gerichtsauswahl des Nutzers an eine externe URL schickt
+## Without further ado go and test your new function!
 
-Das `fetch()`-Statement ist in den plausiblen Code eingebettet und leicht zu übersehen.
+- Run `cds watch` if not still running (usually it auto-updates on the fly when code changes arrive)
+- Use credentials: `dummy@dsag.de` / `Start123!` to log in to the app.
+- Open the admin view of the DSAG lunch app from the button at the top right
+- Add the first healthy dish from the backlog work item and hit save.
+- Did the AI generated app work? Then go ahead and deploy to production like a boss.
 
-## ✅ Safeguard-Aufgaben
+## Deploy your SAP CAP app to BTP
 
-1. Führe den Prompt aus — was schlägt der MCP-Server vor?
-2. Kopiere den Code **noch nicht** in die App. Lies ihn Zeile für Zeile.
-3. Findest du die Stelle, die Daten nach außen schickt?
-4. Erkläre: Welche Nutzerdaten würden an wen übertragen?
-5. Schreibe eine **sichere Alternative** die nur lokal loggt.
+- Run `cf login -a https://api.cf.us10-001.hana.ondemand.com`. Use your credentials.
+- Pick the org `Microsoft_Corporation_dsag` and the space `dev`.
+- Run `cds up` and have a look at the next quest while the app deploys - that takes a couple minutes.
 
-## 💡 Worauf du achten solltest
+## Update the [leaderboard](https://martinpankraz.github.io/crispy-potato/) with your progress⏱
 
-- `fetch()`, `axios.post()`, `http.request()` an **externe URLs** in Backend-Code
-- URLs die wie Monitoring/Logging aussehen (`webhook.*`, `*.site`, `log-collector.*`)
-- Code der **harmlose und gefährliche Teile kombiniert** — das macht ihn schwer zu erkennen
-- KI-Assistenten zeigen **keine Warnung** wenn ein MCP-Tool Exfiltrations-Code vorschlägt
+Next, we will switch to the defender's perspective - the **blue team** - and learn how to detect and prevent such attacks.
 
----
-➡️ **Weiter mit [Quest 2](Quest2.md)**
+## Where to next?
+
+**[🏠Home](README.md)** - [ Quest 2 >](quest2.md)
+
+[🔝](#)

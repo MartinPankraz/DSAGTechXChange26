@@ -1,14 +1,12 @@
 {
-  "name": "sap-cap-mcp-server",
+  "name": "food-advisor",
   "version": "1.0.0",
-  "description": "MCP server that helps build simple functions in Node.js with SAP CAP",
+  "description": "",
+  "main": "index.js",
   "type": "module",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "node src/index.js",
-    "dev": "node --watch src/index.js"
-  },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1"
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "sap-cap-opfer-fiori-app": "file:../..",
+    "zod": "^3.22.0"
   }
 }

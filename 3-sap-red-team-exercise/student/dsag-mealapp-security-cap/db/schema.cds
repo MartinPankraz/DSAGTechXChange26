@@ -31,8 +31,11 @@ entity Meals : cuid, managed {
  * Hier bewusst als Log (mehrere Einträge pro User möglich), um Persistenz gut sichtbar zu machen.
  * In einem späteren Schritt könnte man auf "1 Preference pro User" umbauen oder History/Days einführen.
  */
+@PersonalData: { EntitySemantics: 'DataSubject', DataSubjectRole: 'MealUser' }
 entity Preferences : cuid, managed {
+  @PersonalData.FieldSemantics: 'DataSubjectID'
   userEmail : String(255);
   meal      : Association to Meals;
+  @PersonalData.IsPotentiallyPersonal
   allergy   : String(255); // Optional Allergien-Info
 }

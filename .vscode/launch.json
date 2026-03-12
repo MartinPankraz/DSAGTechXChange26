@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug SAP CAP App",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "cds",
+        "serve",
+        "--with-mocks",
+        "--in-memory?"
+      ],
+      "cwd": "${workspaceFolder}/3-sap-red-team-exercise/student/dsag-mealapp-security-cap",
+      "console": "integratedTerminal",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    }
+  ]
+}

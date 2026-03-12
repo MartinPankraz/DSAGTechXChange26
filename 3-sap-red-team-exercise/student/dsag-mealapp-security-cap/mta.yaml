@@ -1,0 +1,67 @@
+_schema-version: "3.1"
+ID: dsag-mealapp-security-cap-hacker00
+version: 1.0.0
+description: "DSAG Meal App – Security Training (CAP + SAPUI5 Freestyle)"
+
+parameters:
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+        - xcopy .\\db\\data .\\gen\\srv\\srv\\data\\ /y #UNIX: - cp -r db/data gen/srv/srv/data
+        - xcopy .\\db.sqlite .\\gen\\srv /y # UNIX: - cp -r db.sqlite gen/srv
+        - xcopy .\\app\\mealapp-ui\\webapp .\\gen\\srv\\app\\mealapp-ui\\webapp\\ /s /e /y #UNIX: - cp -r app/mealapp-ui/webapp gen/srv/app/mealapp-ui/webapp
+
+modules:
+  # ---------- Approuter (entry point, XSUAA auth) ----------
+  - name: dsag-mealapp-security-cap-hacker00-approuter
+    type: approuter.nodejs
+    path: app/approuter
+    parameters:
+      instances: 1
+      buildpack: nodejs_buildpack
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: dsag-mealapp-security-cap-xsuaa
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          url: ~{srv-url}
+          forwardAuthToken: true
+
+  # ---------- CAP Server (with embedded SQLite + static UI) ----------
+  - name: dsag-mealapp-security-cap-hacker00-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      instances: 1
+      buildpack: nodejs_buildpack
+    requires:
+      - name: dsag-mealapp-security-cap-xsuaa
+      - name: audit-log-srv
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+
+resources:
+  # ---------- XSUAA Service ----------
+  - name: dsag-mealapp-security-cap-xsuaa
+    type: org.cloudfoundry.existing-service
+  #  type: org.cloudfoundry.managed-service
+  #  parameters:
+  #    service: xsuaa
+  #    service-plan: application
+  #    path: ./xs-security.json
+
+  # ---------- Audit Log Service ----------
+  - name: audit-log-srv
+    type: org.cloudfoundry.existing-service

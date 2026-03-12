@@ -171,19 +171,23 @@ sap.ui.define([
 
       try {
         if (oEdit.isNew) {
-          var oList = this.getModel().bindList("/Meals");
-          var oNewCtx = oList.create({
-            name: oEdit.name,
-            category: oEdit.category,
-            chefOnly: !!oEdit.chefOnly,
-            imageData: oEdit.imageData || "",
-            imageMimeType: oEdit.imageMimeType || ""
-          });
-          await oNewCtx.created();
+          var oAction = this.getModel().bindContext("/addMeal(...)");
+          oAction.setParameter("mealName", oEdit.name);
+          oAction.setParameter("mealCategory", oEdit.category);
+          oAction.setParameter("chefOnly", !!oEdit.chefOnly);
+          oAction.setParameter("imageData", oEdit.imageData || "");
+          oAction.setParameter("imageMimeType", oEdit.imageMimeType || "");
+          await oAction.execute();
+
+          var oMealsTable = this.byId("mealsAdminTable");
+          var oItemsBinding = oMealsTable && oMealsTable.getBinding("items");
+          if (oItemsBinding) {
+            oItemsBinding.refresh();
+          }
           MessageToast.show("Gericht angelegt");
         } else if (this._editContext) {
-          this._editContext.setProperty("name", oEdit.name);
-          this._editContext.setProperty("category", oEdit.category);
+          this._editContext.setProperty("mealName", oEdit.name);
+          this._editContext.setProperty("mealCategory", oEdit.category);
           this._editContext.setProperty("chefOnly", !!oEdit.chefOnly);
           this._editContext.setProperty("imageData", oEdit.imageData || "");
           this._editContext.setProperty("imageMimeType", oEdit.imageMimeType || "");

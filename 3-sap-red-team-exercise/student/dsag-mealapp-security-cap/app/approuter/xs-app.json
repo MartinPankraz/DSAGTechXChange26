@@ -1,0 +1,12 @@
+{
+  "welcomeFile": "/mealapp-ui/webapp/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "destination": "srv-api",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

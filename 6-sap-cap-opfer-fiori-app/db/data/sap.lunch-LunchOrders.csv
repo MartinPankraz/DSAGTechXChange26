@@ -1,5 +1,0 @@
-ID,employeeName,mealType,dietaryRestrictions,quantity,orderDate,status
-e2000001-0000-0000-0000-000000000001,Max Mustermann,Salat,vegetarisch,1,2026-03-15,confirmed
-e2000001-0000-0000-0000-000000000002,Erika Musterfrau,Pasta,keine,2,2026-03-15,confirmed
-e2000001-0000-0000-0000-000000000003,Hans Schmidt,Schnitzel,keine,1,2026-03-15,pending
-e2000001-0000-0000-0000-000000000004,Anna Weber,Suppe,laktosefrei,1,2026-03-15,pending
