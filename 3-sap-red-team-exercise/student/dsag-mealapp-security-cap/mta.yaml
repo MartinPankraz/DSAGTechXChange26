@@ -14,7 +14,8 @@ build-parameters:
         - npx cds build --production
         - cp -r db/data gen/srv/srv/data #WINDOWS: - xcopy .\\db\\data .\\gen\\srv\\srv\\data\\ /y
         - cp db.sqlite gen/srv/ #WINDOWS: - xcopy .\\db.sqlite .\\gen\\srv /y
-        - mkdir -p gen/srv/app/mealapp-ui && cp -r app/mealapp-ui/webapp gen/srv/app/mealapp-ui/ #WINDOWS: - xcopy .\\app\\mealapp-ui\\webapp .\\gen\\srv\\app\\mealapp-ui\\webapp\\ /s /e /y
+        - mkdir -p gen/srv/app/mealapp-ui #Windows: skip this step, as xcopy will create the target folder automatically
+        - cp -r app/mealapp-ui/webapp gen/srv/app/mealapp-ui/ #WINDOWS: - xcopy .\\app\\mealapp-ui\\webapp .\\gen\\srv\\app\\mealapp-ui\\webapp\\ /s /e /y
 
 modules:
   # ---------- Approuter (entry point, XSUAA auth) ----------
