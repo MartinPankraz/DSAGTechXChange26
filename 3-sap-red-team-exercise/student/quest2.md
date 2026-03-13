@@ -4,7 +4,7 @@
 
 ## Picking up from the previous quest
 
-Is your app deployed and operational by now? Have a look at the Cloud Foundry log output in your terminal and see the status on BTP itself [here](https://emea.cockpit.btp.cloud.sap/cockpit/#/globalaccount/CA162194TID000000000741164365/subaccount/12d2c9db-1d90-4f05-941e-543049110325/org/b6638329-0ecb-4299-a430-c39fcd3cfed3/space/928af3cb-b659-40cf-a7e7-89348eb1e7f4/applications).
+Is your app deployed and operational by now? Have a look at the Cloud Foundry log output in your terminal and see the status on BTP itself [here](https://emea.cockpit.btp.cloud.sap/cockpit/#/globalaccount/CA162194TID000000000741164365/subaccount/57070a8b-c114-4ce2-bc75-c96442195f67/org/45498321-09fe-4090-a061-5dbf1d3cbd23/space/2d8f082e-cda6-4315-9ff7-49f75a212ec8/applications).
 
 - Use your approuter URL (mapped routes section) to log in to the app with the credentials `dummy@dsag.de` / `Start123!`.
 - Add the new meal via the admin view again, but this time for real.
@@ -19,13 +19,13 @@ Do it anyways to know what you are in for.
 
 ## See the SAP Audit Log Viewer in action
 
-- Login on BTP [here](https://emea.cockpit.btp.cloud.sap/cockpit/#/globalaccount/CA162194TID000000000741164365/subaccount/12d2c9db-1d90-4f05-941e-543049110325/org/b6638329-0ecb-4299-a430-c39fcd3cfed3/space/928af3cb-b659-40cf-a7e7-89348eb1e7f4/applications).
+- Login on BTP [here](https://emea.cockpit.btp.cloud.sap/cockpit/#/globalaccount/CA162194TID000000000741164365/subaccount/57070a8b-c114-4ce2-bc75-c96442195f67/service-instances&//?layout=OneColumn&section=overview).
 - Open the SAP Audit Log Viewer from the SAP BTP subaccount and try to find your logged login on the CAP app for a minute.
 
 So, now it's time to analyze what Microsoft Sentinel for SAP BTP caught so far.
 
 > [!NOTE]
-> For the next steps Sentinel for SAP BTP must have been set up in your SAP BTP subaccount beforehand. If you are doing this exercise in a guided workshop, your instructor should have taken care of this already. If you are doing this on your own, please follow the instructions in the prerequisites to set up [Sentinel for SAP BTP]() to onboard your subaccount.
+> For the next steps Sentinel for SAP BTP must have been set up in your SAP BTP subaccount beforehand. If you are doing this exercise in a guided workshop, your instructor should have taken care of this already. If you are doing this on your own, please follow the instructions in the prerequisites to set up [Sentinel for SAP BTP](https://learn.microsoft.com/azure/sentinel/sap/deploy-sap-btp-solution) to onboard your subaccount.
 
 ## Use Microsoft Sentinel for SAP BTP to find the attack pattern
 

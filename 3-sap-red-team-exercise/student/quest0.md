@@ -25,6 +25,9 @@ If you recall the pre-requisites mentioned in the [README](README.md#Lab-prerequ
 
 - GitHub account. If you don't have one, create a free account [here](https://github.com/signup).
 
+> [!WARNING]
+> GitHub Copilot free tier has limits (50 messages + 2000 chat completions)! See the latest info [here](https://docs.github.com/en/copilot/concepts/billing/individual-plans#github-copilot-free). Use your messages wisely in the quests.
+
 Now, start your engines...
 
 ## GitHub Codespaces Setup

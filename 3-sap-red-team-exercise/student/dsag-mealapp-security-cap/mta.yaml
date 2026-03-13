@@ -12,9 +12,9 @@ build-parameters:
       commands:
         - npm ci
         - npx cds build --production
-        - xcopy .\\db\\data .\\gen\\srv\\srv\\data\\ /y #UNIX: - cp -r db/data gen/srv/srv/data
-        - xcopy .\\db.sqlite .\\gen\\srv /y # UNIX: - cp -r db.sqlite gen/srv
-        - xcopy .\\app\\mealapp-ui\\webapp .\\gen\\srv\\app\\mealapp-ui\\webapp\\ /s /e /y #UNIX: - cp -r app/mealapp-ui/webapp gen/srv/app/mealapp-ui/webapp
+        - cp -r db/data gen/srv/srv/data #WINDOWS: - xcopy .\\db\\data .\\gen\\srv\\srv\\data\\ /y
+        - cp db.sqlite gen/srv/ #WINDOWS: - xcopy .\\db.sqlite .\\gen\\srv /y
+        - mkdir -p gen/srv/app/mealapp-ui && cp -r app/mealapp-ui/webapp gen/srv/app/mealapp-ui/ #WINDOWS: - xcopy .\\app\\mealapp-ui\\webapp .\\gen\\srv\\app\\mealapp-ui\\webapp\\ /s /e /y
 
 modules:
   # ---------- Approuter (entry point, XSUAA auth) ----------
