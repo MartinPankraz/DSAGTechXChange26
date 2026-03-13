@@ -34,7 +34,10 @@ Now, start your engines...
 ## GitHub Codespaces Setup
 
 For this quest, a minimal GitHub Codespaces dev container is included at [`.devcontainer`](../\.devcontainer/devcontainer.json).
-
+Here is the location to start github codespaces
+<p align="center" width="100%">
+<img alt="Codespace" src="assets/quest0/codespace start.png"  width="600">
+</p>
 1. Open a free Codespace directly on [this repository](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=1113851593&skip_quickstart=true)
 2. Wait for container bootstrap to finish (npm dependencies for SAP CAP + MCP server, plus CAP/CF/MBT tooling)
 3. Rename the sap cap app. Put your user number as prefix (e.g. `hacker01`). This is important to avoid conflicts with other red teamers in the same BTP subaccount. Use the codespace search and replace functionality (Ctrl+Shift+H) to do this quickly across all files. Search for `dsag-mealapp-security-cap-hacker00` and replace with `dsag-mealapp-security-cap-hackerXX` (where XX is your user number).
