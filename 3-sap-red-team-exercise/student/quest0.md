@@ -36,7 +36,7 @@ Now, start your engines...
 For this quest, a minimal GitHub Codespaces dev container is included at [`.devcontainer`](../\.devcontainer/devcontainer.json).
 Here is the location to start github codespaces
 <p align="center" width="100%">
-<img alt="Codespace" src="assets/quest0/codespace start.png"  width="600">
+<img alt="Codespace" src="assets/quest0/codespace.png"  width="600">
 </p>
 1. Open a free Codespace directly on [this repository](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=1113851593&skip_quickstart=true)
 2. Wait for container bootstrap to finish (npm dependencies for SAP CAP + MCP server, plus CAP/CF/MBT tooling)
