@@ -27,6 +27,7 @@ If you recall the pre-requisites mentioned in the [README](README.md#Lab-prerequ
 
 > [!WARNING]
 > GitHub Copilot free tier has limits (50 messages + 2000 chat completions)! See the latest info [here](https://docs.github.com/en/copilot/concepts/billing/individual-plans#github-copilot-free). Use your messages wisely in the quests.
+> If there is an urgent need for extra credits, you can start a 30-Day free trial on Copilot Pro
 
 Now, start your engines...
 
