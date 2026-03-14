@@ -10,8 +10,9 @@ In this section we will make sure that you have access to all the required syste
 We configured an environment, ready to use for you. However, due to security restrictions you have to setup Multifactor Authentication (MFA) with your user first. 
 
 ## 1.1. Prepare the User
-### 1.1.1. Open Outlook: https://outlook.office.com
-Test
+### 1.1.1. Open Outlook: 
+Just to ensure that user-credentials are working and to setup MFA, open https://outlook.office.com
+
 > [!NOTE]
 > You might want to start a "New InPrivate Window" in your browser
 
