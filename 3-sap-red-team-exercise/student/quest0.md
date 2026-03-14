@@ -27,6 +27,7 @@ If you recall the pre-requisites mentioned in the [README](README.md#Lab-prerequ
 
 > [!WARNING]
 > GitHub Copilot free tier has limits (50 messages + 2000 chat completions)! See the latest info [here](https://docs.github.com/en/copilot/concepts/billing/individual-plans#github-copilot-free). Use your messages wisely in the quests.
+
 > If there is an urgent need for extra credits, you can start a 30-Day free trial on Copilot Pro
 
 Now, start your engines...
@@ -39,15 +40,33 @@ Here is the location to start github codespaces
 <img alt="Codespace" src="assets/quest0/codespace.png"  width="600">
 </p>
 1. Open a free Codespace directly on [this repository](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=1113851593&skip_quickstart=true)
+<p>
 2. Wait for container bootstrap to finish (npm dependencies for SAP CAP + MCP server, plus CAP/CF/MBT tooling)
-3. Rename the sap cap app. Put your user number as prefix (e.g. `hacker01`). This is important to avoid conflicts with other red teamers in the same BTP subaccount. Use the codespace search and replace functionality (Ctrl+Shift+H) to do this quickly across all files. Search for `dsag-mealapp-security-cap-hacker00` and replace with `dsag-mealapp-security-cap-hackerXX` (where XX is your user number).
-
+</p>
+<p>
+3. Rename the sap cap app. 
+<p>
 <p align="center" width="100%">
 <img alt="PackageJson" src="assets/quest0/packageJson.png"  width="600">
 </p>
+Put your user number as prefix (e.g. `hacker01`). This is important to avoid conflicts with other red teamers in the same BTP subaccount. Use the codespace search and replace functionality (Ctrl+Shift+H) to do this quickly <b>across all files</b>. 
+Search for `dsag-mealapp-security-cap-hacker00` and replace with `dsag-mealapp-security-cap-hackerXX` (where XX is your user number).
+<p align="center" width="100%">
+<img alt="Replace" src="assets/quest0/Replace.png"  width="600">
+</p>
+
 4. See the GitHub Copilot flyout to the right of your code editor. If you don't see it, open the command palette (Ctrl+Shift+P) and search for ">GitHub Copilot:" to open it manually.
+<p align="center" width="100%">
+<img alt="Copilot" src="assets/quest0/githubCopilot.png"  width="600">
+</p>
+5. 
     - Pick AI Model `GPT-5 mini`. This is very important! Otherwise, you won't get the same experience as described in the quests.
+<p align="center" width="100%">
+<img alt="Git5Mini" src="assets/quest0/git5Mini.png"  width="600">
+</p>
+<p>
     - Meet your AI assistant and ask it: "show me in which javascript file the first quest starts." Keep your urge to play more at bay and continue for now. We will get there ;-)
+</p>    
 5. Test the provided SAP CAP app using below commands in the terminal:
 
 ```bash
