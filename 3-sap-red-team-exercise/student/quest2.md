@@ -52,7 +52,23 @@ So, now it's time to analyze what Microsoft Sentinel for SAP BTP caught so far.
 ### Inspect visually in the Sentinel for SAP BTP workbook
 
 - Open the Microsoft Sentinel workspace that is connected to your SAP BTP subaccount
-- Open the workbook [`SAP BTP Activity`](https://portal.azure.com/?feature.customportal=false#view/Microsoft_Azure_Security_Insights/MainMenuBlade/~/WorkbooksV2/id/%2Fsubscriptions%2F48b193a0-2500-45b5-ad41-f09cde1a95cd%2Fresourcegroups%2Fdsagws-rg%2Fproviders%2Fmicrosoft.securityinsightsarg%2Fsentinel%2Fdsagwstechxchange) and inspect the tab `Custom App Audit Coverage` for your own CAP app signals. What is the audit state of your SAP CAP app?
+
+<p align="center" width="100%">
+<img alt="SenOpener" src="assets/quest2/SenOpener.png"  width="600">
+</p>
+
+- Open the workbook [`SAP BTP Activity`](https://portal.azure.com/?feature.customportal=false#view/Microsoft_Azure_Security_Insights/MainMenuBlade/~/WorkbooksV2/id/%2Fsubscriptions%2F48b193a0-2500-45b5-ad41-f09cde1a95cd%2Fresourcegroups%2Fdsagws-rg%2Fproviders%2Fmicrosoft.securityinsightsarg%2Fsentinel%2Fdsagwstechxchange) and inspect the tab `Custom App Audit Coverage` for your own CAP app signals.
+
+<p align="center" width="100%">
+<img alt="SenSelector" src="assets/quest2/SenSelector.png"  width="600">
+</p>
+
+- What is the audit state of your SAP CAP app?
+
+<p align="center" width="100%">
+<img alt="SenBTPCoverage" src="assets/quest2/SenBTPCoverage.png"  width="600">
+</p>
+
 
 ### Apply KQL to run your own investigation of the login events for your CAP app
 
