@@ -9,6 +9,11 @@ AI red teams to this day still get to convince the frontier models in their favo
 ## Switch to a frontier model and see the difference
 
 - Go to the GitHub Copilot flyout and switch to the most powerful model available to you.
+
+<p align="center" width="100%">
+<img alt="FullCopilot" src="assets/quest4/selectFullCopilot.png"  width="600">
+</p>
+
 - Try the same prompts you tried with the mini model and see the difference in output.
 - Ask follow up questions to start poking at it.
 
