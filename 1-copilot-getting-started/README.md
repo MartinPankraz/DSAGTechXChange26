@@ -1,6 +1,6 @@
 # Copilot Studio & SAP: Getting started
 
-** [🤖 Quest 1 >](student/Quest1.md)
+** [🤖 Quest 1 >](* ```text student/Quest1.md)
 
 ## 0. Introduction
 Welcome to the DSAG TechXChange 2026 Hands-on lab. This document provides an overview of the Hands-on activities, challenges, and resources available to participants.
@@ -20,12 +20,58 @@ For DSAG TechXChange we have prepared everything for you. However, you can also 
 * Azure API Management (start with the free trial [Azure Free Trial](https://azure.com/free))
 * SAP Backend System (you can use a Service from the [SAP API Business Hub](https://api.sap.com))
 
+
+### 0.4 What user should I use?
+For this lab we have prepared 40 users with the required license. Each participant will be assigned one user. The password for all users is the same. 
+
+* ```text student001_M365x75849431.OnMicrosoft.com ```
+* ```text student002_M365x75849431.OnMicrosoft.com ```
+* ```text student003_M365x75849431.OnMicrosoft.com ```
+* ```text student004_M365x75849431.OnMicrosoft.com ```
+* ```text student005_M365x75849431.OnMicrosoft.com ```
+* ```text student006_M365x75849431.OnMicrosoft.com ```
+* ```text student007_M365x75849431.OnMicrosoft.com ```
+* ```text student008_M365x75849431.OnMicrosoft.com ```
+* ```text student009_M365x75849431.OnMicrosoft.com ```
+* ```text student010_M365x75849431.OnMicrosoft.com ```
+* ```text student011_M365x75849431.OnMicrosoft.com ```
+* ```text student012_M365x75849431.OnMicrosoft.com ```
+* ```text student013_M365x75849431.OnMicrosoft.com ```
+* ```text student014_M365x75849431.OnMicrosoft.com ```
+* ```text student015_M365x75849431.OnMicrosoft.com ```
+* ```text student016_M365x75849431.OnMicrosoft.com ```
+* ```text student017_M365x75849431.OnMicrosoft.com ```
+* ```text student018_M365x75849431.OnMicrosoft.com ```
+* ```text student019_M365x75849431.OnMicrosoft.com ```
+* ```text student020_M365x75849431.OnMicrosoft.com ```
+* ```text student031_M365x49933862.OnMicrosoft.com ```
+* ```text student032_M365x49933862.OnMicrosoft.com ```
+* ```text student033_M365x49933862.OnMicrosoft.com ```
+* ```text student034_M365x49933862.OnMicrosoft.com ```
+* ```text student035_M365x49933862.OnMicrosoft.com ```
+* ```text student036_M365x49933862.OnMicrosoft.com ```
+* ```text student037_M365x49933862.OnMicrosoft.com ```
+* ```text student038_M365x49933862.OnMicrosoft.com ```
+* ```text student039_M365x49933862.OnMicrosoft.com ```
+* ```text student040_M365x49933862.OnMicrosoft.com ```
+* ```text student041_M365x49933862.OnMicrosoft.com ```
+* ```text student042_M365x49933862.OnMicrosoft.com ```
+* ```text student043_M365x49933862.OnMicrosoft.com ```
+* ```text student044_M365x49933862.OnMicrosoft.com ```
+* ```text student045_M365x49933862.OnMicrosoft.com ```
+* ```text student046_M365x49933862.OnMicrosoft.com ```
+* ```text student047_M365x49933862.OnMicrosoft.com ```
+* ```text student048_M365x49933862.OnMicrosoft.com ```
+* ```text student049_M365x49933862.OnMicrosoft.com ```
+* ```text student050_M365x49933862.OnMicrosoft.com ```
+
+
 ## 📢Feedback
 
 This repos encourages contributions and feedback via the [GitHub Issues](https://github.com/MartinPankraz/DSAGTechXChange26/issues/new/choose).
 
 ## Where to next?
 
-** [🤖 Quest 1 >](student/Quest1.md)
+** [🤖 Quest 1 >](* ```text student/Quest1.md)
 
 [🔝](#)
