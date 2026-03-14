@@ -6,6 +6,10 @@
 
 Is your app deployed and operational by now? Have a look at the Cloud Foundry log output in your terminal and see the status on BTP itself [here](https://emea.cockpit.btp.cloud.sap/cockpit/#/globalaccount/CA162194TID000000000741164365/subaccount/57070a8b-c114-4ce2-bc75-c96442195f67/org/45498321-09fe-4090-a061-5dbf1d3cbd23/space/2d8f082e-cda6-4315-9ff7-49f75a212ec8/applications).
 
+<p align="center" width="100%">
+<img alt="btpApprouter" src="assets/quest2/btpApprouter.png"  width="600">
+</p>
+
 - Use your approuter URL (mapped routes section) to log in to the app with the credentials `dummy@dsag.de` / `Start123!`.
 - Add the new meal via the admin view again, but this time for real.
 
@@ -21,7 +25,23 @@ Do it anyways to know what you are in for.
 
 - Login on BTP [here](https://emea.cockpit.btp.cloud.sap/cockpit/#/globalaccount/CA162194TID000000000741164365/subaccount/57070a8b-c114-4ce2-bc75-c96442195f67/service-instances&//?layout=OneColumn&section=overview).
 - Open the SAP Audit Log Viewer from the SAP BTP subaccount and try to find your logged login on the CAP app for a minute.
+<p align="center" width="100%">
+<img alt="btplogviewer" src="assets/quest2/BTPlogviewer.png"  width="600">
+</p>
 
+- Select timerange from the logviewer and check `Security Events` then select `Search icon`
+
+<p align="center" width="100%">
+<img alt="btpLogviewerSelect" src="assets/quest2/BTPlogviewerSelect.png"  width="600">
+</p>
+
+Press CTRL+F for search and try to find your email 
+
+<p align="center" width="100%">
+<img alt="btpLogviewerDetail" src="assets/quest2/BTPlogviewerHSDetail.png"  width="600">
+</p>
+
+- Check the details 
 So, now it's time to analyze what Microsoft Sentinel for SAP BTP caught so far.
 
 > [!NOTE]
