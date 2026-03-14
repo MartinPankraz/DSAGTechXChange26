@@ -11,15 +11,26 @@ We configured an environment, ready to use for you. However, due to security res
 
 ## 1.1. Prepare the User
 ### 1.1.1. Open Outlook: https://outlook.office.com
+Test
+> [!NOTE]
+> You might want to start a "New InPrivate Window" in your browser
+
+> [!NOTE]
+> Login with a user like *student0XX@M365x75849431.OnMicrosoft.com*
+
 ![Open Outlook](../images/quest1/step01.png)
 
 ### 1.1.2. Enter the provided password:
 ![Enter the password](../images/quest1/step02.png)
  
 ### 1.1.3. Setup MFA
+Click on **Next**
+
 ![Setup MFA](../images/quest1/step03.png)
  
 ### 1.1.4. If required, install Authenticator on your mobile device
+Click on **Next**
+
 ![Setup Authenticator](../images/quest1/step04.png)
  
 ### 1.1.5. Click on Next
@@ -27,6 +38,14 @@ We configured an environment, ready to use for you. However, due to security res
  
 ### 1.1.6. Scan the QR Code with your Authenticator App
 ![Scan QR](../images/quest1/step06.png)
+
+Open the Authenticator app on your phone and click on the "QR" code symbol on the bottom right
+![Scan QR on Authenticator](../images/quest1/step06A.png)
+
+
+Capture the QR Code with your phone and click on **Next** in the Browser
+![Scan QR on Authenticator](../images/quest1/step06B.png)
+
  
 ### 1.1.7. You should get a confirmation on your mobile device
 ![Confirm the number](../images/quest1/step07.png)
@@ -40,6 +59,9 @@ We configured an environment, ready to use for you. However, due to security res
 ### 1.1.10. If required, click on Continue
 ![Continue](../images/quest1/step10.png)
  
+
+ You should now have access to your users Outlook and MFA is setup and configured. 
+
 
 # Where to next?
 
