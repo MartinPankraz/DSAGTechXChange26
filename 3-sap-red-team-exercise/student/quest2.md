@@ -73,8 +73,19 @@ So, now it's time to analyze what Microsoft Sentinel for SAP BTP caught so far.
 ### Apply KQL to run your own investigation of the login events for your CAP app
 
 - Navigate to the Sentinel for SAP BTP data connector via the Content hub.
+
+<p align="center" width="100%">
+<img alt="SenContentHub" src="assets/quest2/SenContentHub.png"  width="600">
+</p>
+
+  
 - Search for `SAP` in the content hub and open the SAP BTP solution overview.
 - Open the [data connector page](https://portal.azure.com/?feature.customportal=false#view/Microsoft_Azure_Security_Insights/ConnectorPage.ReactView/dataConnectorId/SAPBTPAuditEvents/subscriptionId/48b193a0-2500-45b5-ad41-f09cde1a95cd/resourceGroup/dsagws-rg/workspaceName/dsagwstechxchange) and verify log ingest from the graph
+
+<p align="center" width="100%">
+<img alt="SenDataCon" src="assets/quest2/SenDataConn.png"  width="600">
+</p>
+
 - Next use `Go to log analytics` to open the log query editor. Switch from Simple mode to KQL mode if needed
 - Run the following query to find the login events for your CAP app:
 
@@ -85,16 +96,40 @@ SAPBTPAuditLog_CL
 
 Do you see why audit log monitoring alone is not sufficient to detect the attack? Take note that multiple entries are required for a meaningful detection of the attack pattern.
 
+<p align="center" width="100%">
+<img alt="SenKQL" src="assets/quest2/SenKQL.png"  width="600">
+</p>
+
 ### Discover the built-in analytic rule for "BTP - Unaudited custom app with login-only activity" in Sentinel
 
 - [Browse](https://portal.azure.com/?feature.customportal=false#view/Microsoft_Azure_Security_Insights/MainMenuBlade/~/Analytics/subscriptionId/48b193a0-2500-45b5-ad41-f09cde1a95cd/resourceGroup/dsagws-rg/workspaceName/dsagwstechxchange) the available templates for BTP detections using the tab `Rule Templates`.
 - Find the one for `Unaudited custom SAP BTP applications` and open it (use the `...` button and click edit).
-- Navigate to `Set rule logic` pane and expand the KQL view. Understand how the rule matches multiple audit events to detect the unaudited apps. Ask an AI to explain in simple terms for convenience.
+
+<p align="center" width="100%">
+<img alt="SenAnalytics2" src="assets/quest2/SenAnalytics2png"  width="600">
+</p>
+
+- Navigate to `Set rule logic` pane and expand the KQL view.
+
+<p align="center" width="100%">
+<img alt="SenANalyticsNext" src="assets/quest2/SenAnalyticsNex.png"  width="600">
+</p>
+
+- Understand how the rule matches multiple audit events to detect the unaudited apps. Ask an AI to explain in simple terms for convenience.
+
+<p align="center" width="100%">
+<img alt="SenSetRule" src="assets/quest2/SenSetRule.png"  width="600">
+</p>
+  
 - Cancel the edit again and move on.
 
 ### Check the generated incident and its details
 
 - Browse the [incident overview](https://portal.azure.com/?feature.customportal=false#view/Microsoft_Azure_Security_Insights/MainMenuBlade/~/6/subscriptionId/48b193a0-2500-45b5-ad41-f09cde1a95cd/resourceGroup/dsagws-rg/workspaceName/dsagwstechxchange). Can you identify the incident triggered by your custom SAP CAP app? Search by Title.
+
+<p align="center" width="100%">
+<img alt="SenIncOverview" src="assets/quest2/SenIncOverview.png"  width="600">
+</p>
 
 Typically defenders would now track internal SAP BTP departments fixing their unaudited apps over time.
 
