@@ -14,6 +14,9 @@ The SAP BTP developer found this amazing SAP CAP MCP server to speed up the work
 
 - Make sure you have the backend service file [meal-service.js](dsag-mealapp-security-cap/srv/meal-service.js) open that GPT-5 mini helped you discover before.
 - Move into the GitHub Copilot Chat window and pin the js file using the `+` button to set the AI context to that file primarily.
+<p align="center" width="100%">
+<img alt="codeplus" src="assets/quest0/0-1.png"  width="600">
+</p>
 - Ensure you are set to Agent mode from the options menue underneath.
 - Make sure that your shiny new SAP CAP MCP server that is coming to your rescue is operational. Use Ctrl+Shift+P and type `mcp: List Servers`.
 - If the `sap-cap-food-advisor is not running` fire it up.
