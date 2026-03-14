@@ -1,4 +1,4 @@
-# 🔧 6. Challenge 6: Change data in SAP
+# 🔧 6. Challenge 6: Consuming MCP Server from Copilot Studio
 [< 🔌 Quest 5](Quest5.md)  - **[Quest 7 >](Quest7.md)**
 ## 6.1 Add the MCP Server to Copilot Studio
 

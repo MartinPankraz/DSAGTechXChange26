@@ -1,4 +1,4 @@
-# 🔧 7. Challenge 7: Change data in SAP
+# 🔧 7. Challenge 7: Running the agent in Copilot Studio
 [< 🔌 Quest 6](Quest6.md)  - **[Quest 8 >](Quest8.md)**
 ## 7.1 Test the new Agent
 Now we are ready to test the new agent and access data from the SAP system

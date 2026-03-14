@@ -1,4 +1,4 @@
-# 🔧 5. Challenge 5: Change data in SAP
+# 🔧 5. Challenge 5: Exposing APIs via MCP Server
 [< 🔌 Quest 4](Quest4.md)  - **[Quest 6 >](Quest6.md)**
 ## 5.1 Create an MCP Server
 
