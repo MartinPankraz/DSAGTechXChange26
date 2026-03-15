@@ -106,13 +106,13 @@ Do you see why audit log monitoring alone is not sufficient to detect the attack
 - Find the one for `Unaudited custom SAP BTP applications` and open it (use the `...` button and click edit).
 
 <p align="center" width="100%">
-<img alt="SenAnalytics2" src="assets/quest2/SenAnalytics2png"  width="600">
+<img alt="SenAnalytics2" src="assets/quest2/SenAnalytics2.png"  width="600">
 </p>
 
 - Navigate to `Set rule logic` pane and expand the KQL view.
 
 <p align="center" width="100%">
-<img alt="SenANalyticsNext" src="assets/quest2/SenAnalyticsNex.png"  width="600">
+<img alt="SenANalyticsNext" src="assets/quest2/SenAnalyticsNext.png"  width="600">
 </p>
 
 - Understand how the rule matches multiple audit events to detect the unaudited apps. Ask an AI to explain in simple terms for convenience.
