@@ -7,13 +7,11 @@ Microsoft Business Process Solutions does not yet support mirored SAP databases 
 
 ![Navigate to workspace](../images/quest3/200-navigate-to-workspace.png)
 
-## 5.2. Locate bronze-to-silver orchestration pipeline
+## 5.2. Adjust bronze-to-silver orchestration pipeline
 
 In your worksapce, locate the orchestration pipeline for data processing from silver to gold layer: ```bps_om_b2s_orchestration_pipeline_***```
 
 ![](../images/quest5/370-adjust-orchestration-pipe.png)
-
-## 5.3. Adjust bronze layer in orchestration pipeline
 
 Open the pipeline and replace the default value of parameter ```Mirror_Database_Name``` with ```sap-mirror-via-datasphere```.
 
@@ -21,7 +19,7 @@ Open the pipeline and replace the default value of parameter ```Mirror_Database_
 
 Don't foget tp save the pipeline!
 
-## 5.4. Adjust bronze-to-silver pipeline for dimensions
+## 5.3. Adjust bronze-to-silver pipeline for dimensions
 
 Locate and open pipeline ```bps_om_b2s_dim_processing_***``` which orchestrates processing of dimension and text data from bronze to silver layer. Click on Lookup activity ```Get Dimension Tables``` and switch to the "Settings" tab.
 Double click on the ***Query*** property.
@@ -36,7 +34,7 @@ Replace the given SQL code with the following snippet:
 
 Don't forget to save the pipeline!
 
-## 5.5. Adjust bronze-to-silver pipeline for facts
+## 5.4. Adjust bronze-to-silver pipeline for facts
 
 Apply the same change as in 5.4 to pipeline ```bps_om_b2s_fact_processing_***```.
 
