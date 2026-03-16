@@ -4,19 +4,19 @@
 Microsoft Business Process Solutions uses Python notebooks for data transformations. In this challenge, we will make the necessary adjustments to process fact data.  
 The adjustments are the same as for dimensions - except that language handling is not necessary.
 
-## 7.1. Navigate to the workspace and locate notebook ```bps_opm_nb_b2s_dim_***```
+## 7.1. Navigate to the workspace and locate notebook ```bps_opm_nb_b2s_fact_***```
 
 You don't need help for this anymore ;)
 
 ## 7.2. Adjust bronze-to-silver notebook for dimensions
 
-Notebook ```bps_opm_nb_b2s_dim_*** ``` handles transformation of dimenension and text data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
+Notebook ```bps_opm_nb_b2s_fact_*** ``` handles transformation of dimenension and text data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
 
 ### 7.2.1. Adjust function ```apply_data_types```
 
 SAP Datasphere formats date columns in a slightly different way than the supported Open Mirroring solutions do. Let's adjust the code to take care of that:
 
-Open notebook ```bps_opm_nb_b2s_dim_*** ``` and find function ```apply_data_types```. After line 28, insert to following code snippet
+Open notebook ```bps_opm_nb_b2s_fact_*** ``` and find function ```apply_data_types```. After line 28, insert to following code snippet
 
 ```python
             if field['dataType'] == 'DATS':
