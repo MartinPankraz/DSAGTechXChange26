@@ -22,7 +22,7 @@ Navigate back to your workspace
 
 ## 3.4.
 
-![](../images/quest3/Shortcut-launch.png)
+![](../images/quest3/230-Shortcut-launch.png)
 
 ## 3.5.
 
