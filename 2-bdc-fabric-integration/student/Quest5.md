@@ -17,7 +17,7 @@ Open the pipeline and replace the default value of parameter ```Mirror_Database_
 
 ![](../images/quest5/380-b2s-pipe-adjust-mirror-db.png)
 
-Don't foget tp save the pipeline!
+Don't forget to save the pipeline!
 
 ## 5.3. Adjust bronze-to-silver pipeline for dimensions
 
