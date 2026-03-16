@@ -4,23 +4,13 @@
 
 Microsoft Business Process Solutions does not yet support mirored SAP databases as a source out of the box.However, with a handful of adjustments, we can make it work. In this chapter, we will adjust the standard pipelines and notebooks provided by Business Process Solutions accordingly.
 
-## 5.1. Navigate to the workspace
+## 6.1. Navigate to the workspace
 
-![Navigate to workspace](../images/quest3/200-navigate-to-workspace.png)
-
-## 5.2. Locate bronze-to-silver orchestration pipeline
-
-Locate the orchestration pipeline for data processing from silver to gold layer: bps_orchestration_pipeline_full_processing_***
-
-![](../images/quest5/.png)
-
-## 5.3. Adjust bronze layer in orchestration pipeline
-
-## 5.4. Adjust bronze layer notebook for dimensions
+## 6.2. Adjust bronze-to-silver notebook for dimensions
 
 Notebook ```bps_opm_nb_b2s_dim_*** ``` (where *** is a random alphanumeric identifier) handles transformation of dimenension and text data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
 
-### 5.4.1 Adjust function ```apply_data_types```
+### 6.2.1. Adjust function ```apply_data_types```
 
 SAP Datasphere formats date columns in a slightly different way than the supported Open Mirroring solutions do. Let's adjust the code to take care of that:
 
@@ -68,7 +58,7 @@ def apply_data_types(
             input_df = input_df.withColumn(column_name, input_df[column_name].cast(data_type))
     return input_df
 ```
-### 5.4.2 Convert column names to upper case
+### 6.2.2. Convert column names to upper case
 
 SAP Datasphere generates column names in camel case, while higer layers in Business Process Solutions require them in upper case. Let's fix this!
 Sill in notebook ```bps_opm_nb_b2s_dim_*** ``` , search for ```fix dataframe data types```
@@ -91,7 +81,7 @@ You should now see the following code: (#3)
 
 ![](../images/quest5/.png)
 
-### 5.4.3 Fix Langueage codes
+### 6.2.3. Fix Langueage codes
 
 SAP Datasphere provides language codes in ISO format, while Business Process Solutions currently uses the SAP internal representation. Let's fix this!
 
@@ -157,36 +147,6 @@ if 'LANGUAGE' in bronze_spark_df.columns:
 ```
 
 ![](../images/quest5/.png)
-
-## 5.5.
-
-Select the "Account Payables" insight.
-
-![](../images/quest5/.png)
-
-## 5.6.
-
-![](../images/quest5/.png)
-
-## 5.7.
-
-![](../images/quest5/.png)
-
-
-
-
-## 4.8.
-
-![](../images/quest4/340-SAP-mirror-creating.png)
-
-## 4.9.
-
-![](../images/quest4/350-SAP-mirror-replicating.png)
-
-## 4.10.
-
-![](../images/quest4/360-SAP-mirror-done.png)
-
 
 # Where to next?
 
