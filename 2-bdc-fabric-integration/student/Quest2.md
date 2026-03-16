@@ -39,6 +39,8 @@ Select the "Account Payables" insight.
 
 ## 2.8.
 
+connection id ```b4ec5ea8-ae2b-4922-b3b9-5608a4993f61```
+
 ![](../images/quest2/160-BPS-config-Open-Mirroring-config.png)
 
 ## 2.9.
