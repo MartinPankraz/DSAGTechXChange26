@@ -7,7 +7,7 @@ Let's log on and do the first steps!
 
 ## 1.1. Launch Microsoft Fabric:
 Click on (https://app.powerbi.com) to lauch Microsoft Fabric
-![Launch Fabric](../images/quest1/step.png)
+![Launch Fabric]
 
 ## 1.2. You have been assigned a user name ranging from "DSAGFabric1@fabricconf.onmicrosoft.com" to "DSAGFabric15@fabricconf.onmicrosoft.com" depending on your seat/group number. Enter the user name.
 ![Enter the user name](../images/quest1/10-log on.png)
