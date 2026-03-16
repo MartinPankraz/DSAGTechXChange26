@@ -1,4 +1,4 @@
-# 🔌 4. Challenge 4: Create Shortcut to SAP data
+# 🔌 4. Challenge 4: Mirror SAP data into Fabric
 [< 🤖 Quest 3](Quest3.md) - **[🔧 Quest 5 >](Quest5.md)**
 
 In Challenge 4, we will mirror the SAP Account Payables data into Microsoft Fabric...
@@ -50,6 +50,6 @@ Select the "Account Payables" insight.
 
 # Where to next?
 
-**[🤖 Quest 2](Quest2.md) - [🔧 Quest 4 >](Quest4.md)
+**[🤖 Quest 3](Quest3.md) - [🔧 Quest 5 >](Quest5.md)
 
 [🔝](#)
