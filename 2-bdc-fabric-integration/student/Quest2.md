@@ -35,7 +35,7 @@ Select the "Account Payables" insight.
 
 ## 2.7.
 
-![](../images/quest2/160-BPC-config-select-Open-Mirroring.png)
+![](../images/quest2/160-BPC-config-select-open-mirroring(2).png)
 
 ## 2.8.
 
