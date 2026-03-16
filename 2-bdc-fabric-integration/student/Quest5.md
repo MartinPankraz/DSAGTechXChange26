@@ -15,7 +15,30 @@ Locate the orchestration pipeline for data processing from silver to gold layer:
 
 ## 5.3. Adjust bronze layer in orchestration pipeline
 
-## 5.4. Adjust bronze layer notebook for dimensions
+## 5.4. Adjust bronze-to-silver pipeline for dimensions
+
+open bps_om_b2s_dim_processing_***
+
+click on Lookup activity "Get Dimension Tables"
+switch to "Settings" tab
+double click on "Query"
+
+replace with
+
+'''SQL
+@concat('select distinct CDSViewName,REGEXP_REPLACE(CDSViewName, ''\$[EFPT]'', '''') AS ODPName, KeyFields from extractionMetadata em join systemDetails sd on em.SystemName = sd.SystemName where em.Type <> ''FACT'' and em.inScope = 1 and sd.SourceType = ''SAP'' and sd.ConnectionType = ''OpenMirroring'' and em.SystemName = ''', pipeline().parameters.System_Name, '''')
+'''
+
+## 5.5. Adjust bronze-to-silver pipeline for facts
+
+bps_om_b2s_fact_processing_***
+
+
+
+
+
+
+
 
 Notebook ```bps_opm_nb_b2s_dim_*** ``` (where *** is a random alphanumeric identifier) handles transformation of dimenension and text data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
 
