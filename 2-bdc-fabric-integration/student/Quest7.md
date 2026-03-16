@@ -1,25 +1,15 @@
 # 🔌 7. Challenge 7: Adjust fact processing
-[< 🤖 Quest 5](Quest5.md) - **[🔧 Quest 7 >](Quest7.md)**
+[< 🤖 Quest 6](Quest6.md) - **[🔧 Quest 8 >](Quest8.md)**
 
-Microsoft Business Process Solutions does not yet support mirored SAP databases as a source out of the box.However, with a handful of adjustments, we can make it work. In this chapter, we will adjust the standard pipelines and notebooks provided by Business Process Solutions accordingly.
+Fact data is processed in a similar way like dimensions - hence we will make similar adjustemnts to the fact notebook as well.
 
-## 5.1. Navigate to the workspace
+## 7.1. Navigate to the workspace
 
-![Navigate to workspace](../images/quest3/200-navigate-to-workspace.png)
+## 7.2. Adjust bronze-to-silver notebook for facts
 
-## 5.2. Locate bronze-to-silver orchestration pipeline
+Notebook ```bps_opm_nb_b2s_fact_*** ``` (where *** is a random alphanumeric identifier) handles transformation of fact data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
 
-Locate the orchestration pipeline for data processing from silver to gold layer: bps_orchestration_pipeline_full_processing_***
-
-![](../images/quest5/.png)
-
-## 5.3. Adjust bronze layer in orchestration pipeline
-
-## 5.4. Adjust bronze layer notebook for dimensions
-
-Notebook ```bps_opm_nb_b2s_dim_*** ``` (where *** is a random alphanumeric identifier) handles transformation of dimenension and text data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
-
-### 5.4.1 Adjust function ```apply_data_types```
+### 7.2.1. Adjust function ```apply_data_types```
 
 SAP Datasphere formats date columns in a slightly different way than the supported Open Mirroring solutions do. Let's adjust the code to take care of that:
 
@@ -67,7 +57,7 @@ def apply_data_types(
             input_df = input_df.withColumn(column_name, input_df[column_name].cast(data_type))
     return input_df
 ```
-### 5.4.2 Convert column names to upper case
+### 7.2.2. Convert column names to upper case
 
 SAP Datasphere generates column names in camel case, while higer layers in Business Process Solutions require them in upper case. Let's fix this!
 Sill in notebook ```bps_opm_nb_b2s_dim_*** ``` , search for ```fix dataframe data types```
@@ -90,105 +80,8 @@ You should now see the following code: (#3)
 
 ![](../images/quest5/.png)
 
-### 5.4.3 Fix Langueage codes
-
-SAP Datasphere provides language codes in ISO format, while Business Process Solutions currently uses the SAP internal representation. Let's fix this!
-
-**Behind** the "Fix dataframe data types" code (before the "Merge delta table" code), insert a new code cell and paste the following code into it:
-
-```python
-def get_sap_language_expression() -> Column:
-    sap_language_expr = (
-            when(col("LANGUAGE") == 'AF', 'a')
-            .when(col("LANGUAGE") == 'SR', '0')
-            .when(col("LANGUAGE") == 'ZH', '1')
-            .when(col("LANGUAGE") == 'TH', '2')
-            .when(col("LANGUAGE") == 'KO', '3')
-            .when(col("LANGUAGE") == 'RO', '4')
-            .when(col("LANGUAGE") == 'SL', '5')
-            .when(col("LANGUAGE") == 'HR', '6')
-            .when(col("LANGUAGE") == 'MS', '7')
-            .when(col("LANGUAGE") == 'UK', '8')
-            .when(col("LANGUAGE") == 'ET', '9')
-            .when(col("LANGUAGE") == 'AR', 'A')
-            .when(col("LANGUAGE") == 'HE', 'B')
-            .when(col("LANGUAGE") == 'CS', 'C')
-            .when(col("LANGUAGE") == 'DE', 'D')
-            .when(col("LANGUAGE") == 'EN', 'E')
-            .when(col("LANGUAGE") == 'FR', 'F')
-            .when(col("LANGUAGE") == 'EL', 'G')
-            .when(col("LANGUAGE") == 'HU', 'H')
-            .when(col("LANGUAGE") == 'IT', 'I')
-            .when(col("LANGUAGE") == 'JA', 'J')
-            .when(col("LANGUAGE") == 'DA', 'K')
-            .when(col("LANGUAGE") == 'PL', 'L')
-            .when(col("LANGUAGE") == 'ZF', 'M')
-            .when(col("LANGUAGE") == 'NL', 'N')
-            .when(col("LANGUAGE") == 'NO', 'O')
-            .when(col("LANGUAGE") == 'PT', 'P')
-            .when(col("LANGUAGE") == 'SK', 'Q')
-            .when(col("LANGUAGE") == 'RU', 'R')
-            .when(col("LANGUAGE") == 'ES', 'S')
-            .when(col("LANGUAGE") == 'TR', 'T')
-            .when(col("LANGUAGE") == 'FI', 'U')
-            .when(col("LANGUAGE") == 'SV', 'V')
-            .when(col("LANGUAGE") == 'BG', 'W')
-            .when(col("LANGUAGE") == 'LT', 'X')
-            .when(col("LANGUAGE") == 'LV', 'Y')
-            .when(col("LANGUAGE") == 'Z1', 'Z')
-            .when(col("LANGUAGE") == 'IS', 'b')
-            .when(col("LANGUAGE") == 'CA', 'c')
-            .when(col("LANGUAGE") == 'SH', 'd')
-            .when(col("LANGUAGE") == 'ID', 'i')
-            .when(col("LANGUAGE") == 'HI', '묩')
-            .when(col("LANGUAGE") == 'KK', '뱋')
-            .when(col("LANGUAGE") == 'VI', '쁩')
-            .otherwise(None)  # Default case
-        )
-
-    return sap_language_expr
-
-if 'LANGUAGE' in bronze_spark_df.columns:
-    _iso_language_expr = get_sap_language_expression()
-    bronze_spark_df = bronze_spark_df.withColumn('SAPLANGUAGE', _iso_language_expr)
-    bronze_spark_df = bronze_spark_df.drop('LANGUAGE')
-    bronze_spark_df = bronze_spark_df.withColumnRenamed('SAPLANGUAGE', 'LANGUAGE')
-```
-
-![](../images/quest5/.png)
-
-## 5.5.
-
-Select the "Account Payables" insight.
-
-![](../images/quest5/.png)
-
-## 5.6.
-
-![](../images/quest5/.png)
-
-## 5.7.
-
-![](../images/quest5/.png)
-
-
-
-
-## 4.8.
-
-![](../images/quest4/340-SAP-mirror-creating.png)
-
-## 4.9.
-
-![](../images/quest4/350-SAP-mirror-replicating.png)
-
-## 4.10.
-
-![](../images/quest4/360-SAP-mirror-done.png)
-
-
 # Where to next?
 
-**[🤖 Quest 5](Quest5.md) - [🔧 Quest 7 >](Quest7.md)
+**[🤖 Quest 6](Quest6.md) - [🔧 Quest 8 >](Quest8.md)
 
 [🔝](#)
