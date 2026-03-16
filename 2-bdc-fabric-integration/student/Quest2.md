@@ -27,7 +27,7 @@ To start the configuration of Business Process Solutions, click on the "new item
 
 Select the "Account Payables" insight.
 
-![Select Account Payables](../images/quest2/130-PBS-config-select-Account-Payables.png)
+![Select Account Payables](../images/quest2/130-BPS-config-select-Account-Payables.png)
 
 ## 2.6.
 
@@ -35,17 +35,21 @@ Select the "Account Payables" insight.
 
 ## 2.7.
 
-![](../images/quest2/160-BPC-config-select-open-mirroring(2).png)
+![](../images/quest2/150-BPS-config-select-Open-Mirroring.png)
 
 ## 2.8.
 
-![](../images/quest2/170-BPS-config-assign-dataset-name.png)
+![](../images/quest2/160-BPS-config-Open-Mirroring-config.png)
 
 ## 2.9.
 
-![](../images/quest2/180-BPS-config-review-and-deploy.png)
+![](../images/quest2/170-BPS-config-assign-dataset-name.png)
 
 ## 2.10.
+
+![](../images/quest2/180-BPS-config-review-and-deploy.png)
+
+## 2.11.
 
 ![](../images/quest2/190-BPS-config-deployment-succeeded.png)
 
