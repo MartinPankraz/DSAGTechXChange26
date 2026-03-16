@@ -21,8 +21,8 @@ Don't forget to save the pipeline!
 
 ## 5.3. Adjust bronze-to-silver pipeline for dimensions
 
-Locate and open pipeline ```bps_om_b2s_dim_processing_***``` which orchestrates processing of dimension and text data from bronze to silver layer. Click on Lookup activity ```Get Dimension Tables``` and switch to the "Settings" tab.
-Double click on the ***Query*** property.
+Locate and open pipeline ```bps_om_b2s_dim_processing_***``` which orchestrates processing of dimension and text data from bronze to silver layer. Click on Lookup activity ```Get Dimension Tables``` and switch to the **Settings** tab.
+Double click on the **Query** property.
 
 ![](../images/quest5/383-b2s-dim-pipe-adjust-query-2.png)
 
