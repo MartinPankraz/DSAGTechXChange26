@@ -15,35 +15,35 @@ To start the configuration of Business Process Solutions, click on the "new item
 
 ![](../images/quest2/90-assign-BPS-name.png)
 
-## 2.2.
+## 2.3.
 
 ![](../images/quest2/100-BPS-workload-config.png)
 
-## 2.2.
+## 2.4.
 
 ![](../images/quest2/110-BPS-config-select-source.png)
 
-## 2.2.
+## 2.5.
 
 ![](../images/quest2/130-PBS-config-select-Account-Payables.png)
 
-## 2.2.
+## 2.6.
 
 ![](../images/quest2/140-BPS-config-change-insight-name.png)
 
-## 2.2.
+## 2.7.
 
 ![](../images/quest2/160-BPC-config-select-Open-Mirror.png)
 
-## 2.2.
+## 2.8.
 
 ![](../images/quest2/170-BPS-config-assign-dataset-name.png)
 
-## 2.2.
+## 2.9.
 
 ![](../images/quest2/180-BPS-config-review-and-deploy.png)
 
-## 2.2.
+## 2.10.
 
 ![](../images/quest2/190-BPS-config-deployment-succeeded.png)
 
