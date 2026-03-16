@@ -1,13 +1,16 @@
 # 🔌 7. Challenge 7: Adjust fact processing
 [< 🤖 Quest 6](Quest6.md) - **[🔧 Quest 8 >](Quest8.md)**
 
-Fact data is processed in a similar way like dimensions - hence we will make similar adjustemnts to the fact notebook as well.
+Microsoft Business Process Solutions uses Python notebooks for data transformations. In this challenge, we will make the necessary adjustments to process fact data.  
+The adjustments are the same as for dimensions - except that language handling is not necessary.
 
-## 7.1. Navigate to the workspace
+## 7.1. Navigate to the workspace and locate notebook ```bps_opm_nb_b2s_dim_***```
 
-## 7.2. Adjust bronze-to-silver notebook for facts
+You don't need help for this anymore ;)
 
-Notebook ```bps_opm_nb_b2s_fact_*** ``` (where *** is a random alphanumeric identifier) handles transformation of fact data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
+## 7.2. Adjust bronze-to-silver notebook for dimensions
+
+Notebook ```bps_opm_nb_b2s_dim_*** ``` handles transformation of dimenension and text data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
 
 ### 7.2.1. Adjust function ```apply_data_types```
 
@@ -60,13 +63,13 @@ def apply_data_types(
 ### 7.2.2. Convert column names to upper case
 
 SAP Datasphere generates column names in camel case, while higer layers in Business Process Solutions require them in upper case. Let's fix this!
-Sill in notebook ```bps_opm_nb_b2s_dim_*** ``` , search for ```fix dataframe data types```
+Still in notebook ```bps_opm_nb_b2s_dim_*** ``` , search for ```fix dataframe data types```.
 
 Create a new code cell right above the "Fix dataframe data types" snippet.
 
-![](../images/quest5/.png)
+![](../images/quest6/410-bps-notebook-add-upper-case-code.png)
 
-![](../images/quest5/.png)
+Insert the following code into the new cell:
 
 ```python
 exclude_cols = ["_SystemName", "_UpdateTimeStamp", "_Delete", "_change_type"]
@@ -76,9 +79,9 @@ bronze_spark_df = bronze_spark_df.select([
 ])
 ```
 
-You should now see the following code: (#3)
+Your code should now look like this:
 
-![](../images/quest5/.png)
+![](../images/quest6/430-bps-notebook-add-upper-case-code-3.png)
 
 # Where to next?
 
