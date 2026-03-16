@@ -25,7 +25,9 @@ To start the configuration of Business Process Solutions, click on the "new item
 
 ## 2.5.
 
-![](../images/quest2/130-PBS-config-select-Account-Payables.png)
+Select the "Account Payables" insight.
+
+![Select Account Payables](../images/quest2/130-PBS-config-select-Account-Payables.png)
 
 ## 2.6.
 
