@@ -1,12 +1,16 @@
 # 🔌 2. Challenge 2: First Login to Copilot Studio
 [< 🤖 Quest 1](Quest1.md) - **[🔧 Quest 3 >](Quest3.md)**
 
-In Challenge 2, we will get started with Copilot Studio. 
+In Challenge 2, we will deploy and configure Microsoft Business Process solutions, ...
 
 
-!!! TODO: What is Copilot Studio
+## 2.1 Create a Business Process Solutions item in you workspace
 
-## 2.1 Getting started with Copilot Studio and creating the first agent
+To start the configuration of Business Process Solutions, click on the "new item" icon in your workspace. Then select the "Business Process Solutions (preview)" icon. To find it, you may want to use "Filter by keyword".
+
+[Launch BPS configuration](../images/quest2/70-launch-BPS.png)
+
+
 
 ### 2.1.1. Open https://copilotstudio.microsoft.com/
 ![Copilot Studio](../images/quest2/step01.png) 
