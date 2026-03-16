@@ -1,6 +1,6 @@
 
 # 🔌 2. Challenge 3: Create Shortcut to SAP data
-[< 🤖 Quest 1](Quest2.md) - **[🔧 Quest 3 >](Quest4.md)**
+[< 🤖 Quest 2](Quest2.md) - **[🔧 Quest 4 >](Quest4.md)**
 
 In Challenge 3, we will create a shortcut to connect to the data replicated by SAP Datasphere's "Premium Outbound Integration" replication flows, ...
 
@@ -45,6 +45,6 @@ Select the "Account Payables" insight.
 
 # Where to next?
 
-**[🤖 Quest 1](Quest1.md) - [🔧 Quest 3 >](Quest3.md)
+**[🤖 Quest 2](Quest2.md) - [🔧 Quest 4 >](Quest4.md)
 
 [🔝](#)
