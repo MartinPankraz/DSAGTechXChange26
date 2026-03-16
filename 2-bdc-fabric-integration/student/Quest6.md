@@ -67,7 +67,7 @@ Still in notebook ```bps_opm_nb_b2s_dim_*** ``` , search for ```fix dataframe da
 
 Create a new code cell right above the "Fix dataframe data types" snippet.
 
-![](../images/quest5/410-bps-notebook-add-upper-case-code.png)
+![](../images/quest6/410-bps-notebook-add-upper-case-code.png)
 
 Insert the following code into the new cell:
 
@@ -81,7 +81,7 @@ bronze_spark_df = bronze_spark_df.select([
 
 Your code should now look like this:
 
-![](../images/quest5/430-bps-notebook-add-upper-case-code-3.png)
+![](../images/quest6/430-bps-notebook-add-upper-case-code-3.png)
 
 ### 6.2.3. Fix Langueage codes
 
