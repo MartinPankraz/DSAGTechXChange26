@@ -4,42 +4,48 @@
 In Challenge 2, we will deploy and configure Microsoft Business Process solutions, ...
 
 
-## 2.1 Create a Business Process Solutions item in you workspace
+## 2.1. Create a Business Process Solutions item in you workspace
 
 To start the configuration of Business Process Solutions, click on the "new item" icon in your workspace. Then select the "Business Process Solutions (preview)" icon. To find it, you may want to use "Filter by keyword".
 
-[Launch BPS configuration](../images/quest2/70-launch-BPS.png)
+![Launch BPS configuration](../images/quest2/70-launch-BPS.png)
 
 
+## 2.2.
 
-### 2.1.1. Open https://copilotstudio.microsoft.com/
-![Copilot Studio](../images/quest2/step01.png) 
+![](../images/quest2/90-assign-BPS-name.png)
 
-### 2.1.2. Click on Agents and confirm 
-![Confirm](../images/quest2/step02.png) 
- 
-### 2.1.3. Click on Skip 
-![Skip](../images/quest2/step03.png) 
+## 2.2.
 
-### 2.1.4. From the Homepage select Agents on the left hand side
-![Agents](../images/quest2/step03a.png) 
+![](../images/quest2/100-BPS-workload-config.png)
 
- 
-### 2.1.5. Click on Create blank agent
-![Skip](../images/quest2/step04.png) 
- 
+## 2.2.
 
-### 2.1.6. Run a first test:
-Just write ```Hi``` to trigger an interaction
+![](../images/quest2/110-BPS-config-select-source.png)
 
+## 2.2.
 
-![First Test](../images/quest2/step05.png) 
+![](../images/quest2/130-PBS-config-select-Account-Payables.png)
 
-Results from your first tests:
+## 2.2.
 
-![First Test - Result](../images/quest2/step05a.png) 
- 
- 
+![](../images/quest2/140-BPS-config-change-insight-name.png)
+
+## 2.2.
+
+![](../images/quest2/160-BPC-config-select-Open-Mirror.png)
+
+## 2.2.
+
+![](../images/quest2/170-BPS-config-assign-dataset-name.png)
+
+## 2.2.
+
+![](../images/quest2/180-BPS-config-review-and-deploy.png)
+
+## 2.2.
+
+![](../images/quest2/190-BPS-config-deployment-succeeded.png)
 
 
 
