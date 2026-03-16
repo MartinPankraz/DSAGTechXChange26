@@ -1,7 +1,7 @@
 # 🔌 5. Challenge 5: Adjust pipelines
 [< 🤖 Quest 4](Quest4.md) - **[🔧 Quest 6 >](Quest6.md)**
 
-Microsoft Business Process Solutions does not yet support mirored SAP databases as a source out of the box.However, with a handful of adjustments, we can make it work. In this chapter, we will adjust the standard pipelines and notebooks provided by Business Process Solutions accordingly.
+Microsoft Business Process Solutions does not yet support mirored SAP databases as a source out of the box.H owever, with a few adjustments, we can make it work. In the following three challenges, we will adjust the pipelines and notebooks provided by Business Process Solutions to get things running.
 
 ## 5.1. Navigate to the workspace
 
@@ -9,29 +9,32 @@ Microsoft Business Process Solutions does not yet support mirored SAP databases 
 
 ## 5.2. Locate bronze-to-silver orchestration pipeline
 
-Locate the orchestration pipeline for data processing from silver to gold layer: bps_om_b2s_orchestration_pipeline_***
+In your worksapce, locate the orchestration pipeline for data processing from silver to gold layer: ```bps_om_b2s_orchestration_pipeline_***```
 
-replace the default value of parameter ```Mirror_Database_Name``` with ```sap-mirror-via-datasphere```.
-save the pipeline.
-
-![](../images/quest5/.png)
+![](../images/quest5/370-adjust-orchestration-pipe.png)
 
 ## 5.3. Adjust bronze layer in orchestration pipeline
 
+Open the pipeline and replace the default value of parameter ```Mirror_Database_Name``` with ```sap-mirror-via-datasphere```.
+
+![](../images/quest5/380-b2s-pipe-adjust-mirror-db.png)
+
+Don't foget tp save the pipeline!
+
 ## 5.4. Adjust bronze-to-silver pipeline for dimensions
 
-open bps_om_b2s_dim_processing_***
+Locate and open pipeline ```bps_om_b2s_dim_processing_***``` which orchestrates processing of dimension and text data from bronze to silver layer. Click on Lookup activity ```Get Dimension Tables``` and switch to the "Settings" tab.
+Double click on the ***Query*** property.
 
-click on Lookup activity "Get Dimension Tables"
-switch to "Settings" tab
-double click on "Query"
+![](../images/quest5/383-b2s-dim-pipe-adjust-query-2.png)
 
-replace with
+Replace the given SQL code with the following snippet:
 
 ```SQL
 @concat('select distinct CDSViewName,REGEXP_REPLACE(CDSViewName, ''\$[EFPT]'', '''') AS ODPName, KeyFields from extractionMetadata em join systemDetails sd on em.SystemName = sd.SystemName where em.Type <> ''FACT'' and em.inScope = 1 and sd.SourceType = ''SAP'' and sd.ConnectionType = ''OpenMirroring'' and em.SystemName = ''', pipeline().parameters.System_Name, '''')
 ```
-save the pipeline
+
+Don't forget to save the pipeline!
 
 ## 5.5. Adjust bronze-to-silver pipeline for facts
 
