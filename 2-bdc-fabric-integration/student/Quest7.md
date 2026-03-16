@@ -1,4 +1,5 @@
-# 🔌 6. Challenge 6: Adjust Business Process Solutions - part 3: fact processing
+# 🔌 6. Challenge 6: Adjust Business Process Solutions -   
+part 3: fact processing
 [< 🤖 Quest 5](Quest5.md) - **[🔧 Quest 7 >](Quest7.md)**
 
 Microsoft Business Process Solutions does not yet support mirored SAP databases as a source out of the box.However, with a handful of adjustments, we can make it work. In this chapter, we will adjust the standard pipelines and notebooks provided by Business Process Solutions accordingly.
