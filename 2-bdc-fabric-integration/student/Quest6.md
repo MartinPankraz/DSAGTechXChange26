@@ -1,14 +1,16 @@
 
-# 🔌 6. Challenge 6: Adjust Business Process Solutions - part 2: dimension processing
+# 🔌 6. Challenge 6: Adjust transformations for dimensions
 [< 🤖 Quest 5](Quest5.md) - **[🔧 Quest 7 >](Quest7.md)**
 
-Microsoft Business Process Solutions does not yet support mirored SAP databases as a source out of the box.However, with a handful of adjustments, we can make it work. In this chapter, we will adjust the standard pipelines and notebooks provided by Business Process Solutions accordingly.
+Microsoft Business Process Solutions uses Python notebooks for data transformations. In this challenge, we will make the necessary adjustments to process dimension data.
 
-## 6.1. Navigate to the workspace
+## 6.1. Navigate to the workspace and locate notebook ```bps_opm_nb_b2s_dim_***```
+
+You don't need help for this anymore ;)
 
 ## 6.2. Adjust bronze-to-silver notebook for dimensions
 
-Notebook ```bps_opm_nb_b2s_dim_*** ``` (where *** is a random alphanumeric identifier) handles transformation of dimenension and text data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
+Notebook ```bps_opm_nb_b2s_dim_*** ``` handles transformation of dimenension and text data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
 
 ### 6.2.1. Adjust function ```apply_data_types```
 
@@ -61,13 +63,13 @@ def apply_data_types(
 ### 6.2.2. Convert column names to upper case
 
 SAP Datasphere generates column names in camel case, while higer layers in Business Process Solutions require them in upper case. Let's fix this!
-Sill in notebook ```bps_opm_nb_b2s_dim_*** ``` , search for ```fix dataframe data types```
+Still in notebook ```bps_opm_nb_b2s_dim_*** ``` , search for ```fix dataframe data types```.
 
 Create a new code cell right above the "Fix dataframe data types" snippet.
 
-![](../images/quest5/.png)
+![](../images/quest5/410-bps-notebook-add-upper-case-code.png)
 
-![](../images/quest5/.png)
+Insert the following code into the new cell:
 
 ```python
 exclude_cols = ["_SystemName", "_UpdateTimeStamp", "_Delete", "_change_type"]
@@ -77,9 +79,9 @@ bronze_spark_df = bronze_spark_df.select([
 ])
 ```
 
-You should now see the following code: (#3)
+Your code should now look like this:
 
-![](../images/quest5/.png)
+![](../images/quest5/430-bps-notebook-add-upper-case-code-3.png)
 
 ### 6.2.3. Fix Langueage codes
 
@@ -146,7 +148,9 @@ if 'LANGUAGE' in bronze_spark_df.columns:
     bronze_spark_df = bronze_spark_df.withColumnRenamed('SAPLANGUAGE', 'LANGUAGE')
 ```
 
-![](../images/quest5/.png)
+Your code should now look like this:
+
+![](../images/quest6/440-bps-notebook-add-language-code.png)
 
 # Where to next?
 
