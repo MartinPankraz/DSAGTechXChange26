@@ -9,7 +9,10 @@ Microsoft Business Process Solutions does not yet support mirored SAP databases 
 
 ## 5.2. Locate bronze-to-silver orchestration pipeline
 
-Locate the orchestration pipeline for data processing from silver to gold layer: bps_orchestration_pipeline_full_processing_***
+Locate the orchestration pipeline for data processing from silver to gold layer: bps_om_b2s_orchestration_pipeline_***
+
+replace the default value of parameter ```Mirror_Database_Name``` with ```sap-mirror-via-datasphere```.
+save the pipeline.
 
 ![](../images/quest5/.png)
 
@@ -25,17 +28,26 @@ double click on "Query"
 
 replace with
 
-'''SQL
+```SQL
 @concat('select distinct CDSViewName,REGEXP_REPLACE(CDSViewName, ''\$[EFPT]'', '''') AS ODPName, KeyFields from extractionMetadata em join systemDetails sd on em.SystemName = sd.SystemName where em.Type <> ''FACT'' and em.inScope = 1 and sd.SourceType = ''SAP'' and sd.ConnectionType = ''OpenMirroring'' and em.SystemName = ''', pipeline().parameters.System_Name, '''')
-'''
+```
+save the pipeline
 
 ## 5.5. Adjust bronze-to-silver pipeline for facts
 
-bps_om_b2s_fact_processing_***
+Apply the same change to pipeline bps_om_b2s_fact_processing_***
 
+click on Lookup activity "Get Dimension Tables"
+switch to "Settings" tab
+double click on "Query"
 
+replace with
 
+```SQL
+@concat('select distinct CDSViewName,REGEXP_REPLACE(CDSViewName, ''\$[EFPT]'', '''') AS ODPName, KeyFields from extractionMetadata em join systemDetails sd on em.SystemName = sd.SystemName where em.Type <> ''FACT'' and em.inScope = 1 and sd.SourceType = ''SAP'' and sd.ConnectionType = ''OpenMirroring'' and em.SystemName = ''', pipeline().parameters.System_Name, '''')
+```
 
+save the pipeline
 
 
 
