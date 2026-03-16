@@ -37,7 +37,7 @@ Select the "Account Payables" insight.
 
 ## 4.8.
 
-![](../images/quest4/350-SAP-mirror-creating.png)
+![](../images/quest4/340-SAP-mirror-creating.png)
 
 ## 4.9.
 
