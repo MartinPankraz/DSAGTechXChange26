@@ -1,4 +1,4 @@
-# 🔌 2. Challenge 2: First Login to Copilot Studio
+# 🔌 2. Challenge 2: Configure Microsoft Business Process Solutions
 [< 🤖 Quest 1](Quest1.md) - **[🔧 Quest 3 >](Quest3.md)**
 
 In Challenge 2, we will deploy and configure Microsoft Business Process solutions, ...
