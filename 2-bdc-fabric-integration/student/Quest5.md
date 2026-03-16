@@ -36,7 +36,7 @@ Don't forget to save the pipeline!
 
 ## 5.4. Adjust bronze-to-silver pipeline for facts
 
-Apply the same change as in 5.4 to pipeline ```bps_om_b2s_fact_processing_***```.
+Apply the same change as in 5.3 to pipeline ```bps_om_b2s_fact_processing_***```.
 
 # Where to next?
 
