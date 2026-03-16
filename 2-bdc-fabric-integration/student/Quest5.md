@@ -1,5 +1,5 @@
 # 🔌 5. Challenge 5: Adjust Business Process Solutions
-[< 🤖 Quest 4](Quest5.md) - **[🔧 Quest 5 >](Quest6.md)**
+[< 🤖 Quest 4](Quest4.md) - **[🔧 Quest 6 >](Quest6.md)**
 
 Microsoft Business Process Solutions does not yet support mirored SAP databases as a source out of the box.However, with a handful of adjustments, we can make it work. In this chapter, we will adjust the standard pipelines and notebooks provided by Business Process Solutions accordingly.
 
@@ -50,6 +50,6 @@ Select the "Account Payables" insight.
 
 # Where to next?
 
-**[🤖 Quest 2](Quest2.md) - [🔧 Quest 4 >](Quest4.md)
+**[🤖 Quest 4](Quest4.md) - [🔧 Quest 6 >](Quest6.md)
 
 [🔝](#)
