@@ -90,6 +90,8 @@ SAP Datasphere provides language codes in ISO format, while Business Process Sol
 **Behind** the "Fix dataframe data types" code (before the "Merge delta table" code), insert a new code cell and paste the following code into it:
 
 ```python
+from pyspark.sql.column import Column
+
 def get_sap_language_expression() -> Column:
     sap_language_expr = (
             when(col("LANGUAGE") == 'AF', 'a')
