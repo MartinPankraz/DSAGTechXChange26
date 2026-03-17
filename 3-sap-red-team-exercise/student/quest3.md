@@ -26,7 +26,7 @@ npm install
 npm run build        # compiles TypeScript → dist/server.js
 ```
 
-Verify that `.vscode/mcp.json` in the workspace root references it:
+Verify that `.vscode/mcp.json` in the workspace root references it amongst your other MCP servers:
 
 ```jsonc
 {
@@ -86,6 +86,8 @@ Each entry contains a ready-to-paste `how.snippet`, the required `require` impor
 
 Paste the generated snippets into the two quest markers in `srv/meal-service.js`:
 
+It will looks something like this:
+
 **`addMeal` handler (Quest 1 / AUD-002):**
 ```js
 this.on('addMeal', async (req) => {
@@ -138,27 +140,9 @@ Copilot calls `explain_suggestion` and returns the full compliance rationale (GD
 
 ---
 
-### Step 6 — Fix the BTP infrastructure gap
-
-The scan also reports a missing `mta.yaml` binding. Add the following to bind the SAP Audit Log Service for production deployments:
-
-```yaml
-resources:
-  - name: mealapp-auditlog
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: auditlog
-      service-plan: oauth2
-
-modules:
-  - name: mealapp-srv
-    requires:
-      - name: mealapp-auditlog
-```
-
 ## Investigate the result on Sentinel for SAP BTP
 
-Consider tuning your analytic rule for your newly added custom audit log entries.
+Consider tuning your analytic rule for your newly added custom audit log entries. Make a new copy prefixed with your hackername to avoid interfering with other learners.
 
 ## Update the [leaderboard](https://martinpankraz.github.io/crispy-potato/) with your progress⏱
 
