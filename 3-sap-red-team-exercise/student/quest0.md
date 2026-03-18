@@ -76,7 +76,9 @@ cds watch
 So far, so good. Now, let's see what happens when we ask our AI assistant to "help us ship this Lunch Order app faster". Don't worry, we won't let AI loose in the kitchen poisoning everyone... or will we?
 
 > [!NOTE]
-> In case you can't leverage GitHub Codespaces and Copilot for any reason, you can also set up a local development environment on your machine. Install from [here](https://code.visualstudio.com/download). Often your coaches will have pre-configured virtual machines ready for you with everything installed and ready to go.
+> In case you can't leverage GitHub Codespaces and Copilot for any reason, you can also set up a local development env(ironment on your machine. Install from [here](https://code.visualstudio.com/download). Often your coaches will have pre-configured virtual machines ready for you with everything installed and ready to go.
+
+The quest is also available as [video walkthrough](https://app.screencast.com/ZfBOZesuHWwSn)
 
 ## Where to next?
 
