@@ -48,7 +48,9 @@ https://techxchangeapim.azure-api.net/trainer001-sap-products-business-partner-a
 
 
 
-## OPTIONAL - Test via MCP Inspector
+## OPTIONAL 
+<details><summary>Test via MCP Inspector</summary>
+
 The [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) from Anthrophic allows you to test the basic features of an MCP Server. It helps you to evluate if the MCP Server you created is actually working. 
 
 
@@ -71,6 +73,8 @@ Clicking on **List Tools** shows all the Tools or Entity Types that you defined 
 If you scroll down and click on **Run Tool** you shoudl be able to fetch Sales Orders from the SAP System via the MCP Server. 
 
  ![List Tool](../images/quest5/step11.png) 
+</details>
+
 
 
 # Where to next?
