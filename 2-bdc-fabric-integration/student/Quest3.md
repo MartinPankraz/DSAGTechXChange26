@@ -30,6 +30,12 @@ From the "Files" folder of your lakehouse, create a new shortcut.
 
 ![](../images/quest3/230-Shortcut-launch.png)
 
+## 3.5 Select shortcut type
+
+Select source type Azure Data Lake Storage Gen2.
+
+![](../images/quest3/235-shortcut-select-ADLS2)
+
 ## 3.5. Select connection
 
 We have already set up a connection to the ADLS Gen2 storage container and shared it with your user. Select it for your shortcut.
