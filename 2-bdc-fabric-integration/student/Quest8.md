@@ -26,27 +26,37 @@ Let's process data from silver to gold by running pipeline ```bps_orchestration_
 
 ![](../images/quest8/470-find-semantic-model.png)
 
-### 8.3.2. 
+### 8.3.2. Open settings
 
 ![](../images/quest8/475-semantic-model-open.png)
 
-### 8.3.3.
+### 8.3.3. Open "Gateway and cloud connection" settings
+
+Select "Create a connection".
 
 ![](../images/quest8/480-semantic-model-create-connection.png)
 
-### 8.3.4.
+### 8.3.4. Create connection
+
+Assign a connection name. Select "OAuth 2.0" as authentication method and click "Edit credentials".
 
 ![](../images/quest8/490-semantic-model-oauth.png)
 
-### 8.3.5.
+### 8.3.5. Authenticate and create
+
+Follow the OAuth flow and click "Create" to create the connection.
 
 ![](../images/quest8/500-semantic-model-finish-connection.png)
 
-### 8.3.6.
+### 8.3.6. Map semantic model to connection
+
+Map the semantic model to the newly created connection.
 
 ![](../images/quest8/510-semantic-mode-apply-connection.png)
 
-### 8.3.7.
+### 8.3.7. Refresh the semantic model
+
+Back in your workspace, refresh the semantic model.
 
 ![](../images/quest8/520-semantic-model-refresh.png)
 
