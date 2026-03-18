@@ -10,7 +10,7 @@ You don't need help for this anymore ;)
 
 ## 6.2. Adjust bronze-to-silver notebook for dimensions
 
-Notebook ```bps_opm_nb_b2s_dim_*** ``` handles transformation of dimenension and text data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
+Notebook ```bps_opm_nb_b2s_dim_*** ``` handles transformation of dimension and text data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
 
 ### 6.2.1. Adjust function ```apply_data_types```
 
