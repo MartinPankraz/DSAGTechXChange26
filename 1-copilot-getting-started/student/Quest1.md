@@ -1,5 +1,5 @@
 # 🤖 1. Challenge 1: Getting Started - Prepare access
-[🏠Home](../README.md) - [🔌 Quest 2 >](Quest2.md)
+[🏠Home](../README.md) - **[🔌 Quest 2 >](Quest2.md)**
 
 
 In this section we will make sure that you have access to all the required system: 
@@ -66,6 +66,6 @@ Capture the QR Code with your phone and click on **Next** in the Browser
 
 # Where to next?
 
-**[🏠Home](../README.md)** - [🔌 Quest 2 >](Quest2.md)
+[🏠Home](../README.md) - **[🔌 Quest 2 >](Quest2.md)**
 
 [🔝](#)

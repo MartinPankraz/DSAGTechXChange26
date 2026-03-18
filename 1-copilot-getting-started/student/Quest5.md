@@ -75,6 +75,6 @@ If you scroll down and click on **Run Tool** you shoudl be able to fetch Sales O
 
 # Where to next?
 
-**[🔌Quest 4](Quest4.md) - [ Quest 6 >](Quest6.md)
+[🔌Quest 4](Quest4.md) - **[ Quest 6 >](Quest6.md)**
 
 [🔝](#)

@@ -3,8 +3,10 @@
 
 In Challenge 2, we will get started with Copilot Studio. 
 
+Copilot Studio is Microsoft’s low-code platform for building, customizing, and managing AI-powered copilots and agents. It enables organizations to create conversational assistants that understand natural language, ground responses in enterprise knowledge, and interact with users across channels like Microsoft Teams, websites, and Microsoft 365 applications.
 
-!!! TODO: What is Copilot Studio
+With Copilot Studio, both business users and developers can extend Microsoft 365 Copilot or create standalone agents that automate workflows, call APIs, and integrate with enterprise systems using connectors and Power Automate. The platform provides built-in governance, security, and analytics, making it possible to scale AI agents safely and reliably across the organization.
+
 
 ## 2.1 Getting started with Copilot Studio and creating the first agent
 
@@ -50,6 +52,6 @@ Results from your first tests:
 
 # Where to next?
 
-**[🤖 Quest 1](Quest1.md) - [🔧 Quest 3 >](Quest3.md)
+**[🤖 Quest 1](Quest1.md) - **[🔧 Quest 3 >](Quest3.md)**
 
 [🔝](#)

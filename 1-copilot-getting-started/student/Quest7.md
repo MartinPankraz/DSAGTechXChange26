@@ -58,6 +58,6 @@ Ask additional question to explore what is possible retrieving Sales Order, Busi
 
 # Where to next?
 
-**[🔌Quest 6](Quest6.md) - [ Quest 8 >](Quest8.md)
+[🔌Quest 6](Quest6.md) - **[ Quest 8 >](Quest8.md)**
 
 [🔝](#)

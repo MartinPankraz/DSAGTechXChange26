@@ -165,7 +165,7 @@ If you scroll down you should see **HTTP/1.1 200 OK** and lots of Business partn
 
 # Where to next?
 
-**[🔌Quest 3](Quest3.md) - [ Quest 5 >](Quest5.md)
+[🔌Quest 3](Quest3.md) - **[ Quest 5 >](Quest5.md)**
 
 [🔝](#)
 

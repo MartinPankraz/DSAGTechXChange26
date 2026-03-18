@@ -60,7 +60,7 @@ Click on **Add and configure** to add the new MCP Server to your Copilot Studio 
 
 # Where to next?
 
-**[🔌Quest 5](Quest5.md) - [ Quest 7 >](Quest7.md)
+[🔌Quest 5](Quest5.md) - **[ Quest 7 >](Quest7.md)**
 
 [🔝](#)
 
