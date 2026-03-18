@@ -1,7 +1,7 @@
 # 🔌 7. Challenge 7: Adjust fact processing
 [< 🤖 Quest 6](Quest6.md) - **[🔧 Quest 8 >](Quest8.md)**
 
-Microsoft Business Process Solutions uses Python notebooks for data transformations. In this challenge, we will make the necessary adjustments to process fact data.  
+Microsoft Business Process Solutions uses Python notebooks for data transformations. In this challenge, we will make the necessary adjustments to process **fact data**.
 The adjustments are the same as for dimensions - except that language handling is not necessary.
 
 ## 7.1. Navigate to the workspace and locate notebook ```bps_opm_nb_b2s_fact_***```
