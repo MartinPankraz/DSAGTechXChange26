@@ -20,9 +20,39 @@ Let's process data from silver to gold by running pipeline ```bps_orchestration_
 > [!NOTE]
 > The pipeline should take about 20 minutes to run.
 
-## 8.3. Refresh semantic model
+## 8.3. Adjust and refresh semantic model
+
+### 8.3.1. Find the semantic model ```R2R_Account_Payables```.
+
+![](../images/quest8/470-find-semantic-model.png)
+
+### 8.3.2. 
+
+![](../images/quest8/475-semantic-model-open.png)
+
+### 8.3.3.
+
+![](../images/quest8/480-semantic-model-create-connection.png)
+
+### 8.3.4.
+
+![](../images/quest8/490-semantic-model-oauth.png)
+
+### 8.3.5.
+
+![](../images/quest8/500-semantic-model-finish-connection.png)
+
+### 8.3.6.
+
+![](../images/quest8/510-semantic-mode-apply-connection.png)
+
+### 8.3.7.
+
+![](../images/quest8/520-semantic-model-refresh.png)
 
 ## 8.4. Launch Power BI report
+
+![](../images/quest8/530-launch-dashboard.png)
 
 # Where to next?
 
