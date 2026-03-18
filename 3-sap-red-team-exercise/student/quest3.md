@@ -140,9 +140,53 @@ Copilot calls `explain_suggestion` and returns the full compliance rationale (GD
 
 ---
 
+### Step 6 — Redeploy the app
+
+After pasting the audit log snippets, redeploy the CAP app so the changes go live on SAP BTP:
+
+```bash
+cd student/dsag-mealapp-security-cap
+mbt build
+cf deploy mta_archives/*.mtar
+```
+
+Wait for the deployment to complete, then trigger the app again — log in via the approuter URL and create or view a preference/meal to generate fresh audit log entries.
+
+---
+
 ## Investigate the result on Sentinel for SAP BTP
 
-Consider tuning your analytic rule for your newly added custom audit log entries. Make a new copy prefixed with your hackername to avoid interfering with other learners.
+Now that your app emits custom audit log entries, check whether Sentinel picks them up.
+
+### Verify the new entries in the SAP Audit Log Viewer
+
+- Open the [SAP Audit Log Viewer](https://emea.cockpit.btp.cloud.sap/cockpit/#/globalaccount/CA162194TID000000000741164365/subaccount/57070a8b-c114-4ce2-bc75-c96442195f67/service-instances&//?layout=OneColumn&section=overview) in your BTP subaccount.
+- Select a recent time range, check `Security Events`, and search for your user email.
+- You should now see **custom data-access entries** (e.g. `CREATE on Preferences`, `addMeal`) in addition to the login events from Quest 2.
+
+### Run a KQL query in Sentinel to confirm the new signals
+
+- Open the [Sentinel log analytics workspace](https://portal.azure.com/?feature.customportal=false#view/Microsoft_Azure_Security_Insights/MainMenuBlade/~/6/subscriptionId/48b193a0-2500-45b5-ad41-f09cde1a95cd/resourceGroup/dsagws-rg/workspaceName/dsagwstechxchange) and switch to the Log Query editor.
+- Run the following query (replace with your BTP username):
+
+```kql
+SAPBTPAuditLog_CL
+| where UserName == "<your btp username>"
+| order by TimeGenerated desc
+```
+
+You should now see **more than just login events** — the custom audit entries from your CAP handlers appear alongside them.
+
+### Check the analytic rule result
+
+- Browse the [Sentinel Analytics rules](https://portal.azure.com/?feature.customportal=false#view/Microsoft_Azure_Security_Insights/MainMenuBlade/~/Analytics/subscriptionId/48b193a0-2500-45b5-ad41-f09cde1a95cd/resourceGroup/dsagws-rg/workspaceName/dsagwstechxchange).
+- Find the rule `Unaudited custom SAP BTP applications`. Your app should now **no longer trigger** this rule once the new audit entries are flowing in — proving that the remediation worked.
+- Create a copy of the rule prefixed with your hackername to tune it for your specific app events without interfering with other learners.
+
+### Check the Sentinel workbook
+
+- Open the [`SAP BTP Activity` workbook](https://portal.azure.com/?feature.customportal=false#view/Microsoft_Azure_Security_Insights/MainMenuBlade/~/WorkbooksV2/id/%2Fsubscriptions%2F48b193a0-2500-45b5-ad41-f09cde1a95cd%2Fresourcegroups%2Fdsagws-rg%2Fproviders%2Fmicrosoft.securityinsightsarg%2Fsentinel%2Fdsagwstechxchange) and navigate to the `Custom App Audit Coverage` tab.
+- Confirm that your app's audit coverage has improved — it should now show data-access events in addition to login events.
 
 ## Update the [leaderboard](https://martinpankraz.github.io/crispy-potato/) with your progress⏱
 
