@@ -17,7 +17,7 @@ Just to ensure that user-credentials are working and to setup MFA, open https://
 > You might want to start a "New InPrivate Window" in your browser
 
 > [!NOTE]
-> Login with a user like *student0XX@M365x75849431.OnMicrosoft.com*
+> Login with your user, like *student0XX@M365x75849431.OnMicrosoft.com*
 
 ![Open Outlook](../images/quest1/step01.png)
 
