@@ -61,9 +61,12 @@ student0XX
 ``` 
 with your student number, 
 
-Make also sure to adjust the **display name** and add ```text
+Make also sure to adjust the **display name** and add 
+
+```text
 student0XX GWSAMPLE_BASIC
 ```  
+
 (the Name should be automatically be adjusted)
 
 then click on **Create**
