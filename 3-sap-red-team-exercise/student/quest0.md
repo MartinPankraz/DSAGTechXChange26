@@ -78,7 +78,7 @@ So far, so good. Now, let's see what happens when we ask our AI assistant to "he
 > [!NOTE]
 > In case you can't leverage GitHub Codespaces and Copilot for any reason, you can also set up a local development env(ironment on your machine. Install from [here](https://code.visualstudio.com/download). Often your coaches will have pre-configured virtual machines ready for you with everything installed and ready to go.
 
-The quest is also available as [video walkthrough](https://app.screencast.com/ZfBOZesuHWwSn)
+The quest is also available as [video walkthrough](https://app.screencast.com/ZvFbWFjnwgcD5)
 
 ## Where to next?
 
