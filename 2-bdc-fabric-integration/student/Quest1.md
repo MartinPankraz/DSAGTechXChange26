@@ -1,45 +1,43 @@
-# 🤖 1. Challenge 1: Getting Started - Prepare access
+# 🤖 1. Challenge 1: Getting Started with Microsoft Fabric
 [🏠Home](../README.md) - [🔌 Quest 2 >](Quest2.md)
 
 
-In this section we will make sure that you have access to all the required system: 
-* Copilot Studio – To Create the actual agent
-* Azure API Management – To manage APIs and create the MCP Server
-* The SAP Backend system – where the actual data is coming from
+In this section you will make yourself familiar with the very basics of Microsoft Fabric. We configured an environment, ready to use for you.
+Let's log on and do the first steps!
 
-We configured an environment, ready to use for you. However, due to security restrictions you have to setup Multifactor Authentication (MFA) with your user first. 
+## 1.1. Launch Microsoft Fabric
+Click on https://app.powerbi.com to lauch Microsoft Fabric.
 
-## 1.1. Prepare the User
-### 1.1.1. Open Outlook: https://outlook.office.com
-![Open Outlook](../images/quest1/step01.png)
+## 1.2. Enter user name
+You have been assigned a user name ranging from "DSAGFabric1@fabricconf.onmicrosoft.com" to "DSAGFabric15@fabricconf.onmicrosoft.com" depending on your seat/group number. Enter the user name.
 
-### 1.1.2. Enter the provided password:
-![Enter the password](../images/quest1/step02.png)
+![Enter the user name](../images/quest1/10-logon.png)
+
+## 1.3. Enter th password
+Your password is "Initial1234"
+
+![Enter the password](../images/quest1/20-provide-password.png)
  
-### 1.1.3. Setup MFA
-![Setup MFA](../images/quest1/step03.png)
+## 1.4. Fabric start screen
+This is Microsoft Fabric's start screen. At the bottom left, you see the Power BI icon indicating we are using the view optimized for users focussing on Power BI. Since we want to use a number of Fabric capabilities, let's switch to the Fabric view by clicking on the Power BI icon at the bottom left.
+
+![Fabric start screen](../images/quest1/30-start-screen.png)
  
-### 1.1.4. If required, install Authenticator on your mobile device
-![Setup Authenticator](../images/quest1/step04.png)
+## 1.5. Switch to Fabric view
+Now select the Fabric view.
+
+![Switch to Fabric view](../images/quest1/40-switch-to-fabric-view.png)
  
-### 1.1.5. Click on Next
-![Next](../images/quest1/step05.png)
+## 1.6. Fabric view
+![Next](../images/quest1/50-fabric-view.png)
  
-### 1.1.6. Scan the QR Code with your Authenticator App
-![Scan QR](../images/quest1/step06.png)
+## 1.7. Navigate to workspace
+Each user works in a dedicated workspace with the same name as your user name. We have set up permissions such that you can't see other users' workspaces. Navigate to your workspace.
+
+![Navigate to workspace](../images/quest1/55-navigate-to-workspace.png)
  
-### 1.1.7. You should get a confirmation on your mobile device
-![Confirm the number](../images/quest1/step07.png)
- 
-### 1.1.8. And the Authenticator is added
-![Success](../images/quest1/step08.png)
- 
-### 1.1.9. Click on Yes to stay signed-in 
-![Stay signed-in](../images/quest1/step09.png)
- 
-### 1.1.10. If required, click on Continue
-![Continue](../images/quest1/step10.png)
- 
+## 1.8. You're there!
+![User workspace](../images/quest1/60-navigate-to-workspace.png)
 
 # Where to next?
 

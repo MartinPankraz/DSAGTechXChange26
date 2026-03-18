@@ -13,11 +13,13 @@ Is your app deployed and operational by now? Have a look at the Cloud Foundry lo
 - Use your approuter URL (mapped routes section) to log in to the app with the credentials `dummy@dsag.de` / `Start123!`.
 - Add the new meal via the admin view again, but this time for real.
 
-You, as the red teamer lured a SAP BTP developer to upgrade the SAP CAP application ;-) by creating a new API endpoint with susprising outcome using the SAP CAP MCP server and an AI assistant. 
+You, as the red teamer lured a SAP BTP developer to upgrade the SAP CAP application ;-) by creating a new API endpoint with susprising outcome using the SAP CAP MCP server and an AI assistant.
+
+**Did you spot what upgrade your salad or smash burger got? ;-)**
 
 ## Welcome back, blue team defender!
 
-At this stage the only thing defenders can do for post-breach scenarios, is to monitor SAP BTP's standard built-in audit log. Looking at walls of text is no fun and not efficient though.
+At this stage the only thing defenders can do for post-breach scenarios, is to monitor SAP BTP's standard built-in audit log. But looking at walls of text is no fun and not efficient though.
 
 Do it anyways to know what you are in for.
 
@@ -91,7 +93,7 @@ So, now it's time to analyze what Microsoft Sentinel for SAP BTP caught so far.
 
 ```kql
 SAPBTPAuditLog_CL
-| where UserName == "<your username>";
+| where UserName == "<your btp username>";
 ```
 
 Do you see why audit log monitoring alone is not sufficient to detect the attack? Take note that multiple entries are required for a meaningful detection of the attack pattern.
@@ -106,13 +108,13 @@ Do you see why audit log monitoring alone is not sufficient to detect the attack
 - Find the one for `Unaudited custom SAP BTP applications` and open it (use the `...` button and click edit).
 
 <p align="center" width="100%">
-<img alt="SenAnalytics2" src="assets/quest2/SenAnalytics2png"  width="600">
+<img alt="SenAnalytics2" src="assets/quest2/SenAnalytics2.png"  width="600">
 </p>
 
 - Navigate to `Set rule logic` pane and expand the KQL view.
 
 <p align="center" width="100%">
-<img alt="SenANalyticsNext" src="assets/quest2/SenAnalyticsNex.png"  width="600">
+<img alt="SenANalyticsNext" src="assets/quest2/SenAnalyticsNext.png"  width="600">
 </p>
 
 - Understand how the rule matches multiple audit events to detect the unaudited apps. Ask an AI to explain in simple terms for convenience.
@@ -195,7 +197,7 @@ flowchart LR
 
 ## Update the [leaderboard](https://martinpankraz.github.io/crispy-potato/) with your progress⏱
 
-Congratulations for completing the mandatory quests! Spread the word to make SAP BTP a safer place.
+Congratulations for completing the mandatory quests! Spread the word `the cake is a lie!` to make SAP BTP a safer place.
 
 Just got started!? We got you covered with somore more Blue Team work and AI driven remediation of the compromise! Move on to the optional quest 3.
 

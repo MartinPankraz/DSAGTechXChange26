@@ -8,10 +8,6 @@ Every dev out there feels the pressure to deliver faster and faster, and AI is t
 
 Things start to fall through the cracks, and security is the first victim. In this quest, we will set up a lab environment that will allow us to experience this first hand.
 
-<p align="center" width="100%">
-<img alt="Placeholder" src="assets/quest0/0-1.png"  width="600">
-</p>
-
 ## Gather your logins and tools
 
 If you recall the pre-requisites mentioned in the [README](README.md#Lab-prerequisites), now is the time to get them ready. You will need:
@@ -49,8 +45,11 @@ Here is the location to start github codespaces
 <p align="center" width="100%">
 <img alt="PackageJson" src="assets/quest0/packageJson.png"  width="600">
 </p>
-Put your user number as prefix (e.g. `hacker01`). This is important to avoid conflicts with other red teamers in the same BTP subaccount. Use the codespace search and replace functionality (Ctrl+Shift+H) to do this quickly <b>across all files</b>. 
-Search for `dsag-mealapp-security-cap-hacker00` and replace with `dsag-mealapp-security-cap-hackerXX` (where XX is your user number).
+
+> [!IMPORTANT]
+> Put your user number as prefix (e.g. `hacker01`). This is important to avoid conflicts with other red teamers in the same BTP subaccount. Use the codespace search and replace functionality (Ctrl+Shift+H) to do this quickly <b>across all files</b>. 
+> Search for `dsag-mealapp-security-cap-hacker00` and replace with `dsag-mealapp-security-cap-hackerXX` (where XX is your user number).
+
 <p align="center" width="100%">
 <img alt="Replace" src="assets/quest0/Replace.png"  width="600">
 </p>
