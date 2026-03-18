@@ -36,7 +36,11 @@ Don't forget to save the pipeline!
 
 ## 5.4. Adjust bronze-to-silver pipeline for facts
 
-Apply the same change as in 5.3 to pipeline ```bps_om_b2s_fact_processing_***```.
+Pipeline ```bps_om_b2s_fact_processing_***``` orchestrates processing of fact data from bronze to silver. Find Lookup activity ```Get Dimension Tables``` and adjust the **Query** property in the **Settings** tab as follows:
+
+```SQL
+@concat('select DISTINCT CDSViewName, REGEXP_REPLACE(CDSViewName, ''\$[EFPT]'', '''') AS ODPName, KeyFields from extractionMetadata em join systemDetails sd on em.SystemName = sd.SystemName where em.Type = ''FACT'' and em.inScope = 1 and sd.SourceType = ''SAP'' and sd.ConnectionType = ''OpenMirroring'' and em.SystemName = ''', pipeline().parameters.System_Name, '''')
+```
 
 # Where to next?
 
