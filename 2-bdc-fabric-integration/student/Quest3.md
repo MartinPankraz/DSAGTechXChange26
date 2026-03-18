@@ -34,27 +34,27 @@ From the "Files" folder of your lakehouse, create a new shortcut.
 
 Select source type Azure Data Lake Storage Gen2.
 
-![](../images/quest3/235-shortcut-select-ADLS2)
+![](../images/quest3/235-shortcut-select-ADLS2.png)
 
-## 3.5. Select connection
+## 3.6. Select connection
 
 We have already set up a connection to the ADLS Gen2 storage container and shared it with your user. Select it for your shortcut.
 
 ![Select shortcut connection](../images/quest3/240-Shortcut-select-connection.png)
 
-## 3.6. Select storage container
+## 3.7. Select storage container
 
 You can now see the folder structure of the storage container with SAP S/4HANA data. Select the storage container and click "Next".
 
 ![](../images/quest3/250-Shortcut-select-directory.png)
 
-## 3.7. Create Shortcut
+## 3.8. Create Shortcut
 
 Click "Create" to finish the shortcut configuration.
 
 ![](../images/quest3/260-Shortcut-create.png)
 
-## 3.8. Inspect SAP data
+## 3.9. Inspect SAP data
 
 In your Lakehouse, you can now inspect the SAP data. Feel free to take a look at the folder structure and contents.
 
