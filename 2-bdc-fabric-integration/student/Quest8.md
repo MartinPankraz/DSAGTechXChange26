@@ -18,7 +18,7 @@ Let's process data from silver to gold by running pipeline ```bps_orchestration_
 ![](../images/quest8/460-run-bps_orchestration_pipeline_full_processing.png)
 
 > [!NOTE]
-> The pipeline should take about 15 minutes to run.
+> The pipeline should take about 20 minutes to run.
 
 ## 8.3. Refresh semantic model
 
