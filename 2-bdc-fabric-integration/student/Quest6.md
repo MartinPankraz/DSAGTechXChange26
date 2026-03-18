@@ -2,7 +2,7 @@
 # 🔌 6. Challenge 6: Adjust transformations for dimensions
 [< 🤖 Quest 5](Quest5.md) - **[🔧 Quest 7 >](Quest7.md)**
 
-Microsoft Business Process Solutions uses Python notebooks for data transformations. In this challenge, we will make the necessary adjustments to process dimension data.
+Microsoft Business Process Solutions uses Python notebooks for data transformations. In this challenge, we will make the necessary adjustments to process **dimension data**.
 
 ## 6.1. Navigate to the workspace and locate notebook ```bps_opm_nb_b2s_dim_***```
 
