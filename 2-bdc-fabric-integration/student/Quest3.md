@@ -30,7 +30,7 @@ From the "Files" folder of your lakehouse, create a new shortcut.
 
 ![](../images/quest3/230-Shortcut-launch.png)
 
-## 3.5 Select shortcut type
+## 3.5. Select shortcut type
 
 Select source type Azure Data Lake Storage Gen2.
 
