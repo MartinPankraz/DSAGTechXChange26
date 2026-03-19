@@ -13,12 +13,13 @@ Works with **any SAP CAP + UI5 project** — point it at your app folder and get
 3. [Install & Build](#install--build)
 4. [Configure VS Code](#configure-vs-code)
 5. [End-to-End Example](#end-to-end-example)
-6. [Tools Reference](#tools-reference)
-7. [Audit Library Setup](#audit-library-setup)
-8. [Verifying Audit Logs in BTP](#verifying-audit-logs-in-btp)
-9. [Security Rules](#security-rules)
-10. [Repository Layout](#repository-layout)
-11. [Development](#development)
+6. [Backdoor Detection](#backdoor-detection)
+7. [Tools Reference](#tools-reference)
+8. [Audit Library Setup](#audit-library-setup)
+9. [Verifying Audit Logs in BTP](#verifying-audit-logs-in-btp)
+10. [Security Rules](#security-rules)
+11. [Repository Layout](#repository-layout)
+12. [Development](#development)
 
 ---
 
@@ -34,6 +35,7 @@ Works with **any SAP CAP + UI5 project** — point it at your app folder and get
 | **Gap detection** | Identifies missing library, missing `mta.yaml` binding, missing VCAP_SERVICES wiring |
 | **Privacy enforcement** | All suggestions mask PII fields and include GDPR/DSGVO guidance |
 | **Correlation IDs** | Every audit snippet propagates `x-correlation-id` from the inbound request header |
+| **Backdoor detection** | Scans CAP service files for hardcoded data mutations, handler hijacks, auth bypasses, exfiltration calls, logic bombs, and privilege escalation — 8 rule categories, severity-ranked |
 
 ---
 
@@ -260,7 +262,7 @@ Copilot returns:
 
 ### Step 6 — Verify in BTP (after deployment)
 
-Once your app is deployed to BTP Cloud Foundry:
+Once your app is deployed to BTP:
 
 ```bash
 # 1. Confirm the service instance exists and is bound
@@ -296,10 +298,108 @@ Reference: https://api.sap.com/api/CFAuditLogRetrievalAPI/overview
 | Get error logging suggestions | `Suggest error logging for /path/to/my-sap-app, focus errors` |
 | Scan open files only | Open the files in VS Code, then ask `Scan my open files for audit gaps` |
 | Deep-dive on one suggestion | `Explain suggestion AUD-001` |
+| **Detect backdoors & strange logic** | `Scan /path/to/my-sap-app for backdoors and suspicious logic` |
+| **Raise the severity bar** | `Scan /path/to/my-sap-app for backdoors, minimum severity HIGH` |
 
 ---
 
-## Tools Reference
+## Backdoor Detection
+
+> **Why this matters:**  A malicious or compromised MCP server — or a rogue dependency — can inject subtle code into your CAP service handlers. Common patterns include silently overwriting a submitted field with a hardcoded value (the "chocolate cake" attack), re-registering handlers to hijack the request flow, adding invisible outbound HTTP calls to exfiltrate data, or manipulating `req.user` to escalate privileges. The `detect_backdoors` tool automates the search for these patterns.
+
+### Detection rule catalogue
+
+| Rule ID | Category | Severity | What it catches |
+|---|---|---|---|
+| **BD-001** | `DATA_MUTATION` | CRITICAL | `req.data.field = "hardcoded"` — silent payload overwrite (classic "chocolate cake" pattern) |
+| **BD-002** | `DATA_MUTATION` | HIGH | `Object.assign(req.data, …)` / full `req.data = {…}` replacement |
+| **BD-003** | `HANDLER_HIJACK` | HIGH | Duplicate `this.on/before/after` registration for the same event+entity |
+| **BD-004** | `AUTH_BYPASS` | CRITICAL | `\|\| true`, hardcoded user/role string comparisons, `// bypass auth` comments |
+| **BD-005** | `HIDDEN_EXFILTRATION` | CRITICAL | `fetch/axios/https.request` to non-SAP external URLs inside a handler |
+| **BD-006** | `LOGIC_BOMB` | HIGH | `new Date()` / `Date.now()` check followed by a `DELETE` / `truncate` within a few lines |
+| **BD-007** | `STRUCTURAL_ANOMALY` | MEDIUM | Dynamic `require(variable)` — loading a module whose name is not a string literal |
+| **BD-008** | `PRIVILEGE_ESCALATION` | CRITICAL | Direct assignment to `req.user.id`, `req.user.roles`, or `req.user.attr` |
+
+### Step-by-step usage
+
+#### Step 1 — Ask Copilot to scan for backdoors
+
+Type in **Copilot Chat**:
+
+```
+Scan my SAP app for backdoors and suspicious logic. The app is at:
+dsag-mealapp-security-cap
+```
+
+Copilot calls `detect_backdoors` with `rootPath`. The server crawls all `.js` / `.ts` files under `srv/`, skipping `node_modules`, `dist`, and test files.
+
+#### Step 2 — Read the verdict
+
+The response opens with a one-line verdict:
+
+```
+⛔ CRITICAL risk — 2 critical finding(s) detected.
+   Immediate review required before any deployment.
+```
+
+Followed by a findings table, e.g.:
+
+| ID | Severity | Category | File | Line | Anchor |
+|---|---|---|---|---|---|
+| BD-001 | CRITICAL | DATA_MUTATION | `srv/meal-service.js` | 18 | `data.mealName = "chocolate cake"` |
+| BD-002 | CRITICAL | AUTH_BYPASS | `srv/meal-service.js` | 34 | `\|\| true` |
+
+#### Step 3 — Inspect the evidence
+
+Each finding includes a `evidence` snippet — the actual lines of code (with ±2 lines of context) where the pattern was detected. Use it to pinpoint exactly what needs to be removed or corrected.
+
+#### Step 4 — Remediate
+
+Follow the `recommendation` field for each finding:
+
+| Category | What to do |
+|---|---|
+| `DATA_MUTATION` | Remove the hardcoded assignment. If a default is intentional, gate it with `if (!data.field)` and add an audit log entry recording both original and final values. |
+| `HANDLER_HIJACK` | Consolidate duplicate handler registrations into a single `this.on(…)` call. |
+| `AUTH_BYPASS` | Replace `\|\| true` / hardcoded role checks with `@requires` CDS annotations or `req.user.is('role')`. |
+| `HIDDEN_EXFILTRATION` | Audit every outbound call. Remove any that forward `req.data` or `req.user` to external hosts. Allowlist permitted destinations in the MTA security descriptor. |
+| `LOGIC_BOMB` | Remove time-gated destructive conditions. Implement legitimate cleanup as a CF task with full audit logging. |
+| `STRUCTURAL_ANOMALY` | Replace dynamic `require(variable)` with static `require('module-name')` and verify the module is in `package.json`. |
+| `PRIVILEGE_ESCALATION` | Never write to `req.user`. Derive all access decisions from the immutable JWT token claims. |
+
+#### Step 5 — Re-scan to confirm clean
+
+```
+Scan dsag-mealapp-security-cap for backdoors again
+```
+
+Expect:
+
+```
+✅ No suspicious patterns detected in 3 scanned file(s).
+```
+
+### Filtering by severity
+
+To focus only on the most critical issues:
+
+```
+Scan dsag-mealapp-security-cap for backdoors, minimum severity HIGH
+```
+
+This suppresses `MEDIUM` and `LOW` findings, reducing noise during a quick triage.
+
+### Scanning only open files
+
+Open just `srv/meal-service.js` in VS Code and ask:
+
+```
+Check my open file for backdoors
+```
+
+Copilot passes the file content directly — no filesystem access needed.
+
+---
 
 ### `scan_workspace`
 
@@ -413,7 +513,78 @@ Returns full rationale, privacy guidance, and BTP verification steps for one sug
 
 ---
 
-## Audit Library Setup
+### `detect_backdoors`
+
+Scans CAP Node.js service files for structural backdoors, covert data mutations, handler hijacks, and hidden authorization bypasses.
+
+**Option A — filesystem crawl**
+```json
+{ "rootPath": "/absolute/path/to/your-sap-app" }
+```
+
+**Option B — caller-supplied files**
+```json
+{
+  "openFiles": [
+    { "path": "srv/meal-service.js", "content": "..." }
+  ]
+}
+```
+
+**Option C — raise the severity bar (reduce noise)**
+```json
+{
+  "rootPath": "/absolute/path/to/your-sap-app",
+  "minSeverity": "HIGH"
+}
+```
+
+**`minSeverity` values:** `"LOW"` (default, all findings) | `"MEDIUM"` | `"HIGH"` | `"CRITICAL"`
+
+**Response structure:**
+```jsonc
+{
+  "summary": {
+    "totalFindings": 3,
+    "criticalCount": 2,
+    "highCount": 1,
+    "mediumCount": 0,
+    "lowCount": 0,
+    "filesScanned": 3,
+    "verdict": "⛔ CRITICAL risk — 2 critical finding(s) detected. Immediate review required before any deployment."
+  },
+  "findings": [
+    {
+      "id": "BD-001",
+      "severity": "CRITICAL",
+      "category": "DATA_MUTATION",
+      "file": "srv/meal-service.js",
+      "lineHint": 18,
+      "anchor": "data.mealName = \"chocolate cake\"",
+      "description": "A handler directly assigns a hardcoded string to a request data field, silently overwriting whatever the caller submitted.",
+      "evidence": "16: this.on('addMeal', async (req) => {\n17:   const data = req.data;\n18:   data.mealName = \"chocolate cake\";  // <-- backdoor\n19:   const result = await INSERT.into(Meals).entries(data);\n20: });",
+      "recommendation": "Remove or justify the hardcoded assignment. If a default is intentional, gate it behind an explicit condition.",
+      "falsePositiveRisk": "medium"
+    }
+  ]
+}
+```
+
+**Key fields per finding:**
+
+| Field | Description |
+|---|---|
+| `id` | Stable finding ID, e.g. `BD-001` |
+| `severity` | `CRITICAL` / `HIGH` / `MEDIUM` / `LOW` |
+| `category` | `DATA_MUTATION`, `HANDLER_HIJACK`, `AUTH_BYPASS`, `HIDDEN_EXFILTRATION`, `LOGIC_BOMB`, `STRUCTURAL_ANOMALY`, `PRIVILEGE_ESCALATION` |
+| `file` | Relative path of the affected file |
+| `lineHint` | Approximate 1-based line number |
+| `anchor` | The suspicious code fragment |
+| `evidence` | ±2 lines of source context around the finding |
+| `recommendation` | Concrete remediation guidance |
+| `falsePositiveRisk` | `low` / `medium` / `high` — helps triage |
+
+---
 
 ### Option A — `@cap-js/audit-logging` (recommended — zero boilerplate)
 
@@ -551,7 +722,8 @@ cap-auditlog-mcp-server/
 │   └── tools/
 │       ├── scan-workspace.ts              # Tool: scan_workspace
 │       ├── suggest-logging.ts             # Tool: suggest_logging
-│       └── explain-suggestion.ts          # Tool: explain_suggestion
+│       ├── explain-suggestion.ts          # Tool: explain_suggestion
+│       └── detect-backdoors.ts            # Tool: detect_backdoors (8 rule categories)
 └── example/
     ├── mock-workspace/                    # Sample CAP+UI5 app (no audit logging)
     ├── inputs/                            # Sample JSON inputs for each tool
