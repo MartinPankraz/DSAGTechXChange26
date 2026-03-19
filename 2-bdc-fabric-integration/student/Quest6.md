@@ -2,7 +2,7 @@
 # 🔌 6. Challenge 6: Adjust transformations for dimensions
 [< 🤖 Quest 5](Quest5.md) - **[🔧 Quest 7 >](Quest7.md)**
 
-Microsoft Business Process Solutions uses Python notebooks for data transformations. In this challenge, we will make the necessary adjustments to process dimension data.
+Microsoft Business Process Solutions uses Python notebooks for data transformations. In this challenge, we will make the necessary adjustments to process **dimension data**.
 
 ## 6.1. Navigate to the workspace and locate notebook ```bps_opm_nb_b2s_dim_***```
 
@@ -10,7 +10,7 @@ You don't need help for this anymore ;)
 
 ## 6.2. Adjust bronze-to-silver notebook for dimensions
 
-Notebook ```bps_opm_nb_b2s_dim_*** ``` handles transformation of dimenension and text data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
+Notebook ```bps_opm_nb_b2s_dim_*** ``` handles transformation of dimension and text data from bronze to silver layer. To support data in the format delivered by SAP Datasphere, we need to make some adjustments to this notebook.
 
 ### 6.2.1. Adjust function ```apply_data_types```
 
@@ -83,69 +83,72 @@ Your code should now look like this:
 
 ![](../images/quest6/430-bps-notebook-add-upper-case-code-3.png)
 
-### 6.2.3. Fix Langueage codes
+### 6.2.3. Fix Language codes
 
 SAP Datasphere provides language codes in ISO format, while Business Process Solutions currently uses the SAP internal representation. Let's fix this!
 
 **Behind** the "Fix dataframe data types" code (before the "Merge delta table" code), insert a new code cell and paste the following code into it:
 
 ```python
-def get_sap_language_expression() -> Column:
+from pyspark.sql.column import Column
+ 
+def get_sap_language_expression(column_name: str = "LANGUAGE") -> Column:
+    c = col(column_name)
     sap_language_expr = (
-            when(col("LANGUAGE") == 'AF', 'a')
-            .when(col("LANGUAGE") == 'SR', '0')
-            .when(col("LANGUAGE") == 'ZH', '1')
-            .when(col("LANGUAGE") == 'TH', '2')
-            .when(col("LANGUAGE") == 'KO', '3')
-            .when(col("LANGUAGE") == 'RO', '4')
-            .when(col("LANGUAGE") == 'SL', '5')
-            .when(col("LANGUAGE") == 'HR', '6')
-            .when(col("LANGUAGE") == 'MS', '7')
-            .when(col("LANGUAGE") == 'UK', '8')
-            .when(col("LANGUAGE") == 'ET', '9')
-            .when(col("LANGUAGE") == 'AR', 'A')
-            .when(col("LANGUAGE") == 'HE', 'B')
-            .when(col("LANGUAGE") == 'CS', 'C')
-            .when(col("LANGUAGE") == 'DE', 'D')
-            .when(col("LANGUAGE") == 'EN', 'E')
-            .when(col("LANGUAGE") == 'FR', 'F')
-            .when(col("LANGUAGE") == 'EL', 'G')
-            .when(col("LANGUAGE") == 'HU', 'H')
-            .when(col("LANGUAGE") == 'IT', 'I')
-            .when(col("LANGUAGE") == 'JA', 'J')
-            .when(col("LANGUAGE") == 'DA', 'K')
-            .when(col("LANGUAGE") == 'PL', 'L')
-            .when(col("LANGUAGE") == 'ZF', 'M')
-            .when(col("LANGUAGE") == 'NL', 'N')
-            .when(col("LANGUAGE") == 'NO', 'O')
-            .when(col("LANGUAGE") == 'PT', 'P')
-            .when(col("LANGUAGE") == 'SK', 'Q')
-            .when(col("LANGUAGE") == 'RU', 'R')
-            .when(col("LANGUAGE") == 'ES', 'S')
-            .when(col("LANGUAGE") == 'TR', 'T')
-            .when(col("LANGUAGE") == 'FI', 'U')
-            .when(col("LANGUAGE") == 'SV', 'V')
-            .when(col("LANGUAGE") == 'BG', 'W')
-            .when(col("LANGUAGE") == 'LT', 'X')
-            .when(col("LANGUAGE") == 'LV', 'Y')
-            .when(col("LANGUAGE") == 'Z1', 'Z')
-            .when(col("LANGUAGE") == 'IS', 'b')
-            .when(col("LANGUAGE") == 'CA', 'c')
-            .when(col("LANGUAGE") == 'SH', 'd')
-            .when(col("LANGUAGE") == 'ID', 'i')
-            .when(col("LANGUAGE") == 'HI', '묩')
-            .when(col("LANGUAGE") == 'KK', '뱋')
-            .when(col("LANGUAGE") == 'VI', '쁩')
+            when(c == 'AF', 'a')
+            .when(c == 'SR', '0')
+            .when(c == 'ZH', '1')
+            .when(c == 'TH', '2')
+            .when(c == 'KO', '3')
+            .when(c == 'RO', '4')
+            .when(c == 'SL', '5')
+            .when(c == 'HR', '6')
+            .when(c == 'MS', '7')
+            .when(c == 'UK', '8')
+            .when(c == 'ET', '9')
+            .when(c == 'AR', 'A')
+            .when(c == 'HE', 'B')
+            .when(c == 'CS', 'C')
+            .when(c == 'DE', 'D')
+            .when(c == 'EN', 'E')
+            .when(c == 'FR', 'F')
+            .when(c == 'EL', 'G')
+            .when(c == 'HU', 'H')
+            .when(c == 'IT', 'I')
+            .when(c == 'JA', 'J')
+            .when(c == 'DA', 'K')
+            .when(c == 'PL', 'L')
+            .when(c == 'ZF', 'M')
+            .when(c == 'NL', 'N')
+            .when(c == 'NO', 'O')
+            .when(c == 'PT', 'P')
+            .when(c == 'SK', 'Q')
+            .when(c == 'RU', 'R')
+            .when(c == 'ES', 'S')
+            .when(c == 'TR', 'T')
+            .when(c == 'FI', 'U')
+            .when(c == 'SV', 'V')
+            .when(c == 'BG', 'W')
+            .when(c == 'LT', 'X')
+            .when(c == 'LV', 'Y')
+            .when(c == 'Z1', 'Z')
+            .when(c == 'IS', 'b')
+            .when(c == 'CA', 'c')
+            .when(c == 'SH', 'd')
+            .when(c == 'ID', 'i')
+            .when(c == 'HI', '묩')
+            .when(c == 'KK', '뱋')
+            .when(c == 'VI', '쁩')
             .otherwise(None)  # Default case
         )
-
+ 
     return sap_language_expr
-
+ 
 if 'LANGUAGE' in bronze_spark_df.columns:
-    _iso_language_expr = get_sap_language_expression()
-    bronze_spark_df = bronze_spark_df.withColumn('SAPLANGUAGE', _iso_language_expr)
-    bronze_spark_df = bronze_spark_df.drop('LANGUAGE')
-    bronze_spark_df = bronze_spark_df.withColumnRenamed('SAPLANGUAGE', 'LANGUAGE')
+    bronze_spark_df = bronze_spark_df.withColumn('LANGUAGE', get_sap_language_expression('LANGUAGE'))
+ 
+if 'LANGUAGECODE' in bronze_spark_df.columns:
+    bronze_spark_df = bronze_spark_df.withColumn('LANGUAGECODE', get_sap_language_expression('LANGUAGECODE'))
 ```
 
 Your code should now look like this:

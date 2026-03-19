@@ -49,6 +49,6 @@ Click on **Download $metadata-openapi.json** to download the now converted file
  
 # Where to next?
 
-**[🔌Quest 2](Quest2.md) - [ Quest 4 >](Quest4.md)
+**[🔌Quest 2](Quest2.md) - **[ Quest 4 >](Quest4.md)**
 
 [🔝](#)

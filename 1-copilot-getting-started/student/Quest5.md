@@ -48,12 +48,37 @@ https://techxchangeapim.azure-api.net/trainer001-sap-products-business-partner-a
 
 
 
-## OPTIONAL - Test via MCP Inspector
-!!!TODO!!!
+## OPTIONAL 
+<details><summary>Test via MCP Inspector</summary>
+
+The [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) from Anthrophic allows you to test the basic features of an MCP Server. It helps you to evluate if the MCP Server you created is actually working. 
+
+
+If you have node.js installed on your laptop, feel free to run 
+```text
+npx @modelcontextprotocol/inspector
+```
+
+ ![Start MCP Inspector](../images/quest5/step08.png) 
+
+After that a new Browser window should open with the MCP Server up and running. From there copy the URL of the MCP Server in Azure API Management to the MCP INspector and click on Connect
+
+ ![Connect](../images/quest5/step09.png) 
+
+Clicking on **List Tools** shows all the Tools or Entity Types that you defined in Azure APIM Before. Click on **getEntitiesFromSalesOrderSet** 
+
+ ![List Tool](../images/quest5/step10.png) 
+
+
+If you scroll down and click on **Run Tool** you shoudl be able to fetch Sales Orders from the SAP System via the MCP Server. 
+
+ ![List Tool](../images/quest5/step11.png) 
+</details>
+
 
 
 # Where to next?
 
-**[🔌Quest 4](Quest4.md) - [ Quest 6 >](Quest6.md)
+[🔌Quest 4](Quest4.md) - **[ Quest 6 >](Quest6.md)**
 
 [🔝](#)

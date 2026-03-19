@@ -1,5 +1,5 @@
 # 🤖 1. Challenge 1: Getting Started - Prepare access
-[🏠Home](../README.md) - [🔌 Quest 2 >](Quest2.md)
+[🏠Home](../README.md) - **[🔌 Quest 2 >](Quest2.md)**
 
 
 In this section we will make sure that you have access to all the required system: 
@@ -17,7 +17,7 @@ Just to ensure that user-credentials are working and to setup MFA, open https://
 > You might want to start a "New InPrivate Window" in your browser
 
 > [!NOTE]
-> Login with a user like *student0XX@M365x75849431.OnMicrosoft.com*
+> Login with your user, like *student0XX@M365x75849431.OnMicrosoft.com*
 
 ![Open Outlook](../images/quest1/step01.png)
 
@@ -66,6 +66,6 @@ Capture the QR Code with your phone and click on **Next** in the Browser
 
 # Where to next?
 
-**[🏠Home](../README.md)** - [🔌 Quest 2 >](Quest2.md)
+[🏠Home](../README.md) - **[🔌 Quest 2 >](Quest2.md)**
 
 [🔝](#)

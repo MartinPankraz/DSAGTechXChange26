@@ -9,15 +9,16 @@ Microsoft Business Process Solutions does not yet support mirored SAP databases 
 
 ## 5.2. Adjust bronze-to-silver orchestration pipeline
 
-In your worksapce, locate the orchestration pipeline for data processing from silver to gold layer: ```bps_om_b2s_orchestration_pipeline_***```
+In your worksapce, locate the orchestration pipeline for data processing from silver to gold layer: ```bps_om_b2s_orchestration_pipeline_***``` (*** is a generated identifier)
 
 ![](../images/quest5/370-adjust-orchestration-pipe.png)
 
-Open the pipeline and replace the default value of parameter ```Mirror_Database_Name``` with ```sap-mirror-via-datasphere```.
+Open the pipeline and replace the default value of parameter ```Mirror_Database_Name``` with the name of your mirrored database. The default name in quest 4 was ```sap-mirror-via-datasphere```. If you chose a different name, provide it here.
+
+> [!IMPORTANT]
+> Don't forget to save the pipeline!
 
 ![](../images/quest5/380-b2s-pipe-adjust-mirror-db.png)
-
-Don't forget to save the pipeline!
 
 ## 5.3. Adjust bronze-to-silver pipeline for dimensions
 
@@ -32,11 +33,18 @@ Replace the given SQL code with the following snippet:
 @concat('select distinct CDSViewName,REGEXP_REPLACE(CDSViewName, ''\$[EFPT]'', '''') AS ODPName, KeyFields from extractionMetadata em join systemDetails sd on em.SystemName = sd.SystemName where em.Type <> ''FACT'' and em.inScope = 1 and sd.SourceType = ''SAP'' and sd.ConnectionType = ''OpenMirroring'' and em.SystemName = ''', pipeline().parameters.System_Name, '''')
 ```
 
-Don't forget to save the pipeline!
+> [!IMPORTANT]
+> Don't forget to save the pipeline!
 
 ## 5.4. Adjust bronze-to-silver pipeline for facts
 
-Apply the same change as in 5.3 to pipeline ```bps_om_b2s_fact_processing_***```.
+Pipeline ```bps_om_b2s_fact_processing_***``` orchestrates processing of fact data from bronze to silver. Find Lookup activity ```Get Dimension Tables``` and adjust the **Query** property in the **Settings** tab as follows:
+
+```SQL
+@concat('select DISTINCT CDSViewName, REGEXP_REPLACE(CDSViewName, ''\$[EFPT]'', '''') AS ODPName, KeyFields from extractionMetadata em join systemDetails sd on em.SystemName = sd.SystemName where em.Type = ''FACT'' and em.inScope = 1 and sd.SourceType = ''SAP'' and sd.ConnectionType = ''OpenMirroring'' and em.SystemName = ''', pipeline().parameters.System_Name, '''')
+```
+> [!IMPORTANT]
+> Don't forget to save the pipeline!
 
 # Where to next?
 

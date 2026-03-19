@@ -2,7 +2,10 @@
 [< 🔌 Quest 3](Quest3.md)  - **[Quest 5 >](Quest5.md)**
 
 ## 4.1. Azure API Management
-!!! TODO !!! What is APIM
+Azure API Management (APIM) is a fully managed service that helps organizations securely publish, expose, and manage APIs at scale. It acts as a façade between API consumers and backend services, providing a consistent entry point where developers can discover APIs, learn how to use them, and access them in a controlled way.
+
+At the same time, Azure API Management gives API owners powerful control and observability. It enables policies for authentication, throttling, transformation, and caching, while offering built‑in monitoring, analytics, and versioning. This makes it easier to protect backend services, ensure reliability, and evolve APIs without breaking consumers.
+
 
 ### 4.1.1. Open Azure API Management in the Azure Portal:
 Open a new browse tab and open the link:
@@ -58,9 +61,12 @@ student0XX
 ``` 
 with your student number, 
 
-Make also sure to adjust the **display name** and add ```text
+Make also sure to adjust the **display name** and add 
+
+```text
 student0XX GWSAMPLE_BASIC
 ```  
+
 (the Name should be automatically be adjusted)
 
 then click on **Create**
@@ -159,7 +165,7 @@ If you scroll down you should see **HTTP/1.1 200 OK** and lots of Business partn
 
 # Where to next?
 
-**[🔌Quest 3](Quest3.md) - [ Quest 5 >](Quest5.md)
+[🔌Quest 3](Quest3.md) - **[ Quest 5 >](Quest5.md)**
 
 [🔝](#)
 

@@ -6,8 +6,7 @@ In this section you will make yourself familiar with the very basics of Microsof
 Let's log on and do the first steps!
 
 ## 1.1. Launch Microsoft Fabric
-Click on https://app.powerbi.com to lauch Microsoft Fabric
-![Launch Fabric]
+Click on https://app.powerbi.com to lauch Microsoft Fabric.
 
 ## 1.2. Enter user name
 You have been assigned a user name ranging from "DSAGFabric1@fabricconf.onmicrosoft.com" to "DSAGFabric15@fabricconf.onmicrosoft.com" depending on your seat/group number. Enter the user name.
@@ -33,7 +32,7 @@ Now select the Fabric view.
 ![Next](../images/quest1/50-fabric-view.png)
  
 ## 1.7. Navigate to workspace
-Each user works in a dedicated workspace with the same name as your user name. We have set up permissions such that you can't see other user's workspaces. Navigate to your workspace.
+Each user works in a dedicated workspace with the same name as your user name. We have set up permissions such that you can't see other users' workspaces. Navigate to your workspace.
 
 ![Navigate to workspace](../images/quest1/55-navigate-to-workspace.png)
  
