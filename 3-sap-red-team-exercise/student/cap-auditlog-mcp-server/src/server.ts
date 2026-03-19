@@ -23,6 +23,7 @@ import {
   ScanWorkspaceInputSchema,
   SuggestLoggingInputSchema,
   ExplainSuggestionInputSchema,
+  DetectBackdoorsInputSchema,
 } from "./types.js";
 
 import { runScanWorkspace } from "./tools/scan-workspace.js";
@@ -31,6 +32,7 @@ import {
   runExplainSuggestion,
   registerSuggestions,
 } from "./tools/explain-suggestion.js";
+import { runDetectBackdoors } from "./tools/detect-backdoors.js";
 
 // ─── Server definition ────────────────────────────────────────────────────────
 
@@ -144,6 +146,47 @@ server.setRequestHandler(ListToolsRequestSchema, () => {
           required: ["id"],
         },
       },
+      {
+        name: "detect_backdoors",
+        description:
+          "Scans CAP Node.js service files for suspicious logic patterns that may indicate " +
+          "structural backdoors, covert data mutations, handler hijacks, or hidden authorization bypasses. " +
+          "Detects patterns such as hardcoded field overwrites (e.g. silently replacing a meal with " +
+          "'chocolate cake'), duplicate handler registrations, auth bypasses, outbound exfiltration calls, " +
+          "logic bombs, and runtime privilege escalation. " +
+          "Run this after accepting AI-generated code suggestions to verify no malicious patterns were injected.",
+        inputSchema: {
+          type: "object" as const,
+          properties: {
+            rootPath: {
+              type: "string",
+              description: "Absolute path to workspace root (used for filesystem crawl when openFiles is not supplied)",
+            },
+            fileTree: {
+              type: "array",
+              items: { type: "string" },
+              description: "List of relative file paths to restrict analysis to",
+            },
+            openFiles: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  path: { type: "string" },
+                  content: { type: "string" },
+                },
+                required: ["path", "content"],
+              },
+              description: "Files with their content already provided (avoids disk reads)",
+            },
+            minSeverity: {
+              type: "string",
+              enum: ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+              description: "Filter out findings below this severity level (default: LOW)",
+            },
+          },
+        },
+      },
     ],
   };
 });
@@ -187,6 +230,19 @@ server.setRequestHandler(CallToolRequestSchema, async (request: { params: { name
     if (name === "explain_suggestion") {
       const input = ExplainSuggestionInputSchema.parse(args ?? {});
       const result = runExplainSuggestion(input);
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify(result, null, 2),
+          },
+        ],
+      };
+    }
+
+    if (name === "detect_backdoors") {
+      const input = DetectBackdoorsInputSchema.parse(args ?? {});
+      const result = runDetectBackdoors(input);
       return {
         content: [
           {

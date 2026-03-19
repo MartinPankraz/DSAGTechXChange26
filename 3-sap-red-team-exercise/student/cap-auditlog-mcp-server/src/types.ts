@@ -251,3 +251,65 @@ export interface AnalysisContext {
   evidence: Evidence;
   files: FileNode[];
 }
+
+// ─── Backdoor Detection ──────────────────────────────────────────────────────
+
+export const BackdoorSeveritySchema = z.enum(["CRITICAL", "HIGH", "MEDIUM", "LOW"]);
+export type BackdoorSeverity = z.infer<typeof BackdoorSeveritySchema>;
+
+export const BackdoorCategorySchema = z.enum([
+  "DATA_MUTATION",       // silently overwrites field values (e.g. choco-cake swap)
+  "HANDLER_HIJACK",      // re-registers/overrides an existing CAP handler
+  "AUTH_BYPASS",         // skips or weakens authorization checks
+  "HIDDEN_EXFILTRATION", // sends data to unexpected external endpoints
+  "PRIVILEGE_ESCALATION",// grants broader roles/scopes than intended
+  "LOGIC_BOMB",          // condition-triggered destructive or anomalous behavior
+  "STRUCTURAL_ANOMALY",  // catch-all for other suspicious structural patterns
+]);
+export type BackdoorCategory = z.infer<typeof BackdoorCategorySchema>;
+
+export const BackdoorFindingSchema = z.object({
+  id: z.string().describe("Stable ID, e.g. BD-001"),
+  severity: BackdoorSeveritySchema,
+  category: BackdoorCategorySchema,
+  file: z.string().describe("Relative path to the affected file"),
+  lineHint: z.number().optional().describe("Approximate 1-based line number"),
+  anchor: z.string().describe("Function name or code fragment where the issue was found"),
+  description: z.string().describe("Plain-language description of what the suspicious code does"),
+  evidence: z.string().describe("The suspicious code snippet or pattern that triggered this finding"),
+  recommendation: z.string().describe("How to fix or safely review this finding"),
+  falsePositiveRisk: z.enum(["low", "medium", "high"]).describe(
+    "Likelihood this is a legitimate pattern rather than a backdoor"
+  ),
+});
+export type BackdoorFinding = z.infer<typeof BackdoorFindingSchema>;
+
+export const DetectBackdoorsInputSchema = z.object({
+  rootPath: z.string().optional().describe(
+    "Absolute path to workspace root. Used for filesystem crawl when openFiles is not supplied."
+  ),
+  fileTree: z.array(z.string()).optional().describe(
+    "List of relative file paths to restrict analysis to"
+  ),
+  openFiles: z.array(OpenFileSchema).optional().describe(
+    "Files with their content already provided (avoids disk reads)"
+  ),
+  minSeverity: BackdoorSeveritySchema.default("LOW").describe(
+    "Filter findings below this severity level"
+  ),
+});
+export type DetectBackdoorsInput = z.infer<typeof DetectBackdoorsInputSchema>;
+
+export const DetectBackdoorsOutputSchema = z.object({
+  summary: z.object({
+    totalFindings: z.number(),
+    criticalCount: z.number(),
+    highCount: z.number(),
+    mediumCount: z.number(),
+    lowCount: z.number(),
+    filesScanned: z.number(),
+    verdict: z.string().describe("Overall risk verdict for the scanned codebase"),
+  }),
+  findings: z.array(BackdoorFindingSchema),
+});
+export type DetectBackdoorsOutput = z.infer<typeof DetectBackdoorsOutputSchema>;
