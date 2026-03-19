@@ -201,6 +201,8 @@ Congratulations for completing the mandatory quests! Spread the word `the cake i
 
 Just got started!? We got you covered with somore more Blue Team work and AI driven remediation of the compromise! Move on to the optional quest 3.
 
+This quest is also available as a [video walkthrough](https://app.screencast.com/ZfBOZesuHWwSn)
+
 ## Where to next?
 
 [< Quest 1 ](Quest1.md) - **[🏠Home](README.md)** - [ Quest 3 >](quest3.md)

@@ -63,6 +63,8 @@ Congratulations, you just created a new API endpoint in record time without writ
 
 Next, we will switch to the defender's perspective - the **blue team** - and learn how to detect and prevent such attacks.
 
+This quest is also available as [video walkthrough](https://app.screencast.com/NfOVucBtmtz99)
+
 ## Where to next?
 
 **[🏠Home](README.md)** - [ Quest 2 >](quest2.md)
